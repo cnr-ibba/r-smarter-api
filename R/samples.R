@@ -28,6 +28,8 @@ get_smarter_samples <- function(species, query = list(), token = NULL) {
 
   data <- get_smarter_data(url, token, query)
 
+  logger::log_info("Done!")
+
   # returning only the results dataframe
   data$results
 }

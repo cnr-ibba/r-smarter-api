@@ -4,6 +4,7 @@ require(lubridate)
 require(dplyr)
 require(logger)
 
+version <- utils::packageVersion("smarterapi")
 
 # define a global environment for the package
 smarterapi_globals <- new.env()
@@ -12,6 +13,9 @@ smarterapi_globals$base_endpoint <- "/smarter-api"
 smarterapi_globals$token <- NULL
 smarterapi_globals$expires <- NULL
 smarterapi_globals$size <- 25
+smarterapi_globals$user_agent <- httr::user_agent(
+  paste0("smarterapi v", version)
+)
 
 
 # returns true if token doesn't exist or is expired (or expires within 1 day)
@@ -32,7 +36,8 @@ read_url <- function(url, token, query = list()) {
   resp <- httr::GET(
     url,
     query = query,
-    httr::add_headers(Authorization = paste("Bearer", token))
+    httr::add_headers(Authorization = paste("Bearer", token)),
+    smarterapi_globals$user_agent
   )
 
   # check errors: SMARTER-backend is supposed to return JSON objects

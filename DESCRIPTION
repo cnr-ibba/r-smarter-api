@@ -20,4 +20,5 @@ Imports:
     httr,
     lubridate,
     logger,
-    dplyr
+    dplyr,
+    utils

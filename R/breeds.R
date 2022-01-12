@@ -26,6 +26,8 @@ get_smarter_breeds <- function(query = list(), token = NULL) {
   # reading our data
   data <- get_smarter_data(url, token, query)
 
+  logger::log_info("Done!")
+
   # returning only the results dataframe
   data$results
 }

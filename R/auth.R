@@ -28,7 +28,8 @@ get_smarter_token <- function(username = Sys.getenv("SMARTER_API_USERNAME"),
   resp <- httr::POST(
     auth_url,
     body = list(username = username, password = password),
-    encode = "json"
+    encode = "json",
+    smarterapi_globals$user_agent
   )
 
   # this will read a JSON by default
