@@ -10,7 +10,7 @@ require(logger)
 #' @export
 #'
 #' @examples
-get_smarter_breeds <- function(query = list(), token=NULL) {
+get_smarter_breeds <- function(query = list(), token = NULL) {
   if (is.null(token)) {
     token <- get_smarter_token()
   }
@@ -18,7 +18,10 @@ get_smarter_breeds <- function(query = list(), token=NULL) {
   logger::log_info("Get data from breeds endpoint")
 
   # setting the URL endpoint
-  url <- httr::modify_url(smarterapi.globals$base_url, path = sprintf("%s/breeds", smarterapi.globals$base_endpoint))
+  url <- httr::modify_url(
+    smarterapi_globals$base_url,
+    path = sprintf("%s/breeds", smarterapi_globals$base_endpoint)
+  )
 
   # reading our data
   data <- get_smarter_data(url, token, query)

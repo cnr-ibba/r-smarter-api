@@ -10,16 +10,17 @@ require(logger)
 #' @export
 #'
 #' @examples
-get_smarter_datasets <- function(query = list(), token=NULL) {
+get_smarter_datasets <- function(query = list(), token = NULL) {
   if (is.null(token)) {
     token <- get_smarter_token()
   }
 
   logger::log_info("Get data from datasets endpoint")
 
-  url <-
-    modify_url(smarterapi.globals$base_url, path = sprintf("%s/datasets", smarterapi.globals$base_endpoint))
-
+  url <- modify_url(
+    smarterapi_globals$base_url,
+    path = sprintf("%s/datasets", smarterapi_globals$base_endpoint)
+  )
 
   data <- get_smarter_data(url, token, query)
 
