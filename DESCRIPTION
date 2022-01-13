@@ -24,3 +24,5 @@ Imports:
     logger,
     dplyr,
     utils
+URL: https://github.com/cnr-ibba/r-smarter-api
+BugReports: https://github.com/cnr-ibba/r-smarter-api/issues

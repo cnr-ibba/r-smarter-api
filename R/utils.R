@@ -9,7 +9,7 @@ smarterapi_globals$token <- NULL
 smarterapi_globals$expires <- NULL
 smarterapi_globals$size <- 25
 smarterapi_globals$user_agent <- httr::user_agent(
-  paste0("smarterapi v", version)
+  paste0("r-smarterapi v", version)
 )
 
 
@@ -41,11 +41,10 @@ read_url <- function(url, token, query = list()) {
   }
 
   # parse a JSON response. fromJSON to flatten results
-  parsed <-
-    jsonlite::fromJSON(
-      content(resp, "text", encoding = "utf-8"),
-      flatten = TRUE
-    )
+  parsed <- jsonlite::fromJSON(
+    httr::content(resp, "text", encoding = "utf-8"),
+    flatten = TRUE
+  )
 
   # deal with API errors: not "200 Ok" status
   if (httr::http_error(resp)) {
