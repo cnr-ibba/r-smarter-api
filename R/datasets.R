@@ -1,6 +1,4 @@
 
-require(logger)
-
 #' Title
 #'
 #' @param query

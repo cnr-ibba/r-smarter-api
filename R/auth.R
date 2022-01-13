@@ -1,6 +1,3 @@
-require(httr)
-require(lubridate)
-require(logger)
 
 #' Title
 #'

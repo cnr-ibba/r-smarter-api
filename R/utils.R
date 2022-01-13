@@ -1,9 +1,4 @@
 
-require(httr)
-require(lubridate)
-require(dplyr)
-require(logger)
-
 version <- utils::packageVersion("smarterapi")
 
 # define a global environment for the package
