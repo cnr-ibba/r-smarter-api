@@ -51,7 +51,7 @@ read_url <- function(url, token, query = list()) {
     stop(
       sprintf(
         "SMARTER API returned an error [%s]: '%s'",
-        status_code(resp),
+        httr::status_code(resp),
         parsed$message
       ),
       call. = FALSE

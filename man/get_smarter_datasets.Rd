@@ -33,11 +33,12 @@ Swagger Datasets endpoint} for more information about the datasets endpoint
 
 \examples{
 genotypes_foreground <- get_smarter_datasets(
-  query = list(type="foreground", type="genotypes"))
+  query = list(type = "foreground", type = "genotypes")
+)
 
 adaptmap_genotypes <- get_smarter_datasets(
-  query = list(species="Goat", search="adaptmap", type="genotypes"))
-
+  query = list(species = "Goat", search = "adaptmap", type = "genotypes")
+)
 \dontrun{
 
 all_datasets <- get_smarter_datasets()

@@ -34,17 +34,23 @@ Swagger Samples endpoint} for more information about the samples endpoint
 }
 
 \examples{
-italian_sheeps <- get_smarter_samples("Sheep", query = list(country="Italy"))
+italian_sheeps <- get_smarter_samples(
+  "Sheep",
+  query = list(country = "Italy")
+)
 
-merino_sheeps <- get_smarter_samples("Sheep", query = list(breed="Merino"))
+merino_sheeps <- get_smarter_samples("Sheep", query = list(breed = "Merino"))
 
 selected_goats <- get_smarter_samples(
-  "Goat", query = list(country="Italy", breed_code="ORO", breed_code="GAR"))
-
+  "Goat",
+  query = list(country = "Italy", breed_code = "ORO", breed_code = "GAR")
+)
 \dontrun{
 
 foreground_goats <- get_smarter_samples(
-  "Goat", query = list(type="foreground"))
+  "Goat",
+  query = list(type = "foreground")
+)
 
 all_sheep_samples <- get_smarter_samples("Sheep")
 }

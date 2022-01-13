@@ -32,14 +32,13 @@ Swagger Breeds endpoint} for more information about the breeds endpoint
 }
 
 \examples{
-selected_breed <- get_smarter_breeds(query=list(code="TEX"))
+selected_breed <- get_smarter_breeds(query = list(code = "TEX"))
 
-selected_breeds <- get_smarter_breeds(query=list(search="mer"))
-
+selected_breeds <- get_smarter_breeds(query = list(search = "mer"))
 \dontrun{
 
 all_breeds <- get_smarter_breeds()
 
-sheep_breeds <- get_smarter_breeds(query=list(species="Sheep"))
+sheep_breeds <- get_smarter_breeds(query = list(species = "Sheep"))
 }
 }

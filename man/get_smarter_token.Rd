@@ -49,6 +49,7 @@ SMARTER credentials \strong{MUST NOT be tracked} in your code
 \examples{
 token <- get_smarter_token()
 \dontrun{
+
 token <- get_smarter_token(username, password)
 }
 }
