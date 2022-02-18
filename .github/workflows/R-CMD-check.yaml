@@ -8,6 +8,10 @@ on:
 
 name: R-CMD-check
 
+env:
+  SMARTER_API_USERNAME: ${{ secrets.SMARTER_API_USERNAME }}
+  SMARTER_API_PASSWORD: ${{ secrets.SMARTER_API_PASSWORD }}
+
 jobs:
   R-CMD-check:
 
@@ -19,11 +23,11 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          # - {os: macOS-latest,   r: 'release'}
-          # - {os: windows-latest, r: 'release'}
-          # - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
+          - {os: macOS-latest,   r: 'release'}
+          - {os: windows-latest, r: 'release'}
+          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,   r: 'release'}
-          # - {os: ubuntu-latest,   r: 'oldrel-1'}
+          - {os: ubuntu-latest,   r: 'oldrel-1'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -32,13 +36,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # https://stackoverflow.com/a/57948488
-      - name:  Install
-        run:   |
-               if [ "$RUNNER_OS" == "Linux" ]; then
-                    sudo apt-get install -y libcurl4-openssl-dev
-               fi
-        shell: bash
+      - name: Install libcurl on Linux
+        if: runner.os == 'Linux'
+        run: sudo apt-get update -y && sudo apt-get install -y libcurl4-openssl-dev
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -50,21 +50,12 @@ jobs:
 
       - uses: r-lib/actions/setup-renv@v2
 
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v1
-        with:
-          envkey_SMARTER_API_USERNAME: ${{ secrets.SMARTER_API_USERNAME }}
-          envkey_SMARTER_API_PASSWORD: ${{ secrets.SMARTER_API_PASSWORD }}
-          file_name: .Renviron
-
-
       - uses: r-lib/actions/check-r-package@v2
 
       - name: Show testthat output
         if: always()
         run: find ./check -name '*check.log' -exec cat '{}' \; || true
         shell: bash
-        working-directory: ./detectRUNS
 
       - name: Upload check results
         if: failure()
