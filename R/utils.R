@@ -24,6 +24,21 @@ is_token_expired <- function() {
 }
 
 
+check_smarter_errors <- function(resp, parsed) {
+  # deal with API errors: not "200 Ok" status
+  if (httr::http_error(resp)) {
+    stop(
+      sprintf(
+        "SMARTER API returned an error [%s]: '%s'",
+        httr::status_code(resp),
+        parsed$message
+      ),
+      call. = FALSE
+    )
+  }
+}
+
+
 read_url <- function(url, token, query = list()) {
   logger::log_debug(sprintf("Get data from %s", url))
 
@@ -46,17 +61,8 @@ read_url <- function(url, token, query = list()) {
     flatten = TRUE
   )
 
-  # deal with API errors: not "200 Ok" status
-  if (httr::http_error(resp)) {
-    stop(
-      sprintf(
-        "SMARTER API returned an error [%s]: '%s'",
-        httr::status_code(resp),
-        parsed$message
-      ),
-      call. = FALSE
-    )
-  }
+  # test for error in responses
+  check_smarter_errors(resp, parsed)
 
   return(parsed)
 }

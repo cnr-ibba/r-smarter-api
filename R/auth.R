@@ -58,6 +58,9 @@ get_smarter_token <- function(username = Sys.getenv("SMARTER_API_USERNAME"),
   # this will read a JSON by default
   data <- httr::content(resp)
 
+  # test for error in responses
+  check_smarter_errors(resp, data)
+
   # track data in my environment
   smarterapi_globals$token <- data$token
   smarterapi_globals$expires <- lubridate::ymd_hms(data$expires)
