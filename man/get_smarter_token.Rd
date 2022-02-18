@@ -34,10 +34,9 @@ set those values in your environment. You can call
 SMARTER_API_USERNAME=<smarter username>
 SMARTER_API_PASSWORD=<smarter password>
 }
-See \href{https://support.rstudio.com/hc/en-us/articles/360047157094-
-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-
-and-repos-conf}{Managing R with .Rprofile, .Renviron, Rprofile.site,
-Renviron.site, rsession.conf, and repos.conf}
+See \href{"https://support.rstudio.com/hc/en-us/articles/360047157094-Managing-R-with-Rprofile-Renviron-Rprofile-site-Renviron-site-rsession-conf-and-repos-conf"}{
+Managing R with .Rprofile, .Renviron, Rprofile.site, Renviron.site,
+rsession.conf, and repos.conf}
 for more information
 }
 
