@@ -36,13 +36,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # https://stackoverflow.com/a/57948488
-      - name:  Install
-        run:   |
-               if [ "$RUNNER_OS" == "Linux" ]; then
-                    sudo apt-get install -y libcurl4-openssl-dev
-               fi
-        shell: bash
+      - name: Install libcurl on Linux
+        if: runner.os == 'Linux'
+        run: sudo apt-get update -y && sudo apt-get install -y libcurl4-openssl-dev
 
       - uses: r-lib/actions/setup-pandoc@v2
 
