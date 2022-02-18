@@ -15,7 +15,8 @@ RoxygenNote: 7.1.2
 Suggests: 
     lintr,
     styler,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    rcmdcheck
 Config/testthat/edition: 3
 Imports: 
     jsonlite,
