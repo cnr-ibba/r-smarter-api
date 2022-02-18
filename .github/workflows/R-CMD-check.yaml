@@ -57,14 +57,12 @@ jobs:
           envkey_SMARTER_API_PASSWORD: ${{ secrets.SMARTER_API_PASSWORD }}
           file_name: .Renviron
 
-
       - uses: r-lib/actions/check-r-package@v2
 
       - name: Show testthat output
         if: always()
         run: find ./check -name '*check.log' -exec cat '{}' \; || true
         shell: bash
-        working-directory: ./detectRUNS
 
       - name: Upload check results
         if: failure()
