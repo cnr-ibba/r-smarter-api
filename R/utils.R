@@ -97,11 +97,12 @@ get_smarter_data <- function(url, token, query = list()) {
   }
 
   # return an S3 obj with the data we got
-  structure(list(
-    content = parsed,
-    url = url,
-    results = results
-  ),
-  class = "smarter_api"
+  structure(
+    list(
+      content = parsed,
+      url = url,
+      results = results
+    ),
+    class = "smarter_api"
   )
 }
