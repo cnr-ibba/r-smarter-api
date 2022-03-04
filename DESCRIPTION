@@ -28,6 +28,7 @@ Imports:
     lubridate,
     logger,
     dplyr,
+    tidyr,
     sf
 URL: https://github.com/cnr-ibba/r-smarter-api
 BugReports: https://github.com/cnr-ibba/r-smarter-api/issues

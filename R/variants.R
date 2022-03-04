@@ -60,6 +60,6 @@ get_smarter_variants <- function(species, assembly, query = list(), token = NULL
 
   logger::log_info("Done!")
 
-  # returning only the results dataframe
-  data$results
+  # try to unnest variants and returns them
+  tidyr::unnest(data$results, cols = c("locations"))
 }
