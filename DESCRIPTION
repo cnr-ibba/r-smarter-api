@@ -19,13 +19,15 @@ Suggests:
     rcmdcheck,
     roxygen2,
     utils,
-    usethis
+    usethis,
+    leaflet
 Config/testthat/edition: 3
 Imports: 
     jsonlite,
     httr,
     lubridate,
     logger,
-    dplyr
+    dplyr,
+    sf
 URL: https://github.com/cnr-ibba/r-smarter-api
 BugReports: https://github.com/cnr-ibba/r-smarter-api/issues

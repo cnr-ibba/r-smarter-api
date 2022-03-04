@@ -7,7 +7,7 @@
 get_smarter_variants(species, assembly, query = list(), token = NULL)
 }
 \arguments{
-\item{species}{A smarter species ("Goat", "Sheep")}
+\item{species}{a smarter species ("Goat", "Sheep")}
 
 \item{assembly}{the smarter working assembly for such species}
 
