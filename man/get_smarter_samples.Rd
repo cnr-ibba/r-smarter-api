@@ -7,7 +7,7 @@
 get_smarter_samples(species, query = list(), token = NULL)
 }
 \arguments{
-\item{species}{A smarter species ("Goat", "Sheep")}
+\item{species}{a smarter species ("Goat", "Sheep")}
 
 \item{query}{a \code{list} of query arguments}
 

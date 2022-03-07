@@ -1,4 +1,5 @@
 
+# nolint start
 #' Get a SMARTER authentication token
 #'
 #' Authenticate through SMARTER API and returns a valid token. Token is also
@@ -34,6 +35,7 @@
 #'
 #' token <- get_smarter_token(username, password)
 #' }
+# nolint end
 get_smarter_token <- function(username = Sys.getenv("SMARTER_API_USERNAME"),
                               password = Sys.getenv("SMARTER_API_PASSWORD")) {
   if (!is_token_expired()) {

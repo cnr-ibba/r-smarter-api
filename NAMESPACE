@@ -2,5 +2,9 @@
 
 export(get_smarter_breeds)
 export(get_smarter_datasets)
+export(get_smarter_geojson)
+export(get_smarter_info)
 export(get_smarter_samples)
+export(get_smarter_supportedchips)
 export(get_smarter_token)
+export(get_smarter_variants)

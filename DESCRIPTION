@@ -1,6 +1,6 @@
 Package: smarterapi
 Title: Fetch SMARTER data through REST API
-Version: 0.0.0.9001
+Version: 0.1.0
 Authors@R: 
     person("Paolo", "Cozzi", , "paolo.cozzi@ibba.cnr.it", 
            role = c("aut", "cre"),
@@ -17,7 +17,10 @@ Suggests:
     styler,
     testthat (>= 3.0.0),
     rcmdcheck,
-    roxygen2
+    roxygen2,
+    utils,
+    usethis,
+    leaflet
 Config/testthat/edition: 3
 Imports: 
     jsonlite,
@@ -25,7 +28,7 @@ Imports:
     lubridate,
     logger,
     dplyr,
-    utils,
-    usethis
+    tidyr,
+    sf
 URL: https://github.com/cnr-ibba/r-smarter-api
 BugReports: https://github.com/cnr-ibba/r-smarter-api/issues
