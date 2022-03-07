@@ -1,4 +1,5 @@
 
+# nolint start
 #' Get SMARTER Info
 #'
 #' Collect information about smarter database status and returns values in a list
@@ -33,6 +34,7 @@
 #' @examples
 #' smarter_status <- get_smarter_info()
 #' smarter_version <- smarter_status$version
+# nolint end
 get_smarter_info <- function(token = NULL) {
   if (is.null(token)) {
     token <- get_smarter_token()

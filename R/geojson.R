@@ -1,4 +1,5 @@
 
+# nolint start
 #' Get SMARTER GeoJSON Samples
 #'
 #' Fetch SMARTER REST API samples with GPS coordinates and return them into as
@@ -28,6 +29,7 @@
 #'     clusterOptions = markerClusterOptions(), label = ~smarter_id
 #'   )
 #' }
+# nolint end
 get_smarter_geojson <- function(species, token = NULL) {
   if (is.null(token)) {
     token <- get_smarter_token()
@@ -40,7 +42,9 @@ get_smarter_geojson <- function(species, token = NULL) {
 
   url <- httr::modify_url(
     smarterapi_globals$base_url,
-    path = sprintf("%s/samples.geojson/%s", smarterapi_globals$base_endpoint, species)
+    path = sprintf(
+      "%s/samples.geojson/%s", smarterapi_globals$base_endpoint, species
+    )
   )
 
   # in this request, we add the token to the request header section

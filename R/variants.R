@@ -35,7 +35,9 @@
 #'   assembly = "ARS1"
 #' )
 #' }
+# nolint start
 get_smarter_variants <- function(species, assembly, query = list(), token = NULL) {
+  # nolint end
   if (is.null(token)) {
     token <- get_smarter_token()
   }
