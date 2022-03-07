@@ -5,7 +5,7 @@
 #' Cached token is used or a new token is generated if not provided when calling
 #' this function (see \code{\link{get_smarter_token}} for more information)
 #'
-#' @param species A smarter species ("Goat", "Sheep")
+#' @param species a smarter species ("Goat", "Sheep")
 #' @inheritParams get_smarter_breeds
 #'
 #' @return Returns a dataframe with selected samples
