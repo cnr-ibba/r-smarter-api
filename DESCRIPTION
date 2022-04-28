@@ -20,7 +20,9 @@ Suggests:
     roxygen2,
     utils,
     usethis,
-    leaflet
+    leaflet,
+    knitr,
+    rmarkdown
 Config/testthat/edition: 3
 Imports: 
     jsonlite,
@@ -32,3 +34,4 @@ Imports:
     sf
 URL: https://cnr-ibba.github.io/r-smarter-api/
 BugReports: https://github.com/cnr-ibba/r-smarter-api/issues
+VignetteBuilder: knitr
