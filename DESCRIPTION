@@ -30,5 +30,5 @@ Imports:
     dplyr,
     tidyr,
     sf
-URL: https://github.com/cnr-ibba/r-smarter-api
+URL: https://cnr-ibba.github.io/r-smarter-api/
 BugReports: https://github.com/cnr-ibba/r-smarter-api/issues
