@@ -14,6 +14,51 @@ knitr::opts_chunk$set(
 )
 ```
 
+**smarterapi** is an R package which enable to browse the
+[SMARTER backend API](https://webserver.ibba.cnr.it/smarter-api/docs/) and 
+collect smarter data. In this R package, functions to deal with the different 
+API endpoints are implemented. In this vignette, we assume you have configured
+properly this function in order to use your SMARTER credentials.
+
+## Getting started
+
+Simply import `smarterapi` like any other R package:
+
 ```{r setup}
 library(smarterapi)
 ```
+
+## Collect info about versions
+
+The smarter database is continuously updated, for example when receiving new
+samples, genotypes, metadata or when something is fixed or updated, for example
+when a new assembly is added. In order to ensure reproducibility and monitoring
+changes, genotypes and metadata are provided using *versions*: this means that
+you have to ensure that the genotypes dataset and metadata are referring to the 
+same version. You can check database version using the `get_smarter_info()`
+method:
+
+```{r}
+info <- get_smarter_info()
+info$version
+info$last_updated
+```
+
+The same version system is specified in the genotype file dataset you can download
+from the smarter FTP site:
+
+```bash
+$ tree -L 2 SHEEP/
+SHEEP/
+└── OAR3
+    ├── archive
+    ├── SMARTER-OA-OAR3-top-0.4.4.md5
+    └── SMARTER-OA-OAR3-top-0.4.4.zip
+```
+
+You have to ensure that you are working with the same version, for both metadata
+and genotypes: if not, you may not find samples in the genotype files or you are
+referring to an out-dated assembly version. To see the changelist in each 
+version, please refer to the SMARTER-database
+[HISTORY.rst](https://github.com/cnr-ibba/SMARTER-database/blob/master/HISTORY.rst)
+file.
