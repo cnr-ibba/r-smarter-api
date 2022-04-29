@@ -84,8 +84,8 @@ interface to have an idea on which parameter are allowed for each endpoint.
 
 Here are some examples on collecting samples. The main function required to collect
 sample is `get_smarter_samples()`, which is an helper function which allow to query
-the [samples/goat](https://webserver.ibba.cnr.it/smarter-api/docs/#/Samples/get_samples_goat)
-and [samples/sheep](https://webserver.ibba.cnr.it/smarter-api/docs/#/Samples/get_samples_sheep)
+the [/samples/goat](https://webserver.ibba.cnr.it/smarter-api/docs/#/Samples/get_samples_goat)
+and [/samples/sheep](https://webserver.ibba.cnr.it/smarter-api/docs/#/Samples/get_samples_sheep)
 endpoints of the SMARTER-backend API. We will use some other functions to have 
 better idea on which values to use to filter data.
 
@@ -94,7 +94,7 @@ better idea on which values to use to filter data.
 Getting samples by dataset is quite easy, you have to provide the proper `dataset_id`
 to the `get_smarter_samples()` function. However, you have to determine the proper
 `dataset_id` using the `get_smarter_dataset()` function, which model the 
-[datasets](https://webserver.ibba.cnr.it/smarter-api/docs/#/Datasets/get_datasets)
+[/datasets](https://webserver.ibba.cnr.it/smarter-api/docs/#/Datasets/get_datasets)
 endpoint. For example, to extract
 only *background* genotypes datasets (data generated before SMARTER project) you 
 have to pass the proper `type` to the `query` argument. Since the `query` argument
@@ -126,7 +126,7 @@ pander::pander(background_goat_genotypes[, c("_id.$oid", "breed", "file")])
 So collect the *adaptmap* samples, we can provide the proper `dataset_id` to the
 `get_smarter_samples()` method. We can add additional parameters, like country:
 
-```{r}
+```{r eval=FALSE}
 adatpmap_id <- background_goat_genotypes["_id.$oid"][1]
 adaptmap_goats <- get_smarter_samples(
   species = "Goat", query = list(dataset = adatpmap_id, country = "Italy"))
@@ -137,7 +137,7 @@ The previous case is quite easy, there was only one dataset in
 the `get_smarter_samples` query. But how we can handle multiple datasets?
 we can transform the proper column in a list and then renaming it:
 
-```{r}
+```{r eval=FALSE}
 # get more datasets
 foreground_goat_genotypes <- get_smarter_datasets(
   query = list(type = "genotypes", type = "foreground", species = "Goat"))
@@ -157,6 +157,9 @@ name of the file submitted in the dataset, you can search by datasets *content*:
 
 ```{r}
 datasets <- get_smarter_datasets(query = list(search = "adaptmap"))
+```
+
+```{r echo=FALSE}
 pander::pander(datasets[, c("_id.$oid", "breed", "file")])
 ```
 
@@ -165,6 +168,53 @@ the other is a *genotypes*. To select only *genotypes*, simply add `type=genotyp
 to the `query` parameter.
 
 ### Select by breed
+
+You can select samples relying on *breeds names* or *breed codes*. Breed names are
+written in the languages they come from, so in order to retrieve *Île de France*
+or *Fjällnäs* breed samples, you have to specify the full breed name or use the 
+search parameter with the `get_smarter_breeds()` which model the
+[/breeds](https://webserver.ibba.cnr.it/smarter-api/docs/#/Breeds/get_breeds)
+endpoint:
+
+```{r}
+breeds <- get_smarter_breeds(query = list(
+  species = "Sheep", search = "de france"))
+```
+
+```{r echo=FALSE}
+pander::pander(subset(breeds, select = c("name", "code")))
+```
+
+Searchs for breeds can return multiple values, for example:
+
+```{r}
+breeds <- get_smarter_breeds(query = list(
+  species = "Sheep", search = "merino"))
+```
+
+```{r echo=FALSE}
+pander::pander(subset(breeds, select = c("name", "code")))
+```
+
+Name and codes can be used as they are to select samples by passing multiple
+arguments to the query:
+
+```{r eval=FALSE}
+selected_samples <- get_smarter_samples(species = "Sheep", query = list(
+  breed_code = "MER", breed_code = "AME"
+))
+```
+
+or to get all the samples with *merino* in breed name:
+
+```{r eval=FALSE}
+# construct the query arguments
+query <- as.list(breeds$code)
+names(query) <- rep("breed_code", length(query))
+
+# execute query
+merino_samples <- get_smarter_samples(species = "Sheep", query = query)
+```
 
 ### Select by country
 
