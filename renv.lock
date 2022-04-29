@@ -807,6 +807,17 @@
         "askpass"
       ]
     },
+    "pander": {
+      "Package": "pander",
+      "Version": "0.6.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "737924139a1e4fc96356ff377c754c35",
+      "Requirements": [
+        "Rcpp",
+        "digest"
+      ]
+    },
     "pillar": {
       "Package": "pillar",
       "Version": "1.7.0",
