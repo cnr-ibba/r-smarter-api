@@ -24,9 +24,14 @@ properly this function in order to use your SMARTER credentials.
 
 Simply import `smarterapi` like any other R package:
 
-```{r setup}
-library(pander)
+```{r setup, message=FALSE}
+library(dplyr)
 library(smarterapi)
+```
+
+```{r echo=FALSE}
+# required by this vignette
+library(pander)
 ```
 
 ## Collect info about versions
@@ -218,4 +223,59 @@ merino_samples <- get_smarter_samples(species = "Sheep", query = query)
 
 ### Select by country
 
+You can retrive samples by countries. First get a list of the available
+countries relying on country name, then extract samples using the correct
+country name:
+
+```{r}
+italy <- get_smarter_countries(query = list(search = "italy"))
+
+italian_background_sheeps <- get_smarter_samples(
+  species = "Sheep",
+  query = list(
+    country = italy$name[1]
+  )
+)
+```
+
 ## Subset genotypes relying samples
+
+You can extract your selected samples from the proper genotype file using
+[plink](https://www.cog-genomics.org/plink/). First, you have to write a *TSV*
+file with *breed_code* and *smarter_id* as columns. For example, using the samples
+selected above and *dplyr*:
+
+```{r}
+selected_sheeps_ids <- italian_background_sheeps %>% dplyr::select(
+  "breed_code", "smarter_id")
+
+write.table(
+  selected_sheeps_ids, 
+  file = "selected_sheeps.txt", 
+  quote = FALSE, 
+  sep = "\t", 
+  row.names = FALSE, 
+  col.names = FALSE)
+```
+
+Next, you need to collect the proper *plink options* in order to not loose
+information from the plink file. The parameters used to generate the genotype
+files are tracked in the info endpoint. In this example, get parameters from
+*Sheep* genotypes:
+
+```{r}
+info <- get_smarter_info()
+plink_opts <- paste0(info$plink_specie_opt$Sheep, collapse = " ")
+plink_opts
+```
+
+And finally you can call plink and providing your sample list:
+
+```bash
+plink --chr-set 26 no-xy no-mt --allow-no-sex \
+  --bfile SMARTER-OA-OAR3-top-0.4.4 \
+  --keep selected_sheeps.txt \
+  --out selected_sheep-OAR3-top-0.4.4 \
+  --make-bed
+```
+
