@@ -4,10 +4,12 @@
 \alias{get_smarter_geojson}
 \title{Get SMARTER GeoJSON Samples}
 \usage{
-get_smarter_geojson(species, token = NULL)
+get_smarter_geojson(species, query = list(), token = NULL)
 }
 \arguments{
 \item{species}{a smarter species ("Goat", "Sheep")}
+
+\item{query}{a \code{list} of query arguments}
 
 \item{token}{a string with a valid token}
 }
@@ -27,7 +29,13 @@ library(dplyr)
 library(leaflet)
 
 # get goat samples with GPS coordinates as sf object
-goat_data <- get_smarter_geojson("Goat")
+goat_data <- get_smarter_geojson(
+  species = "Goat",
+  query = list(
+    type = "background",
+    country = "Italy"
+  )
+)
 
 # leaflet doesn't handle MULTIPOINT data (https://github.com/rstudio/leaflet/issues/352)
 # Cast them into point considering only the first objects

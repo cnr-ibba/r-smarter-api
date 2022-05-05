@@ -7,8 +7,7 @@
 #' Cached token is used or a new token is generated if not provided when calling
 #' this function (see \code{\link{get_smarter_token}} for more information)
 #'
-#' @param species a smarter species ("Goat", "Sheep")
-#' @param token a string with a valid token
+#' @inheritParams get_smarter_samples
 #'
 #' @return a sf data object
 #' @export
@@ -20,7 +19,13 @@
 #' library(leaflet)
 #'
 #' # get goat samples with GPS coordinates as sf object
-#' goat_data <- get_smarter_geojson("Goat")
+#' goat_data <- get_smarter_geojson(
+#'   species = "Goat",
+#'   query = list(
+#'     type = "background",
+#'     country = "Italy"
+#'   )
+#' )
 #'
 #' # leaflet doesn't handle MULTIPOINT data (https://github.com/rstudio/leaflet/issues/352)
 #' # Cast them into point considering only the first objects
@@ -35,7 +40,7 @@
 #'   )
 #' }
 # nolint end
-get_smarter_geojson <- function(species, token = NULL) {
+get_smarter_geojson <- function(species, query = list(), token = NULL) {
   if (is.null(token)) {
     token <- get_smarter_token()
   }
@@ -55,6 +60,7 @@ get_smarter_geojson <- function(species, token = NULL) {
   # in this request, we add the token to the request header section
   resp <- httr::GET(
     url,
+    query = query,
     httr::add_headers(Authorization = paste("Bearer", token)),
     smarterapi_globals$user_agent
   )
