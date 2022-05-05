@@ -25,6 +25,11 @@
 #' italy <- get_smarter_countries(query = list(name = "Italy"))
 #' france <- get_smarter_countries(query = list(alpha_2 = "FR"))
 #'
+#' \dontrun{
+#' # get countries where there are sheeps
+#' sheep_countries <- get_smarter_countries(query = list(species = "Sheep"))
+#' }
+#'
 get_smarter_countries <- function(query = list(), token = NULL) {
   if (is.null(token)) {
     token <- get_smarter_token()

@@ -36,4 +36,9 @@ Swagger Countries endpoint} for more information about the breeds endpoint
 italy <- get_smarter_countries(query = list(name = "Italy"))
 france <- get_smarter_countries(query = list(alpha_2 = "FR"))
 
+\dontrun{
+# get countries where there are sheeps
+sheep_countries <- get_smarter_countries(query = list(species = "Sheep"))
+}
+
 }

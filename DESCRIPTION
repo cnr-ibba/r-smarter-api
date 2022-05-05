@@ -1,6 +1,6 @@
 Package: smarterapi
 Title: Fetch SMARTER data through REST API
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person("Paolo", "Cozzi", , "paolo.cozzi@ibba.cnr.it", 
            role = c("aut", "cre"),
@@ -22,7 +22,8 @@ Suggests:
     usethis,
     leaflet,
     knitr,
-    rmarkdown
+    rmarkdown,
+    pander
 Config/testthat/edition: 3
 Imports: 
     jsonlite,
