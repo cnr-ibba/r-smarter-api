@@ -1,0 +1,57 @@
+---
+title: "Working with GeoJSON data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with GeoJSON data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette explain some tips in order to work and visualize SMARTER data
+using the [GeoJSON endpoints](https://webserver.ibba.cnr.it/smarter-api/docs/#/GeoJSON):
+These endpoints in particular retrieve all the samples with GPS coordinates
+(like using the `locations__exists=TRUE` parameter with the `get_smarter_samples()`
+method) and then return results as *geo dataframe*. First, load some required
+libraries:
+
+```{r setup}
+library(smarterapi)
+library(sf)
+```
+
+Next collect data using the `smarterapi` methods. For example for the *Sheep
+hapmap background* dataset:
+
+```{r}
+hapmap_dataset <- get_smarter_datasets(query = list(
+  species = "Sheep",
+  type = "background",
+  type = "genotypes",
+  search = "hapmap"
+))
+hapmap_data <- get_smarter_geojson(species = "Sheep", query = list(
+  dataset = hapmap_dataset["_id.$oid"][1],
+  country = "Italy"
+))
+```
+
+The `get_smarter_geojson()` methods returns a `sf()` *MULTIPOINTS* objects since
+multiple locations could be collected for each animal, for example for 
+*transhumant* samples. However, for simplicity, we can focus our analyses using
+only one GPS coordinate, transforming this *MULTIPOINTS* object into a *POINT*
+object:
+
+```{r warning=FALSE}
+hapmap_data <- hapmap_data %>% sf::st_cast("POINT", do_split = FALSE)
+hapmap_data
+```
+
+The *warnings* you see in your terminal tell you that you are considering only
+the first coordinate object from each *MULTIPOINT* collection.
