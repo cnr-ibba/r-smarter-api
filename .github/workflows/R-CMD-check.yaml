@@ -41,7 +41,7 @@ jobs:
       - name: Install dependencies on Linux
         if: runner.os == 'Linux'
         run: sudo apt-get update -y && sudo apt-get install -y libcurl4-openssl-dev
-             libgdal-dev libudunits2-dev
+             libgdal-dev libudunits2-dev libharfbuzz-dev libfribidi-dev
 
       - uses: r-lib/actions/setup-pandoc@v2.1.3
 
