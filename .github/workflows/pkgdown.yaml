@@ -12,8 +12,13 @@ name: pkgdown
 jobs:
   pkgdown:
     runs-on: ubuntu-latest
+
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+      SMARTER_API_USERNAME: ${{ secrets.SMARTER_API_USERNAME }}
+      SMARTER_API_PASSWORD: ${{ secrets.SMARTER_API_PASSWORD }}
+
     steps:
       - uses: actions/checkout@v2
 
@@ -32,8 +37,14 @@ jobs:
         with:
           cache-version: 2
 
-      - name: Deploy package
-        run: |
-          git config --local user.name "$GITHUB_ACTOR"
-          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
+      - name: Build site
+        run: pkgdown::build_site_github_pages(new_process = FALSE, install = TRUE)
+        shell: Rscript {0}
+
+      - name: Deploy to GitHub pages 🚀
+        if: github.event_name != 'pull_request'
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+          clean: false
+          branch: gh-pages
+          folder: docs
