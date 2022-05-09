@@ -33,6 +33,7 @@ library(rnaturalearthdata)
 library(elevatr)
 library(geodata)
 library(terra)
+library(progress)
 library(smarterapi)
 ```
 
