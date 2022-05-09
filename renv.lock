@@ -1264,6 +1264,16 @@
         "sp"
       ]
     },
+    "rnaturalearthdata": {
+      "Package": "rnaturalearthdata",
+      "Version": "0.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0d34b89b43e900467e60f5449226f3e3",
+      "Requirements": [
+        "sp"
+      ]
+    },
     "rosm": {
       "Package": "rosm",
       "Version": "0.2.5",
