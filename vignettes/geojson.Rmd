@@ -18,16 +18,24 @@ This vignette explain some tips in order to work and visualize SMARTER data
 using the [GeoJSON endpoints](https://webserver.ibba.cnr.it/smarter-api/docs/#/GeoJSON):
 These endpoints in particular retrieve all the samples with GPS coordinates
 (like using the `locations__exists=TRUE` parameter with the `get_smarter_samples()`
-method) and then return results as *geo dataframe*. First, load some required
-libraries:
+method) and then return results as a *Simple feature*. This could help you doing
+spatial queries such as collect samples within a certain area or calculate variables
+from a raster object. Moreover, is it possible to display data using maps or plots.
+Here are some libraries used in this vignette you may find useful:
 
 ```{r setup}
-library(smarterapi)
 library(sf)
+library(leaflet)
+library(ggplot2)
+library(ggspatial)
+library(rnaturalearth)
+library(smarterapi)
 ```
 
-Next collect data using the `smarterapi` methods. For example for the *Sheep
-hapmap background* dataset:
+## Get data using parameters
+
+You can collect GeoJSON data using parameters, like using the `get_smarter_samples()`
+function. For example, try to collect data for the *Sheep hapmap background* dataset:
 
 ```{r}
 hapmap_dataset <- get_smarter_datasets(query = list(
@@ -42,6 +50,8 @@ hapmap_data <- get_smarter_geojson(species = "Sheep", query = list(
 ))
 ```
 
+## Convert from MULTIPOINTS to POINT
+
 The `get_smarter_geojson()` methods returns a `sf()` *MULTIPOINTS* objects since
 multiple locations could be collected for each animal, for example for 
 *transhumant* samples. However, for simplicity, we can focus our analyses using
@@ -55,3 +65,45 @@ hapmap_data
 
 The *warnings* you see in your terminal tell you that you are considering only
 the first coordinate object from each *MULTIPOINT* collection.
+
+## Displaying data using ggplot2
+
+`sf` data could be visualized using ggplot2. In the following examples we
+derive the countries from the `rnaturalearth` package, then we will zoom
+the plot to the selected points of the previous example:
+
+```{r}
+bbox <- sf::st_bbox(hapmap_data)
+world <- rnaturalearth::ne_countries(scale = "medium", returnclass = "sf")
+
+ggplot2::ggplot() + 
+  ggplot2::geom_sf(data = world, fill = "antiquewhite") + 
+  ggplot2::geom_sf(data = hapmap_data, color = 'blue', size = 5) +
+  ggspatial::annotation_scale(location = "bl", width_hint = 0.5) +
+  ggspatial::annotation_north_arrow(location = "bl", which_north = "true",
+    pad_x = ggplot2::unit(0.75, "in"), pad_y = ggplot2::unit(0.5, "in"),
+    style = ggspatial::north_arrow_fancy_orienteering) + 
+  ggspatial::coord_sf(
+    xlim = c(bbox$xmin, bbox$xmax), ylim = c(bbox$ymin, bbox$ymax)) +
+  ggplot2::theme_bw() +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) +
+  ggplot2::xlab("longitude") + ggplot2::ylab("latitude") +
+  ggplot2::ggtitle("Selected samples")
+```
+
+## Displaying data using leaflet
+
+Data could be visualized in an interactive way using *R* `leaflet` library:
+
+```r
+leaflet::leaflet(
+  data = hapmap_data, 
+  options = leaflet::leafletOptions(minZoom = 5, maxZoom = 8)) %>%
+  leaflet::addTiles() %>%
+  leaflet::addMarkers(
+    clusterOptions = leaflet::markerClusterOptions(), label = ~smarter_id
+  )
+```
+
+See [Leaflet for R](https://rstudio.github.io/leaflet/) documentation for 
+more information.
