@@ -394,6 +394,26 @@
         "proxy"
       ]
     },
+    "elevatr": {
+      "Package": "elevatr",
+      "Version": "0.4.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "4922456741d2babf2bc14654c8d6d4fd",
+      "Requirements": [
+        "furrr",
+        "future",
+        "httr",
+        "jsonlite",
+        "progressr",
+        "purrr",
+        "raster",
+        "sf",
+        "slippymath",
+        "sp",
+        "units"
+      ]
+    },
     "ellipsis": {
       "Package": "ellipsis",
       "Version": "0.3.2",
@@ -444,6 +464,35 @@
       "Hash": "7c89603d81793f0d5486d91ab1fc6f1d",
       "Requirements": []
     },
+    "furrr": {
+      "Package": "furrr",
+      "Version": "0.2.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2aba4ab06e8707ac054c6683cb6fed56",
+      "Requirements": [
+        "ellipsis",
+        "future",
+        "globals",
+        "lifecycle",
+        "purrr",
+        "rlang",
+        "vctrs"
+      ]
+    },
+    "future": {
+      "Package": "future",
+      "Version": "1.25.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "877024e372cf61e41f5d13eafd8d4bac",
+      "Requirements": [
+        "digest",
+        "globals",
+        "listenv",
+        "parallelly"
+      ]
+    },
     "generics": {
       "Package": "generics",
       "Version": "0.1.2",
@@ -451,6 +500,16 @@
       "Repository": "CRAN",
       "Hash": "177475892cf4a55865868527654a7741",
       "Requirements": []
+    },
+    "geodata": {
+      "Package": "geodata",
+      "Version": "0.4-6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e4177dfdb16c7559e705fd80f1bed27f",
+      "Requirements": [
+        "terra"
+      ]
     },
     "gert": {
       "Package": "gert",
@@ -525,6 +584,16 @@
       "Repository": "CRAN",
       "Hash": "f3aefccc1cc50de6338146b62f115de8",
       "Requirements": []
+    },
+    "globals": {
+      "Package": "globals",
+      "Version": "0.14.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "eca8023ed5ca6372479ebb9b3207f5ae",
+      "Requirements": [
+        "codetools"
+      ]
     },
     "glue": {
       "Package": "glue",
@@ -743,6 +812,14 @@
         "xmlparsedata"
       ]
     },
+    "listenv": {
+      "Package": "listenv",
+      "Version": "0.8.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0bde42ee282efb18c7c4e63822f5b4f7",
+      "Requirements": []
+    },
     "logger": {
       "Package": "logger",
       "Version": "0.2.2",
@@ -851,6 +928,14 @@
         "Rcpp",
         "digest"
       ]
+    },
+    "parallelly": {
+      "Package": "parallelly",
+      "Version": "1.31.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "115faaa1a50897c3e2339d1cb7d3d493",
+      "Requirements": []
     },
     "pillar": {
       "Package": "pillar",
@@ -996,6 +1081,16 @@
       "Requirements": [
         "R6",
         "ps"
+      ]
+    },
+    "progressr": {
+      "Package": "progressr",
+      "Version": "0.10.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "7df448f5ae46ab0a1af0fb619349d3fd",
+      "Requirements": [
+        "digest"
       ]
     },
     "proxy": {
@@ -1290,6 +1385,18 @@
         "magrittr",
         "s2",
         "units"
+      ]
+    },
+    "slippymath": {
+      "Package": "slippymath",
+      "Version": "0.3.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "abdaf883004a4791545655d79ca3aae0",
+      "Requirements": [
+        "png",
+        "purrr",
+        "raster"
       ]
     },
     "sp": {

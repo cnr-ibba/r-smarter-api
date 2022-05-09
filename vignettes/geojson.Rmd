@@ -29,6 +29,9 @@ library(leaflet)
 library(ggplot2)
 library(ggspatial)
 library(rnaturalearth)
+library(elevatr)
+library(geodata)
+library(terra)
 library(smarterapi)
 ```
 
@@ -66,7 +69,9 @@ hapmap_data
 The *warnings* you see in your terminal tell you that you are considering only
 the first coordinate object from each *MULTIPOINT* collection.
 
-## Displaying data using ggplot2
+## Visualize SMARTER GPS data
+
+### Displaying data using ggplot2
 
 `sf` data could be visualized using ggplot2. In the following examples we
 derive the countries from the `rnaturalearth` package, then we will zoom
@@ -91,7 +96,10 @@ ggplot2::ggplot() +
   ggplot2::ggtitle("Selected samples")
 ```
 
-## Displaying data using leaflet
+See [this post](https://r-spatial.org/r/2018/10/25/ggplot2-sf.html) for a nice
+introduction to `sf` and `ggplot2`.
+
+### Displaying data using leaflet
 
 Data could be visualized in an interactive way using *R* `leaflet` library:
 
@@ -106,4 +114,49 @@ leaflet::leaflet(
 ```
 
 See [Leaflet for R](https://rstudio.github.io/leaflet/) documentation for 
+more information.
+
+## Integrate data with external sources
+
+### Derive elevation data using elevatr
+
+We can collect elevation data using the `elevatr` package. The following
+functions returns the input dataframe with `elevation` and `elev_units` as
+additional columns:
+
+```{r}
+prj_dd <- "EPSG:4326"
+hapmap_data_elev <- elevatr::get_elev_point(hapmap_data, prj = prj_dd, src = "aws")
+```
+
+See [elevatr vignette](https://cran.r-project.org/web/packages/elevatr/vignettes/introduction_to_elevatr.html)
+or [elevatr](https://rspatialdata.github.io/elevation.html) tutorial in 
+[rspatialdata](https://rspatialdata.github.io/index.html) documentation for more
+information and examples.
+
+### Add worldclim data from rasters
+
+We can collect data from [worldclim](https://www.worldclim.org/) database using 
+the `geodata` package: this package in particular collect *raster* data from different 
+sources (see geodata 
+[reference manual](https://cran.r-project.org/web/packages/geodata/geodata.pdf)
+for more information). In this example, we collect the *raster* with the lowest
+definition (10min =~ 340km) for worldclim
+[bioclimatic variables](https://www.worldclim.org/data/bioclim.html)
+and elevation. Raster images will be placed in the `tempdir` path. Then using
+`terra::extract` we calculate the values for our data, after converting them
+into terra *SpatialVectors*:
+
+```{r}
+worldclim_bio <- geodata::worldclim_global(var = "bio", res = 10, path = tempdir())
+bio_data <- terra::extract(worldclim_bio, terra::vect(hapmap_data))
+
+worldclim_elev <- geodata::worldclim_global(var = "elev", res = 10, path = tempdir())
+elev_data <- terra::extract(worldclim_elev, terra::vect(hapmap_data))
+
+hapmap_data_worldclim <- cbind(hapmap_data, merge(elev_data, bio_data))
+```
+
+See [raster extraction](https://www.worldclim.org/data/bioclim.html) from
+[geocomputation with R](https://geocompr.robinlovelace.net/index.html) for
 more information.
