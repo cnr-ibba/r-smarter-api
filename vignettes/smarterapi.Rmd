@@ -275,7 +275,7 @@ And finally you can call plink and providing your sample list:
 plink --chr-set 26 no-xy no-mt --allow-no-sex \
   --bfile SMARTER-OA-OAR3-top-0.4.4 \
   --keep selected_sheeps.txt \
-  --out selected_sheep-OAR3-top-0.4.4 \
+  --out selected_sheeps-OAR3-top-0.4.4 \
   --make-bed
 ```
 

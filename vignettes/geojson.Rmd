@@ -55,6 +55,29 @@ hapmap_data <- get_smarter_geojson(species = "Sheep", query = list(
 ))
 ```
 
+## Filter data using spatial queries
+
+An alternative approach in selecting samples expoits *spatial queries*. In this
+example, we imported the goat dataset as [geojson](https://en.wikipedia.org/wiki/GeoJSON)
+file into [qgis](https://www.qgis.org/en/site/). Then we created two *polygons*
+features in correspondance of the samples we want to collect using GPS coordinates
+like in the following picture:
+
+![select by polygons](images/smarter_goat_dataset.png)
+
+Then we exported the two polygons as a *shapefile*. Here is how we can do a
+spatial query with `st_intersects()` in order to collect samples in correspondance
+of the two areas of interest:
+
+```{r warning=FALSE}
+polygons_file <- system.file("extdata", "polygons.shp", package = "smarterapi")
+polygons <- sf::st_read(polygons_file)
+goat_data <- get_smarter_geojson("Goat", query = list(type = "background"))
+sel_sgbp <- sf::st_intersects(goat_data, polygons)
+sel_logical <- lengths(sel_sgbp) > 0
+selected_goats <- goat_data[sel_logical, ]
+```
+
 ## Convert from MULTIPOINTS to POINT
 
 The `get_smarter_geojson()` methods returns a `sf()` *MULTIPOINTS* objects since
