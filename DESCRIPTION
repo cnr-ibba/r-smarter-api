@@ -26,7 +26,12 @@ Suggests:
     pander,
     ggplot2,
     ggspatial,
-    rnaturalearth
+    elevatr,
+    progress,
+    geodata,
+    terra,
+    rnaturalearth,
+    rnaturalearthdata
 Config/testthat/edition: 3
 Imports: 
     jsonlite,
