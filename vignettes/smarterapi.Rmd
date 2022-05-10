@@ -92,7 +92,9 @@ sample is `get_smarter_samples()`, which is an helper function which allow to qu
 the [/samples/goat](https://webserver.ibba.cnr.it/smarter-api/docs/#/Samples/get_samples_goat)
 and [/samples/sheep](https://webserver.ibba.cnr.it/smarter-api/docs/#/Samples/get_samples_sheep)
 endpoints of the SMARTER-backend API. We will use some other functions to have 
-better idea on which values to use to filter data.
+better idea on which values to use to filter data. Remember that all the parameters
+you see in each different example can be merged with other to restrict your query
+to have only the samples you are looking for.
 
 ### Select by datasets
 
@@ -190,7 +192,7 @@ breeds <- get_smarter_breeds(query = list(
 pander::pander(subset(breeds, select = c("name", "code")))
 ```
 
-Searchs for breeds can return multiple values, for example:
+Search for breeds can return multiple values, for example:
 
 ```{r}
 breeds <- get_smarter_breeds(query = list(
@@ -227,7 +229,7 @@ You can retrive samples by countries. First get a list of the available
 countries relying on country name, then extract samples using the correct
 country name:
 
-```{r}
+```{r eval=FALSE}
 italy <- get_smarter_countries(query = list(search = "italy"))
 
 italian_background_sheeps <- get_smarter_samples(
@@ -238,14 +240,63 @@ italian_background_sheeps <- get_smarter_samples(
 )
 ```
 
+### Select by chip
+
+You can select samples relying on the chip they are sequenced. If you search 
+for multiple chip types, you will collect all samples which belongs to any of 
+the specified chip. First, collect a list of the available chips for a certain
+species:
+
+```{r}
+sheep_chips <- get_smarter_supportedchips(query = list(species = "Sheep"))
+```
+
+```{r echo=FALSE}
+pander::pander(subset(sheep_chips, select = -c(`_id.$oid`)))
+```
+
+Then collect samples relying on chip name, for example:
+
+```{r eval=FALSE}
+selected_samples <- get_smarter_samples(
+  species = "Sheep",
+  query = list(
+    chip_name="IlluminaOvineHDSNP",
+    chip_name="AffymetrixAxiomOviCan"
+  )
+)
+```
+
+### Select by metadata
+
+Since metadata aren't formatted in the same way in each samples, is difficult to 
+define a single query you can apply to each samples. For the moment, the only 
+queries you can apply on metadata are restricted to their presence or absence.
+For example, we can collect all samples which have GPS coordinates and phenotypes
+(any):
+
+```{r eval=FALSE}
+smarter_goats <- get_smarter_samples(
+  species = "Goat",
+  query = list(
+    locations__exists=TRUE,
+    phenotype__exists=TRUE
+  )
+)
+```
+
+After that, you have to filter out the `smarter_goats` dataframe in order to 
+collect only the samples you want.
+
 ## Subset genotypes relying samples
 
-You can extract your selected samples from the proper genotype file using
+After you have identified the samples of your interest, 
+you can extract their genotypes from the proper file using
 [plink](https://www.cog-genomics.org/plink/). First, you have to write a *TSV*
 file with *breed_code* and *smarter_id* as columns. For example, using the samples
 selected above and *dplyr*:
 
-```{r}
+```{r eval=FALSE}
 selected_sheeps_ids <- italian_background_sheeps %>% dplyr::select(
   "breed_code", "smarter_id")
 

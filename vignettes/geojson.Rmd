@@ -69,7 +69,7 @@ Then we exported the two polygons as a *shapefile*. Here is how we can do a
 spatial query with `st_intersects()` in order to collect samples in correspondance
 of the two areas of interest:
 
-```r
+```{r eval=FALSE}
 polygons_file <- system.file("extdata", "polygons.shp", package = "smarterapi")
 polygons <- sf::st_read(polygons_file)
 goat_data <- get_smarter_geojson("Goat", query = list(type = "background"))
@@ -128,7 +128,7 @@ introduction to `sf` and `ggplot2`.
 
 Data could be visualized in an interactive way using *R* `leaflet` library:
 
-```r
+```{r eval=FALSE}
 leaflet::leaflet(
   data = hapmap_data, 
   options = leaflet::leafletOptions(minZoom = 5, maxZoom = 8)) %>%
@@ -149,7 +149,7 @@ We can collect elevation data using the `elevatr` package. The following
 functions returns the input dataframe with `elevation` and `elev_units` as
 additional columns:
 
-```r
+```{r eval=FALSE}
 prj_dd <- "EPSG:4326"
 hapmap_data_elev <- elevatr::get_elev_point(
   hapmap_data, 
@@ -176,7 +176,7 @@ and elevation. Raster images will be placed in the `tempdir` path. Then using
 `terra::extract` we calculate the values for our data, after converting them
 into terra *SpatialVectors*:
 
-```r
+```{r eval=FALSE}
 worldclim_bio <- geodata::worldclim_global(
   var = "bio",
   res = 10,

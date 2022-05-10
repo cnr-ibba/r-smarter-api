@@ -135,7 +135,7 @@ Then collect all the SNPs for a certain chip by providing the SMARTER chip *name
 Please, consider that you will download more than 50K SNP for this chip and this
 will take a lot of time
 
-```r
+```{r eval=FALSE}
 variants <- get_smarter_variants(
   species = "Sheep",
   assembly = "OAR3",
