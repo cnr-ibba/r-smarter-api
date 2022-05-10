@@ -44,7 +44,7 @@
 #' }
 get_smarter_samples <- function(species, query = list(), token = NULL) {
   if (is.null(token)) {
-    token <- get_smarter_token()
+    token <- smarterapi::get_smarter_token()
   }
 
   logger::log_info("Get data from samples endpoint")

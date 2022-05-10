@@ -15,9 +15,9 @@
 #' Additional parameters need to be passed as \code{list} using the \code{query}
 #' parameter. For example, to get all the countries where there are "Sheeps"
 #' you need to provide \code{list(species="Sheep")} as \code{query} parameter.
-#' Endpoint supports searches with *two* or *tree* ISO codes using \code{alpha_2}
-#'  and \code{alpha3} parameters respectively. In addition, you can search
-#' using a pattern through the \code{search} parameter.
+#' Endpoint supports searches with *two* or *tree* ISO codes using
+#' \code{alpha_2} and \code{alpha3} parameters respectively. In addition,
+#' you can search using a pattern through the \code{search} parameter.
 #' See \href{https://webserver.ibba.cnr.it/smarter-api/docs/#/Countries}{
 #' Swagger Countries endpoint} for more information about the breeds endpoint
 #'
@@ -32,7 +32,7 @@
 #'
 get_smarter_countries <- function(query = list(), token = NULL) {
   if (is.null(token)) {
-    token <- get_smarter_token()
+    token <- smarterapi::get_smarter_token()
   }
 
   logger::log_info("Get data from countries endpoint")
