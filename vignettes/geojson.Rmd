@@ -69,7 +69,7 @@ Then we exported the two polygons as a *shapefile*. Here is how we can do a
 spatial query with `st_intersects()` in order to collect samples in correspondance
 of the two areas of interest:
 
-```{r warning=FALSE}
+```r
 polygons_file <- system.file("extdata", "polygons.shp", package = "smarterapi")
 polygons <- sf::st_read(polygons_file)
 goat_data <- get_smarter_geojson("Goat", query = list(type = "background"))
@@ -149,9 +149,13 @@ We can collect elevation data using the `elevatr` package. The following
 functions returns the input dataframe with `elevation` and `elev_units` as
 additional columns:
 
-```{r}
+```r
 prj_dd <- "EPSG:4326"
-hapmap_data_elev <- elevatr::get_elev_point(hapmap_data, prj = prj_dd, src = "aws")
+hapmap_data_elev <- elevatr::get_elev_point(
+  hapmap_data, 
+  prj = prj_dd, 
+  src = "aws"
+)
 ```
 
 See [elevatr vignette](https://cran.r-project.org/web/packages/elevatr/vignettes/introduction_to_elevatr.html)
@@ -172,11 +176,17 @@ and elevation. Raster images will be placed in the `tempdir` path. Then using
 `terra::extract` we calculate the values for our data, after converting them
 into terra *SpatialVectors*:
 
-```{r}
-worldclim_bio <- geodata::worldclim_global(var = "bio", res = 10, path = tempdir())
+```r
+worldclim_bio <- geodata::worldclim_global(
+  var = "bio",
+  res = 10,
+  path = tempdir())
 bio_data <- terra::extract(worldclim_bio, terra::vect(hapmap_data))
 
-worldclim_elev <- geodata::worldclim_global(var = "elev", res = 10, path = tempdir())
+worldclim_elev <- geodata::worldclim_global(
+  var = "elev",
+  res = 10,
+  path = tempdir())
 elev_data <- terra::extract(worldclim_elev, terra::vect(hapmap_data))
 
 hapmap_data_worldclim <- cbind(hapmap_data, merge(elev_data, bio_data))

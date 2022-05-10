@@ -101,7 +101,7 @@ on the reference sequence it's `T/C`.
 
 ## Fetch Variants by region
 
-Variants endpoint support query by regions, using *<chromosome>:<start>-<end>* as
+Variants endpoint support query by regions, using `<chromosome>:<start>-<end>` as
 format, for example:
 
 ```{r}
