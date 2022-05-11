@@ -24,7 +24,7 @@
 #' }
 get_smarter_supportedchips <- function(query = list(), token = NULL) {
   if (is.null(token)) {
-    token <- get_smarter_token()
+    token <- smarterapi::get_smarter_token()
   }
 
   logger::log_info("Get data from supported chip endpoint")
@@ -32,7 +32,7 @@ get_smarter_supportedchips <- function(query = list(), token = NULL) {
   # setting the URL endpoint
   url <- httr::modify_url(
     smarterapi_globals$base_url,
-    path = sprintf("%s//supported-chips", smarterapi_globals$base_endpoint)
+    path = sprintf("%s/supported-chips", smarterapi_globals$base_endpoint)
   )
 
   # reading our data

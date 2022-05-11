@@ -1,0 +1,197 @@
+---
+title: "Working with GeoJSON data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Working with GeoJSON data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette explain some tips in order to work and visualize SMARTER data
+using the [GeoJSON endpoints](https://webserver.ibba.cnr.it/smarter-api/docs/#/GeoJSON):
+These endpoints in particular retrieve all the samples with GPS coordinates
+(like using the `locations__exists=TRUE` parameter with the `get_smarter_samples()`
+method) and then return results as a *Simple feature*. This could help you doing
+spatial queries such as collect samples within a certain area or calculate variables
+from a raster object. Moreover, is it possible to display data using maps or plots.
+Here are some libraries used in this vignette you may find useful:
+
+```{r setup}
+library(sf)
+library(leaflet)
+library(ggplot2)
+library(ggspatial)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(elevatr)
+library(geodata)
+library(terra)
+library(progress)
+library(smarterapi)
+```
+
+## Get data using parameters
+
+You can collect GeoJSON data using parameters, like using the `get_smarter_samples()`
+function. For example, try to collect data for the *Sheep hapmap background* dataset:
+
+```{r}
+hapmap_dataset <- get_smarter_datasets(query = list(
+  species = "Sheep",
+  type = "background",
+  type = "genotypes",
+  search = "hapmap"
+))
+hapmap_data <- get_smarter_geojson(species = "Sheep", query = list(
+  dataset = hapmap_dataset["_id.$oid"][1],
+  country = "Italy"
+))
+```
+
+## Filter data using spatial queries
+
+An alternative approach in selecting samples expoits *spatial queries*. In this
+example, we imported the goat dataset as [geojson](https://en.wikipedia.org/wiki/GeoJSON)
+file into [qgis](https://www.qgis.org/en/site/). Then we created two *polygons*
+features in correspondance of the samples we want to collect using GPS coordinates
+like in the following picture:
+
+![select by polygons](images/smarter_goat_dataset.png)
+
+Then we exported the two polygons as a *shapefile*. Here is how we can do a
+spatial query with `st_intersects()` in order to collect samples in correspondance
+of the two areas of interest:
+
+```{r eval=FALSE}
+polygons_file <- system.file("extdata", "polygons.shp", package = "smarterapi")
+polygons <- sf::st_read(polygons_file)
+goat_data <- get_smarter_geojson("Goat", query = list(type = "background"))
+sel_sgbp <- sf::st_intersects(goat_data, polygons)
+sel_logical <- lengths(sel_sgbp) > 0
+selected_goats <- goat_data[sel_logical, ]
+```
+
+## Convert from MULTIPOINTS to POINT
+
+The `get_smarter_geojson()` methods returns a `sf()` *MULTIPOINTS* objects since
+multiple locations could be collected for each animal, for example for 
+*transhumant* samples. However, for simplicity, we can focus our analyses using
+only one GPS coordinate, transforming this *MULTIPOINTS* object into a *POINT*
+object:
+
+```{r warning=FALSE}
+hapmap_data <- hapmap_data %>% sf::st_cast("POINT", do_split = FALSE)
+hapmap_data
+```
+
+The *warnings* you see in your terminal tell you that you are considering only
+the first coordinate object from each *MULTIPOINT* collection.
+
+## Visualize SMARTER GPS data
+
+### Displaying data using ggplot2
+
+`sf` data could be visualized using ggplot2. In the following examples we
+derive the countries from the `rnaturalearth` package, then we will zoom
+the plot to the selected points of the previous example:
+
+```{r}
+bbox <- sf::st_bbox(hapmap_data)
+world <- rnaturalearth::ne_countries(scale = "medium", returnclass = "sf")
+
+ggplot2::ggplot() + 
+  ggplot2::geom_sf(data = world, fill = "antiquewhite") + 
+  ggplot2::geom_sf(data = hapmap_data, color = 'blue', size = 5) +
+  ggspatial::annotation_scale(location = "bl", width_hint = 0.5) +
+  ggspatial::annotation_north_arrow(location = "bl", which_north = "true",
+    pad_x = ggplot2::unit(0.75, "in"), pad_y = ggplot2::unit(0.5, "in"),
+    style = ggspatial::north_arrow_fancy_orienteering) + 
+  ggspatial::coord_sf(
+    xlim = c(bbox$xmin, bbox$xmax), ylim = c(bbox$ymin, bbox$ymax)) +
+  ggplot2::theme_bw() +
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) +
+  ggplot2::xlab("longitude") + ggplot2::ylab("latitude") +
+  ggplot2::ggtitle("Selected samples")
+```
+
+See [this post](https://r-spatial.org/r/2018/10/25/ggplot2-sf.html) for a nice
+introduction to `sf` and `ggplot2`.
+
+### Displaying data using leaflet
+
+Data could be visualized in an interactive way using *R* `leaflet` library:
+
+```{r eval=FALSE}
+leaflet::leaflet(
+  data = hapmap_data, 
+  options = leaflet::leafletOptions(minZoom = 5, maxZoom = 8)) %>%
+  leaflet::addTiles() %>%
+  leaflet::addMarkers(
+    clusterOptions = leaflet::markerClusterOptions(), label = ~smarter_id
+  )
+```
+
+See [Leaflet for R](https://rstudio.github.io/leaflet/) documentation for 
+more information.
+
+## Integrate data with external sources
+
+### Derive elevation data using elevatr
+
+We can collect elevation data using the `elevatr` package. The following
+functions returns the input dataframe with `elevation` and `elev_units` as
+additional columns:
+
+```{r eval=FALSE}
+prj_dd <- "EPSG:4326"
+hapmap_data_elev <- elevatr::get_elev_point(
+  hapmap_data, 
+  prj = prj_dd, 
+  src = "aws"
+)
+```
+
+See [elevatr vignette](https://cran.r-project.org/web/packages/elevatr/vignettes/introduction_to_elevatr.html)
+or [elevatr](https://rspatialdata.github.io/elevation.html) tutorial in 
+[rspatialdata](https://rspatialdata.github.io/index.html) documentation for more
+information and examples.
+
+### Add worldclim data from rasters
+
+We can collect data from [worldclim](https://www.worldclim.org/) database using 
+the `geodata` package: this package in particular collect *raster* data from different 
+sources (see geodata 
+[reference manual](https://cran.r-project.org/web/packages/geodata/geodata.pdf)
+for more information). In this example, we collect the *raster* with the lowest
+definition (10min =~ 340km) for worldclim
+[bioclimatic variables](https://www.worldclim.org/data/bioclim.html)
+and elevation. Raster images will be placed in the `tempdir` path. Then using
+`terra::extract` we calculate the values for our data, after converting them
+into terra *SpatialVectors*:
+
+```{r eval=FALSE}
+worldclim_bio <- geodata::worldclim_global(
+  var = "bio",
+  res = 10,
+  path = tempdir())
+bio_data <- terra::extract(worldclim_bio, terra::vect(hapmap_data))
+
+worldclim_elev <- geodata::worldclim_global(
+  var = "elev",
+  res = 10,
+  path = tempdir())
+elev_data <- terra::extract(worldclim_elev, terra::vect(hapmap_data))
+
+hapmap_data_worldclim <- cbind(hapmap_data, merge(elev_data, bio_data))
+```
+
+See [raster extraction](https://www.worldclim.org/data/bioclim.html) from
+[geocomputation with R](https://geocompr.robinlovelace.net/index.html) for
+more information.

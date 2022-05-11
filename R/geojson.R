@@ -7,32 +7,42 @@
 #' Cached token is used or a new token is generated if not provided when calling
 #' this function (see \code{\link{get_smarter_token}} for more information)
 #'
-#' @param species a smarter species ("Goat", "Sheep")
-#' @param token a string with a valid token
+#' @inheritParams get_smarter_samples
 #'
 #' @return a sf data object
 #' @export
 #'
 #' @examples
 #' \dontrun{
+#' # required to execute pipe operations and draw examples
+#' library(dplyr)
+#' library(leaflet)
+#'
 #' # get goat samples with GPS coordinates as sf object
-#' goat_data <- get_smarter_geojson("Goat")
+#' goat_data <- get_smarter_geojson(
+#'   species = "Goat",
+#'   query = list(
+#'     type = "background",
+#'     country = "Italy"
+#'   )
+#' )
 #'
 #' # leaflet doesn't handle MULTIPOINT data (https://github.com/rstudio/leaflet/issues/352)
-#' # Cast them into point (https://r-spatial.github.io/sf/reference/st_cast.html)
-#' goat_data$geometry <- sf::st_cast(goat_data$geometry, "POINT")
+#' # Cast them into point considering only the first objects
+#' # (https://r-spatial.github.io/sf/reference/st_cast.html)
+#' goat_data <- goat_data %>% sf::st_cast("POINT", do_split=FALSE)
 #'
 #' # draw samples in a leaflet map using markerCluser
 #' leaflet(data = goat_data) %>%
 #'   leaflet::addTiles() %>%
-#'   addMarkers(
-#'     clusterOptions = markerClusterOptions(), label = ~smarter_id
+#'   leaflet::addMarkers(
+#'     clusterOptions = leaflet::markerClusterOptions(), label = ~smarter_id
 #'   )
 #' }
 # nolint end
-get_smarter_geojson <- function(species, token = NULL) {
+get_smarter_geojson <- function(species, query = list(), token = NULL) {
   if (is.null(token)) {
-    token <- get_smarter_token()
+    token <- smarterapi::get_smarter_token()
   }
 
   logger::log_info("Get data from geojson endpoint")
@@ -50,6 +60,7 @@ get_smarter_geojson <- function(species, token = NULL) {
   # in this request, we add the token to the request header section
   resp <- httr::GET(
     url,
+    query = query,
     httr::add_headers(Authorization = paste("Bearer", token)),
     smarterapi_globals$user_agent
   )

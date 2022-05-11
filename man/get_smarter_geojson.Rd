@@ -4,10 +4,12 @@
 \alias{get_smarter_geojson}
 \title{Get SMARTER GeoJSON Samples}
 \usage{
-get_smarter_geojson(species, token = NULL)
+get_smarter_geojson(species, query = list(), token = NULL)
 }
 \arguments{
 \item{species}{a smarter species ("Goat", "Sheep")}
+
+\item{query}{a \code{list} of query arguments}
 
 \item{token}{a string with a valid token}
 }
@@ -22,18 +24,29 @@ this function (see \code{\link{get_smarter_token}} for more information)
 }
 \examples{
 \dontrun{
+# required to execute pipe operations and draw examples
+library(dplyr)
+library(leaflet)
+
 # get goat samples with GPS coordinates as sf object
-goat_data <- get_smarter_geojson("Goat")
+goat_data <- get_smarter_geojson(
+  species = "Goat",
+  query = list(
+    type = "background",
+    country = "Italy"
+  )
+)
 
 # leaflet doesn't handle MULTIPOINT data (https://github.com/rstudio/leaflet/issues/352)
-# Cast them into point (https://r-spatial.github.io/sf/reference/st_cast.html)
-goat_data$geometry <- sf::st_cast(goat_data$geometry, "POINT")
+# Cast them into point considering only the first objects
+# (https://r-spatial.github.io/sf/reference/st_cast.html)
+goat_data <- goat_data \%>\% sf::st_cast("POINT", do_split=FALSE)
 
 # draw samples in a leaflet map using markerCluser
 leaflet(data = goat_data) \%>\%
   leaflet::addTiles() \%>\%
-  addMarkers(
-    clusterOptions = markerClusterOptions(), label = ~smarter_id
+  leaflet::addMarkers(
+    clusterOptions = leaflet::markerClusterOptions(), label = ~smarter_id
   )
 }
 }
