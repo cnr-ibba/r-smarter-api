@@ -44,16 +44,7 @@ jobs:
 
       - name: Install dependencies on Windows
         if: runner.os == 'windows'
-        uses: conda-incubator/setup-miniconda@v2
-        with:
-          auto-activate-base: true
-          activate-environment: ""
-
-      - name: Bash
-        if: runner.os == 'windows'
-        shell: bash -l {0}
-        run: |
-          conda install --channel conda-forge gdal
+        run: choco install qgis
 
       - uses: r-lib/actions/setup-pandoc@v2
 
