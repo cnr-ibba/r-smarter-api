@@ -2,9 +2,9 @@
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: [master, devel]
+    branches: [master, devel, issue-15]
   pull_request:
-    branches: [master, devel]
+    branches: [master, devel, issue-15]
 
 name: R-CMD-check
 
@@ -24,11 +24,11 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest,   r: 'release'}
+          # - {os: macOS-latest,   r: 'release'}
           - {os: windows-latest, r: 'release'}
-          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
-          - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: 'oldrel-1'}
+          # - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
+          # - {os: ubuntu-latest,   r: 'release'}
+          # - {os: ubuntu-latest,   r: 'oldrel-1'}
 
     steps:
       - uses: actions/checkout@v2
@@ -41,6 +41,10 @@ jobs:
       - name: Install dependencies on MacOS
         if: runner.os == 'macOS'
         run: brew install gdal
+
+      - name: Install dependencies on Windows
+        if: runner.os == 'windows'
+        run: choco install qgis
 
       - uses: r-lib/actions/setup-pandoc@v2
 
