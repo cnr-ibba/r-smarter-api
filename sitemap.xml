@@ -7,6 +7,18 @@
     <loc>https://cnr-ibba.github.io/r-smarter-api/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://cnr-ibba.github.io/r-smarter-api/articles/geojson.html</loc>
+  </url>
+  <url>
+    <loc>https://cnr-ibba.github.io/r-smarter-api/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://cnr-ibba.github.io/r-smarter-api/articles/smarterapi.html</loc>
+  </url>
+  <url>
+    <loc>https://cnr-ibba.github.io/r-smarter-api/articles/variants.html</loc>
+  </url>
+  <url>
     <loc>https://cnr-ibba.github.io/r-smarter-api/authors.html</loc>
   </url>
   <url>
@@ -14,6 +26,9 @@
   </url>
   <url>
     <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_breeds.html</loc>
+  </url>
+  <url>
+    <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_countries.html</loc>
   </url>
   <url>
     <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_datasets.html</loc>
