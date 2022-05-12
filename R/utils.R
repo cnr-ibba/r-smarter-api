@@ -83,14 +83,13 @@ get_smarter_data <- function(url, token, query = list()) {
 
   # check for pagination
   while (!is.null(parsed$`next`)) {
-    # append next value to base url
-    next_url <- httr::modify_url(
-      smarterapi_globals$base_url,
-      path = parsed$`next`
-    )
+    # get next page
+    query$page <- urltools::param_get(parsed$`next`, "page")
 
-    # query arguments are already in url: get next page
-    parsed <- read_url(next_url, token)
+    logger::log_debug(sprintf("Next page %s", query$page))
+
+    # get next page
+    parsed <- read_url(url, token, query)
 
     # append new results to df. Deal with different columns
     results <- dplyr::bind_rows(results, parsed$"items")
