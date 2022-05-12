@@ -1,6 +1,6 @@
 Package: smarterapi
 Title: Fetch SMARTER data through REST API
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: 
     person("Paolo", "Cozzi", , "paolo.cozzi@ibba.cnr.it", 
            role = c("aut", "cre"),
@@ -36,6 +36,7 @@ Config/testthat/edition: 3
 Imports: 
     jsonlite,
     httr,
+    urltools,
     lubridate,
     logger,
     dplyr,
