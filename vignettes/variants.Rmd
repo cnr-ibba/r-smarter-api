@@ -69,7 +69,7 @@ snp <- get_smarter_variants(
 ```
 
 ```{r echo=FALSE}
-pander::pander(subset(snp, select = -c(`probeset_id`, `_id.$oid`, `sequence.manifest`)))
+pander::pander(subset(snp, select = -c(`_id.$oid`, `sequence.IlluminaGoatSNP50`)))
 ```
 
 Please, refer to the `get_smarter_info()` `working_assemblies` to have an idea
@@ -90,7 +90,7 @@ snp <- get_smarter_variants(
 ```
 
 ```{r echo=FALSE}
-pander::pander(subset(snp, select = -c(`probeset_id`, `_id.$oid`, `sequence.manifest`)))
+pander::pander(subset(snp, select = -c(`_id.$oid`, `sequence.IlluminaOvineHDSNP`)))
 ```
 
 Is `T/C` on the *forward* strand of *OAR3*: this means that the reversed probe is 
@@ -113,7 +113,7 @@ variants <- get_smarter_variants(
 ```
 
 ```{r echo=FALSE}
-pander::pander(subset(variants, select = -c(`probeset_id`, `_id.$oid`, `sequence.manifest`)))
+pander::pander(subset(variants, select = -c(`_id.$oid`, `sequence.IlluminaGoatSNP50`)))
 ```
 
 ## Fetch Variants by chip name
