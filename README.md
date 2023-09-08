@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/cnr-ibba/r-smarter-api/workflows/R-CMD-check/badge.svg)](https://github.com/cnr-ibba/r-smarter-api/actions)
+[![R-CMD-check](https://github.com/cnr-ibba/r-smarter-api/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cnr-ibba/r-smarter-api/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of `smarterapi` is to collect data from *SMARTER REST API*
