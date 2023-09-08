@@ -55,6 +55,7 @@ jobs:
       - uses: r-lib/actions/setup-renv@v2
         with:
           cache-version: 1
+          profile: '"dev"'
 
       - uses: r-lib/actions/check-r-package@v2
         with:
