@@ -50,7 +50,13 @@ jobs:
 
       - uses: r-lib/actions/setup-renv@v2
         with:
-          cache-version: 2
+          cache-version: 1
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: |
+            any::rcmdcheck
+            any::lintr
 
       - uses: r-lib/actions/check-r-package@v2
         with:
