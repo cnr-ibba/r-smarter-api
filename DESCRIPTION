@@ -23,6 +23,7 @@ Suggests:
     leaflet,
     knitr,
     rmarkdown,
+    yaml,
     pander,
     ggplot2,
     ggspatial,
@@ -33,7 +34,7 @@ Suggests:
     rnaturalearth,
     rnaturalearthdata
 Config/testthat/edition: 3
-Config/Needs/check: lintr, rcmdcheck 
+Config/renv/profiles/dev/dependencies: lintr, rcmdcheck
 Imports: 
     jsonlite,
     httr,
