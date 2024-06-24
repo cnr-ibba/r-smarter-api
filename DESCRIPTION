@@ -1,6 +1,6 @@
 Package: smarterapi
-Title: Fetch SMARTER data through REST API
-Version: 0.2.0:9000
+Title: Fetch SMARTER Data Through REST API
+Version: 0.2.0.9000
 Authors@R: 
     person("Paolo", "Cozzi", , "paolo.cozzi@ibba.cnr.it", 
            role = c("aut", "cre"),
@@ -34,7 +34,13 @@ Suggests:
     rnaturalearth,
     rnaturalearthdata
 Config/testthat/edition: 3
-Config/renv/profiles/dev/dependencies: lintr, rcmdcheck
+Config/renv/profiles/dev/dependencies: 
+    lintr,
+    rcmdcheck,
+    roxygen2,
+    styler,
+    testthat,
+    usethis
 Imports: 
     jsonlite,
     httr,
