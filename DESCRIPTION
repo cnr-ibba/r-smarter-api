@@ -34,7 +34,7 @@ Suggests:
     rnaturalearth,
     rnaturalearthdata
 Config/testthat/edition: 3
-Config/renv/profiles/dev/dependencies: lintr, rcmdcheck
+Config/renv/profiles/default/dependencies: lintr, rcmdcheck
 Imports: 
     jsonlite,
     httr,
