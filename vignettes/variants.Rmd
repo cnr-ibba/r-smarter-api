@@ -69,7 +69,17 @@ snp <- get_smarter_variants(
 ```
 
 ```{r echo=FALSE}
-pander::pander(subset(snp, select = -c(`_id.$oid`, `sequence.IlluminaGoatSNP50`)))
+pander::pander(
+  subset(
+    snp, 
+    select = -c(
+      `_id.$oid`, 
+      `sequence.IlluminaGoatSNP50`, 
+      `sequence.AffymetrixAxiomGoatv2`,
+      `chip_name`
+    )
+  )
+)
 ```
 
 Please, refer to the `get_smarter_info()` `working_assemblies` to have an idea
@@ -113,7 +123,16 @@ variants <- get_smarter_variants(
 ```
 
 ```{r echo=FALSE}
-pander::pander(subset(variants, select = -c(`_id.$oid`, `sequence.IlluminaGoatSNP50`)))
+pander::pander(
+  subset(
+    snp, 
+    select = -c(
+      `_id.$oid`, 
+      `chip_name`,
+      `sequence.IlluminaOvineHDSNP`
+    )
+  )
+)
 ```
 
 ## Fetch Variants by chip name
