@@ -52,10 +52,11 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          cache-version: 2
+          cache-version: 1
           dependencies: '"hard"'
           extra-packages: |
             any::rcmdcheck
+            any::knitr
 
       - uses: r-lib/actions/check-r-package@v2
         with:
