@@ -33,7 +33,7 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install dependencies on Linux
         if: runner.os == 'Linux'
@@ -44,18 +44,17 @@ jobs:
         if: runner.os == 'macOS'
         run: brew install gdal
 
-      - uses: r-lib/actions/setup-pandoc@v2
-
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - uses: r-lib/actions/setup-renv@v2
+      - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          cache-version: 1
-          profile: '"dev"'
+          cache-version: 2
+          extra-packages: |
+            any::rcmdcheck
 
       - uses: r-lib/actions/check-r-package@v2
         with:
