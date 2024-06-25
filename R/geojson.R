@@ -68,4 +68,6 @@ get_smarter_geojson <- function(species, query = list()) {
   data <- sf::read_sf(
     httr::content(resp, "text", encoding = "utf-8")
   )
+
+  return(data)
 }

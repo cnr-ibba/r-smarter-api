@@ -81,7 +81,7 @@ selected_goats <- goat_data[sel_logical, ]
 ## Convert from MULTIPOINTS to POINT
 
 The `get_smarter_geojson()` methods returns a `sf()` *MULTIPOINTS* objects since
-multiple locations could be collected for each animal, for example for 
+multiple locations could be collected for each animal, for example for
 *transhumant* samples. However, for simplicity, we can focus our analyses using
 only one GPS coordinate, transforming this *MULTIPOINTS* object into a *POINT*
 object:
@@ -106,13 +106,13 @@ the plot to the selected points of the previous example:
 bbox <- sf::st_bbox(hapmap_data)
 world <- rnaturalearth::ne_countries(scale = "medium", returnclass = "sf")
 
-ggplot2::ggplot() + 
-  ggplot2::geom_sf(data = world, fill = "antiquewhite") + 
-  ggplot2::geom_sf(data = hapmap_data, color = 'blue', size = 5) +
+ggplot2::ggplot() +
+  ggplot2::geom_sf(data = world, fill = "antiquewhite") +
+  ggplot2::geom_sf(data = hapmap_data, color = "blue", size = 5) +
   ggspatial::annotation_scale(location = "bl", width_hint = 0.5) +
   ggspatial::annotation_north_arrow(location = "bl", which_north = "true",
     pad_x = ggplot2::unit(0.75, "in"), pad_y = ggplot2::unit(0.5, "in"),
-    style = ggspatial::north_arrow_fancy_orienteering) + 
+    style = ggspatial::north_arrow_fancy_orienteering) +
   ggspatial::coord_sf(
     xlim = c(bbox$xmin, bbox$xmax), ylim = c(bbox$ymin, bbox$ymax)) +
   ggplot2::theme_bw() +
@@ -130,7 +130,7 @@ Data could be visualized in an interactive way using *R* `leaflet` library:
 
 ```{r eval=FALSE}
 leaflet::leaflet(
-  data = hapmap_data, 
+  data = hapmap_data,
   options = leaflet::leafletOptions(minZoom = 5, maxZoom = 8)) %>%
   leaflet::addTiles() %>%
   leaflet::addMarkers(
@@ -138,7 +138,7 @@ leaflet::leaflet(
   )
 ```
 
-See [Leaflet for R](https://rstudio.github.io/leaflet/) documentation for 
+See [Leaflet for R](https://rstudio.github.io/leaflet/) documentation for
 more information.
 
 ## Integrate data with external sources
@@ -152,22 +152,22 @@ additional columns:
 ```{r eval=FALSE}
 prj_dd <- "EPSG:4326"
 hapmap_data_elev <- elevatr::get_elev_point(
-  hapmap_data, 
-  prj = prj_dd, 
+  hapmap_data,
+  prj = prj_dd,
   src = "aws"
 )
 ```
 
 See [elevatr vignette](https://cran.r-project.org/web/packages/elevatr/vignettes/introduction_to_elevatr.html)
-or [elevatr](https://rspatialdata.github.io/elevation.html) tutorial in 
+or [elevatr](https://rspatialdata.github.io/elevation.html) tutorial in
 [rspatialdata](https://rspatialdata.github.io/index.html) documentation for more
 information and examples.
 
 ### Add worldclim data from rasters
 
-We can collect data from [worldclim](https://www.worldclim.org/) database using 
-the `geodata` package: this package in particular collect *raster* data from different 
-sources (see geodata 
+We can collect data from [worldclim](https://www.worldclim.org/) database using
+the `geodata` package: this package in particular collect *raster* data from different
+sources (see geodata
 [reference manual](https://cran.r-project.org/web/packages/geodata/geodata.pdf)
 for more information). In this example, we collect the *raster* with the lowest
 definition (10min =~ 340km) for worldclim
