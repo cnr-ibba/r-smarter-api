@@ -2,8 +2,6 @@
 #' Get SMARTER supported chips
 #'
 #' Collect information on chip data currently managed in SMARTER database.
-#' Cached token is used or a new token is generated if not provided when calling
-#' this function (see \code{\link{get_smarter_token}} for more information)
 #'
 #' @inheritParams get_smarter_breeds
 #'

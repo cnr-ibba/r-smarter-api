@@ -3,8 +3,6 @@
 #' Retrieve information on SMARTER SNPs. Only informations about the supported
 #' assemblies are returned (see \code{\link{get_smarter_info}} for more
 #' information).
-#' Cached token is used or a new token is generated if not provided when calling
-#' this function (see \code{\link{get_smarter_token}} for more information)
 #'
 #' @inheritParams get_smarter_samples
 #' @param assembly the smarter working assembly for such species

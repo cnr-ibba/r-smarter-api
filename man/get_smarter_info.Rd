@@ -11,8 +11,6 @@ a list object with SMARTER database information
 }
 \description{
 Collect information about smarter database status and returns values in a list
-Cached token is used or a new token is generated if not provided when calling
-this function (see \code{\link{get_smarter_token}} for more information)
 }
 \section{About SMARTER database info endpoint}{
 

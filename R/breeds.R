@@ -2,8 +2,6 @@
 #' Get SMARTER Breeds
 #'
 #' Fetch SMARTER REST API breeds endpoint and returns results in a dataframe.
-#' Cached token is used or a new token is generated if not provided when calling
-#' this function (see \code{\link{get_smarter_token}} for more information)
 #'
 #' @param query a \code{list} of query arguments
 #'

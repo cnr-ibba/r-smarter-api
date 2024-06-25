@@ -2,8 +2,6 @@
 #' Get SMARTER Countries
 #'
 #' Fetch SMARTER REST API countries endpoint and returns results in a dataframe.
-#' Cached token is used or a new token is generated if not provided when calling
-#' this function (see \code{\link{get_smarter_token}} for more information)
 #'
 #' @inheritParams get_smarter_breeds
 #'

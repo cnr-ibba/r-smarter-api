@@ -4,8 +4,6 @@
 #'
 #' Fetch SMARTER REST API samples with GPS coordinates and return them into as
 #' simple features.
-#' Cached token is used or a new token is generated if not provided when calling
-#' this function (see \code{\link{get_smarter_token}} for more information)
 #'
 #' @inheritParams get_smarter_samples
 #'

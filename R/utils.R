@@ -3,7 +3,7 @@ version <- utils::packageVersion("smarterapi")
 
 # define a global environment for the package
 smarterapi_globals <- new.env()
-smarterapi_globals$base_url <- "https://webserver.ibba.cnr.it"
+smarterapi_globals$base_url <- "http://localhost:27080"
 smarterapi_globals$base_endpoint <- "/smarter-api"
 smarterapi_globals$size <- 25
 smarterapi_globals$user_agent <- httr::user_agent(

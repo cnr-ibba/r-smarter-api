@@ -20,8 +20,6 @@ Returns a dataframe with selected variants
 Retrieve information on SMARTER SNPs. Only informations about the supported
 assemblies are returned (see \code{\link{get_smarter_info}} for more
 information).
-Cached token is used or a new token is generated if not provided when calling
-this function (see \code{\link{get_smarter_token}} for more information)
 }
 \section{About SMARTER supported assemblies}{
 
