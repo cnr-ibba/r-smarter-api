@@ -51,12 +51,9 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          cache-version: 1
-          dependencies: '"hard"'
-          extra-packages: |
-            any::devtools
+      - name: Install devtools dependency
+        run: install.packages("devtools")
+        shell: Rscript {0}
 
       - name: Install package with devtools
         run: devtools::install_github("cnr-ibba/r-smarter-api")
