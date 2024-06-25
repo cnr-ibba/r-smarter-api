@@ -158,7 +158,7 @@ hapmap_data_elev <- elevatr::get_elev_point(
 )
 ```
 
-See [elevatr vignette](https://cran.r-project.org/web/packages/elevatr/vignettes/introduction_to_elevatr.html)
+See [elevatr vignette](https://cran.r-project.org/package=elevatr/vignettes/introduction_to_elevatr.html)
 or [elevatr](https://rspatialdata.github.io/elevation.html) tutorial in
 [rspatialdata](https://rspatialdata.github.io/index.html) documentation for more
 information and examples.
@@ -168,7 +168,7 @@ information and examples.
 We can collect data from [worldclim](https://www.worldclim.org/) database using
 the `geodata` package: this package in particular collect *raster* data from different
 sources (see geodata
-[reference manual](https://cran.r-project.org/web/packages/geodata/geodata.pdf)
+[reference manual](https://cran.r-project.org/package=geodata/geodata.pdf)
 for more information). In this example, we collect the *raster* with the lowest
 definition (10min =~ 340km) for worldclim
 [bioclimatic variables](https://www.worldclim.org/data/bioclim.html)
@@ -193,5 +193,5 @@ hapmap_data_worldclim <- cbind(hapmap_data, merge(elev_data, bio_data))
 ```
 
 See [raster extraction](https://www.worldclim.org/data/bioclim.html) from
-[geocomputation with R](https://geocompr.robinlovelace.net/index.html) for
+[geocomputation with R](https://r.geocompx.org/index.html) for
 more information.

@@ -20,8 +20,8 @@ vignette](https://cnr-ibba.github.io/r-smarter-api/articles/smarterapi.html).
 The `smarterapi` package is only available from
 [GitHub](https://github.com/) and can be installed as a *source package*
 or in alternative using
-[devtools](https://cran.r-project.org/web/packages/devtools/index.html)
-package, for example:
+[devtools](https://CRAN.R-project.org/package=devtools) package, for
+example:
 
 ``` r
 # install devtools if needed

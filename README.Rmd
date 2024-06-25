@@ -30,7 +30,7 @@ the user as a dataframe. Get more information with the
 
 The `smarterapi` package is only available from [GitHub](https://github.com/) 
 and can be installed as a *source package* or in alternative using
-[devtools](https://cran.r-project.org/web/packages/devtools/index.html)
+[devtools](https://CRAN.R-project.org/package=devtools)
 package, for example:
 
 ```r
