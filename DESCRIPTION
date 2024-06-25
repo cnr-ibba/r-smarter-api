@@ -5,9 +5,8 @@ Authors@R:
     person("Paolo", "Cozzi", , "paolo.cozzi@ibba.cnr.it", 
            role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-0388-6874"))
-Description: smarterapi is an interface which interacts with SMARTER REST API
-    by querying data using token authentication and providing results into 
-    dataframes.
+Description: This package is an interface which interacts with SMARTER REST API
+    by querying data and providing results into dataframes.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -45,7 +44,6 @@ Imports:
     jsonlite,
     httr,
     urltools,
-    lubridate,
     logger,
     dplyr,
     tidyr,
