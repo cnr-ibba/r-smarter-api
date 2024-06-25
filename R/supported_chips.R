@@ -22,11 +22,7 @@
 #'   query = list(chip_name = "AffymetrixAxiomOviCan")
 #' )
 #' }
-get_smarter_supportedchips <- function(query = list(), token = NULL) {
-  if (is.null(token)) {
-    token <- smarterapi::get_smarter_token()
-  }
-
+get_smarter_supportedchips <- function(query = list()) {
   logger::log_info("Get data from supported chip endpoint")
 
   # setting the URL endpoint
@@ -36,7 +32,7 @@ get_smarter_supportedchips <- function(query = list(), token = NULL) {
   )
 
   # reading our data
-  data <- get_smarter_data(url, token, query)
+  data <- get_smarter_data(url, query)
 
   logger::log_info("Done!")
 

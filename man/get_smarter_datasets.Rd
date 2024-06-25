@@ -4,12 +4,10 @@
 \alias{get_smarter_datasets}
 \title{Get SMARTER Datasets}
 \usage{
-get_smarter_datasets(query = list(), token = NULL)
+get_smarter_datasets(query = list())
 }
 \arguments{
 \item{query}{a \code{list} of query arguments}
-
-\item{token}{a string with a valid token}
 }
 \value{
 Returns a dataframe with selected datasets

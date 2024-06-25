@@ -4,10 +4,7 @@
 \alias{get_smarter_info}
 \title{Get SMARTER Info}
 \usage{
-get_smarter_info(token = NULL)
-}
-\arguments{
-\item{token}{a string with a valid token}
+get_smarter_info()
 }
 \value{
 a list object with SMARTER database information

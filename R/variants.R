@@ -36,12 +36,8 @@
 #' )
 #' }
 # nolint start
-get_smarter_variants <- function(species, assembly, query = list(), token = NULL) {
+get_smarter_variants <- function(species, assembly, query = list()) {
   # nolint end
-  if (is.null(token)) {
-    token <- smarterapi::get_smarter_token()
-  }
-
   logger::log_info("Get data from variants endpoint")
 
   # mind that species is lowercase in endpoint url
@@ -58,7 +54,7 @@ get_smarter_variants <- function(species, assembly, query = list(), token = NULL
     )
   )
 
-  data <- get_smarter_data(url, token, query)
+  data <- get_smarter_data(url, query)
 
   logger::log_info("Done!")
 

@@ -4,14 +4,12 @@
 \alias{get_smarter_samples}
 \title{Get SMARTER Samples}
 \usage{
-get_smarter_samples(species, query = list(), token = NULL)
+get_smarter_samples(species, query = list())
 }
 \arguments{
 \item{species}{a smarter species ("Goat", "Sheep")}
 
 \item{query}{a \code{list} of query arguments}
-
-\item{token}{a string with a valid token}
 }
 \value{
 Returns a dataframe with selected samples

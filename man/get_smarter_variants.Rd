@@ -4,7 +4,7 @@
 \alias{get_smarter_variants}
 \title{Get SMARTER variants}
 \usage{
-get_smarter_variants(species, assembly, query = list(), token = NULL)
+get_smarter_variants(species, assembly, query = list())
 }
 \arguments{
 \item{species}{a smarter species ("Goat", "Sheep")}
@@ -12,8 +12,6 @@ get_smarter_variants(species, assembly, query = list(), token = NULL)
 \item{assembly}{the smarter working assembly for such species}
 
 \item{query}{a \code{list} of query arguments}
-
-\item{token}{a string with a valid token}
 }
 \value{
 Returns a dataframe with selected variants

@@ -32,11 +32,7 @@
 #'
 #' all_datasets <- get_smarter_datasets()
 #' }
-get_smarter_datasets <- function(query = list(), token = NULL) {
-  if (is.null(token)) {
-    token <- smarterapi::get_smarter_token()
-  }
-
+get_smarter_datasets <- function(query = list()) {
   logger::log_info("Get data from datasets endpoint")
 
   url <- httr::modify_url(
@@ -44,7 +40,7 @@ get_smarter_datasets <- function(query = list(), token = NULL) {
     path = sprintf("%s/datasets", smarterapi_globals$base_endpoint)
   )
 
-  data <- get_smarter_data(url, token, query)
+  data <- get_smarter_data(url, query)
 
   logger::log_info("Done!")
 

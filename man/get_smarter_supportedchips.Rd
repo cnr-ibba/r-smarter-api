@@ -4,12 +4,10 @@
 \alias{get_smarter_supportedchips}
 \title{Get SMARTER supported chips}
 \usage{
-get_smarter_supportedchips(query = list(), token = NULL)
+get_smarter_supportedchips(query = list())
 }
 \arguments{
 \item{query}{a \code{list} of query arguments}
-
-\item{token}{a string with a valid token}
 }
 \value{
 Returns a dataframe with selected chips

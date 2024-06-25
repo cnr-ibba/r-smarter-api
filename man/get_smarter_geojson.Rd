@@ -4,14 +4,12 @@
 \alias{get_smarter_geojson}
 \title{Get SMARTER GeoJSON Samples}
 \usage{
-get_smarter_geojson(species, query = list(), token = NULL)
+get_smarter_geojson(species, query = list())
 }
 \arguments{
 \item{species}{a smarter species ("Goat", "Sheep")}
 
 \item{query}{a \code{list} of query arguments}
-
-\item{token}{a string with a valid token}
 }
 \value{
 a sf data object

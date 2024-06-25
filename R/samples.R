@@ -42,11 +42,7 @@
 #'
 #' all_sheep_samples <- get_smarter_samples("Sheep")
 #' }
-get_smarter_samples <- function(species, query = list(), token = NULL) {
-  if (is.null(token)) {
-    token <- smarterapi::get_smarter_token()
-  }
-
+get_smarter_samples <- function(species, query = list()) {
   logger::log_info("Get data from samples endpoint")
 
   # mind that species is lowercase in endpoint url
@@ -57,7 +53,7 @@ get_smarter_samples <- function(species, query = list(), token = NULL) {
     path = sprintf("%s/samples/%s", smarterapi_globals$base_endpoint, species)
   )
 
-  data <- get_smarter_data(url, token, query)
+  data <- get_smarter_data(url, query)
 
   logger::log_info("Done!")
 

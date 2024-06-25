@@ -40,11 +40,7 @@
 #'   )
 #' }
 # nolint end
-get_smarter_geojson <- function(species, query = list(), token = NULL) {
-  if (is.null(token)) {
-    token <- smarterapi::get_smarter_token()
-  }
-
+get_smarter_geojson <- function(species, query = list()) {
   logger::log_info("Get data from geojson endpoint")
 
   # mind that species is lowercase in endpoint url
@@ -61,7 +57,6 @@ get_smarter_geojson <- function(species, query = list(), token = NULL) {
   resp <- httr::GET(
     url,
     query = query,
-    httr::add_headers(Authorization = paste("Bearer", token)),
     smarterapi_globals$user_agent
   )
 
