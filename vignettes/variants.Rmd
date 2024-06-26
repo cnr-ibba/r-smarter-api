@@ -68,7 +68,7 @@ snp <- get_smarter_variants(
 )
 ```
 
-```{r echo=FALSE}
+```{r echo=FALSE, warning=FALSE}
 pander::pander(
   subset(
     snp,
@@ -106,8 +106,8 @@ pander::pander(
 
 Is `T/C` on the *forward* strand of *OAR3*: this means that the reversed probe is
 aligned to the genome (as you could infer from the `bottom` *illumina strand* attribute
-of this SNP.). Variants in the SMARTER-database are converted using the **illumina top**
-coding convenction, so you will find this SNP as `A/G` in the SMARTER-database while
+of this SNP). Genotypes in the SMARTER-database are converted using the **illumina top**
+coding convention, so you will find this SNP as `A/G` in the SMARTER-database while
 on the reference sequence it's `T/C`.
 
 ## Fetch Variants by region
@@ -119,18 +119,23 @@ format, for example:
 variants <- get_smarter_variants(
   species = "Goat",
   assembly = "ARS1",
-  query = list(region = "1:1-100000")
+  query = list(
+    region = "1:1-100000"
+  )
 )
 ```
 
 ```{r echo=FALSE}
+variants$chip_name <- sapply(variants$chip_name, function(x) paste(x, collapse = ","))
+
 pander::pander(
   subset(
-    snp,
+    variants,
     select = -c(
       `_id.$oid`,
-      `chip_name`,
-      `sequence.IlluminaOvineHDSNP`
+      `sequence.AffymetrixAxiomGoatv2`,
+      `sequence.IlluminaGoatSNP50`,
+      `probesets`
     )
   )
 )
