@@ -17,7 +17,7 @@ get_smarter_variants(species, assembly, query = list())
 Returns a dataframe with selected variants
 }
 \description{
-Retrieve information on SMARTER SNPs. Only informations about the supported
+Retrieve information on SMARTER SNPs. Only information about the supported
 assemblies are returned (see \code{\link{get_smarter_info}} for more
 information).
 }

@@ -23,7 +23,7 @@ The info endpoint contains information about the status of the database\tabular{
 }
 
 
-Those informations are required to understand if your genotypes are updated
+Those information are required to understand if your genotypes are updated
 or not. For example, if the SMARTER database current \emph{version} and
 \emph{last_updated} are more recent than your genotype file, you could retrive
 information on samples not included in the genotype file. In such case, you

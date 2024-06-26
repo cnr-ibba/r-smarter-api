@@ -17,7 +17,7 @@
 #' | plink_specie | track the specie specific parameters to generate genotypes using plink |
 #' | working_assemblies | the source of variant positions and genotypes |
 #'
-#' Those informations are required to understand if your genotypes are updated
+#' Those information are required to understand if your genotypes are updated
 #' or not. For example, if the SMARTER database current *version* and
 #' *last_updated* are more recent than your genotype file, you could retrive
 #' information on samples not included in the genotype file. In such case, you

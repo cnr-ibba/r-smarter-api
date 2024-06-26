@@ -3,9 +3,11 @@ version <- utils::packageVersion("smarterapi")
 
 # define a global environment for the package
 smarterapi_globals <- new.env()
-smarterapi_globals$base_url <- "http://localhost:27080"
+smarterapi_globals$base_url <- "https://webserver.ibba.cnr.it"
 smarterapi_globals$base_endpoint <- "/smarter-api"
 smarterapi_globals$size <- 25
+smarterapi_globals$ftp_url <- "ftp://webserver.ibba.cnr.it"
+smarterapi_globals$ftp_path <- "/smarter"
 smarterapi_globals$user_agent <- httr::user_agent(
   paste0("r-smarterapi v", version)
 )
@@ -56,7 +58,7 @@ read_url <- function(url, query = list()) {
 
 get_smarter_data <- function(url, query = list()) {
   # test for page size. Add a default size if necessary
-  if (!"size" %in% names(query) | is.null(query[["size"]])) {
+  if (!"size" %in% names(query) || is.null(query[["size"]])) {
     # add global result size to query
     query$size <- smarterapi_globals$size
   }
