@@ -2,7 +2,7 @@
 % Please edit documentation in R/supported_chips.R
 \name{get_smarter_supportedchips}
 \alias{get_smarter_supportedchips}
-\title{Get SMARTER supported chips}
+\title{Get SMARTER Supported Chips}
 \usage{
 get_smarter_supportedchips(query = list())
 }

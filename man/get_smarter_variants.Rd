@@ -2,7 +2,7 @@
 % Please edit documentation in R/variants.R
 \name{get_smarter_variants}
 \alias{get_smarter_variants}
-\title{Get SMARTER variants}
+\title{Get SMARTER Variants}
 \usage{
 get_smarter_variants(species, assembly, query = list())
 }

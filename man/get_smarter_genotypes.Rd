@@ -2,7 +2,7 @@
 % Please edit documentation in R/genotypes.R
 \name{get_smarter_genotypes}
 \alias{get_smarter_genotypes}
-\title{Get SMARTER genotypes}
+\title{Get SMARTER Genotypes}
 \usage{
 get_smarter_genotypes(species, assembly, dest_path = NULL)
 }

@@ -23,9 +23,7 @@
 #'
 #' selected_breeds <- get_smarter_breeds(query = list(search = "mer"))
 #' \dontrun{
-#'
 #' all_breeds <- get_smarter_breeds()
-#'
 #' sheep_breeds <- get_smarter_breeds(query = list(species = "Sheep"))
 #' }
 get_smarter_breeds <- function(query = list()) {

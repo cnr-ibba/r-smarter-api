@@ -17,8 +17,7 @@ knitr::opts_chunk$set(
 **smarterapi** is an R package which enable to browse the
 [SMARTER backend API](https://webserver.ibba.cnr.it/smarter-api/docs/) and
 collect smarter data. In this R package, functions to deal with the different
-API endpoints are implemented. In this vignette, we assume you have configured
-properly this function in order to use your SMARTER credentials.
+API endpoints are implemented.
 
 ## Getting started
 
@@ -58,8 +57,8 @@ $ tree -L 2 SHEEP/
 SHEEP/
 └── OAR3
     ├── archive
-    ├── SMARTER-OA-OAR3-top-0.4.4.md5
-    └── SMARTER-OA-OAR3-top-0.4.4.zip
+    ├── SMARTER-OA-OAR3-top-0.4.10.md5
+    └── SMARTER-OA-OAR3-top-0.4.10.zip
 ```
 
 You have to ensure that you are working with the same version, for both metadata
@@ -72,12 +71,12 @@ file.
 ## Querying SMARTER API
 
 The `smarterapi` package is structured to handle *requests/responses* to the
-SMARTER API backend using R packages like `httr`, `jsonlite`, handling token
-*authentication* through helper functions. In general, each functions accepts
-a `query=list()` parameter, in which pass addtional parameter to the API endpoint
+SMARTER API backend using R packages like `httr` and `jsonlite`.
+In general, each functions accepts
+a `query=list()` parameter, in which pass additional parameter to the API endpoint
 in order to filter results matching query. Some functions like `get_smarter_samples()`
 or `get_smarter_variants()` requires additional parameters like the `species` or
-the `assembly` version. Each function, in general will returns results in a
+the `assembly` version. Each function in general will return results in a
 `data.frame`: you could filter out data using `dplyr` or with standard R methods
 or you could filter data *directly* by submitting a proper query to the API.
 Please refer to the proper documentation to understand
@@ -106,17 +105,22 @@ endpoint. For example, to extract
 only *background* genotypes datasets (data generated before SMARTER project) you
 have to pass the proper `type` to the `query` argument. Since the `query` argument
 is a list, you can pass multiple parameters at once. For parameters which supports
-arrays, you could supply the same parameters multiple times: each one will be passed
-through the API endpoint
+arrays, you could supply the same parameter name multiple times: 
+each one will be passed through the API endpoint
 
 ```{r}
+# select all genotypes datasets made before SMARTER project
 background_genotypes <- get_smarter_datasets(
   query = list(type = "background", type = "genotypes"))
 
 # same as before, but limiting to goat species
 background_goat_genotypes <- get_smarter_datasets(
-  query = list(type = "background", type = "genotypes",
-             species = "Goat"))
+  query = list(
+    type = "background",
+    type = "genotypes",
+    species = "Goat"
+  )
+)
 ```
 
 Take some time to explore the dataframe columns. There are two importants fields,
@@ -134,12 +138,13 @@ So collect the *adaptmap* samples, we can provide the proper `dataset_id` to the
 `get_smarter_samples()` method. We can add additional parameters, like country:
 
 ```{r eval=FALSE}
-adatpmap_id <- background_goat_genotypes["_id.$oid"][1]
+# select the adaptmap id, which is in the first row of the dataframe
+adatpmap_id <- background_goat_genotypes["_id.$oid"][1, 1]
 adaptmap_goats <- get_smarter_samples(
   species = "Goat", query = list(dataset = adatpmap_id, country = "Italy"))
 ```
 
-The previous case is quite easy, there was only one dataset in
+The previous case is quite easy, we want only one dataset in
 `background_goat_genotypes` dataframe, so we can simply paste this value in
 the `get_smarter_samples` query. But how we can handle multiple datasets?
 we can transform the proper column in a list and then renaming it:
@@ -157,6 +162,34 @@ query <- append(datasets, breeds)
 
 # select samples: subset by breed code and datasets
 foreground_goat_samples <- get_smarter_samples(species = "Goat", query = query)
+```
+
+We can also use the `get_smarter_datasets()` function to do a reverse selection
+of our samples, for example to get all the samples which are not in one or more
+datasets: suppose, for example, to collect all samples which are not in the
+*isheep* datasets:
+
+```{r eval=FALSE}
+# collect all foreground datasets having "isheep" in their name
+isheep_datasets <- get_smarter_datasets(
+  query = list(
+    type = "foreground",
+    type = "genotypes",
+    search = "isheep"
+  )
+)
+
+# collect ids for isheep datasets
+isheep_ids <- isheep_datasets$"_id.$oid"
+
+# collect all foreground samples
+foreground_samples <- get_smarter_samples(
+  "Sheep", query = list(type = "foreground")
+)
+
+# get rid of isheep_samples
+filtered_samples <- foreground_samples %>%
+  dplyr::filter(!`dataset_id.$oid` %in% isheep_ids)
 ```
 
 The last selection example relies on dataset file contents: if you remember the
@@ -288,6 +321,73 @@ smarter_goats <- get_smarter_samples(
 After that, you have to filter out the `smarter_goats` dataframe in order to
 collect only the samples you want.
 
+## Refer samples to their original publication
+
+Suppose you want to refer the samples to the original publication the come from:
+in the *dataset* dataframe we have a `doi` column in which the *publication DOI*
+is stored. You can use this information to collect publication information, but
+you need to merge *samples* and *datasets* dataframes in order to refer properly
+the samples to the publication they come from. Here is an example of how to do:
+
+```{r eval=FALSE}
+# collect all the genotypes datasets
+datasets <- get_smarter_datasets(
+  query = list(
+    species = "Sheep", 
+    type = "genotypes"
+  )
+)
+
+# collect all the samples
+samples <- get_smarter_samples(
+  species = "Sheep",
+)
+
+# merge datasets and samples using dplyr
+samples_with_doi <- dplyr::inner_join(
+    datasets, 
+    samples, 
+    by = dplyr::join_by(`_id.$oid` == `dataset_id.$oid`)
+  ) %>% dplyr::select(
+    smarter_id, 
+    breed_code, 
+    breed.y, 
+    doi
+  ) %>% dplyr::filter(
+    !is.na(doi)
+  )
+
+# count how many samples come from each publication
+samples_with_doi %>% 
+  group_by(doi) %>% 
+  summarise(counts = n())
+```
+
+
+## Collect genotypes
+
+The *genotypes* can't be retrieved using the *smarter-api* because they are
+available from the [public FTP](ftp://webserver.ibba.cnr.it/smarter/). You need
+to download the files using an FTP client like [FileZilla](https://filezilla-project.org/)
+or [lftp](https://lftp.yar.ru/) and then
+extract the genotypes using [plink](https://www.cog-genomics.org/plink/).
+In alternative, is it possible to download the genotypes using the `get_smarter_genotypes`
+method of this package. This method will download the genotypes from the FTP 
+for the current releases of the selected *species* and *assembly* and will
+return the destination path of the downloaded archive:
+
+```{r eval=FALSE}
+downloaded_archive <- get_smarter_genotypes(
+  "Sheep", 
+  "OAR3"
+)
+```
+
+This method will download the genotypes in the current working directory, or 
+in the directory specified in the `dest_path` argument. The genotypes will be stored
+in a compressed `.zip` file, which need to be de-compressed in order to be
+used with [plink](https://www.cog-genomics.org/plink/).
+
 ## Subset genotypes relying samples
 
 After you have identified the samples of your interest,
@@ -324,8 +424,8 @@ And finally you can call plink and providing your sample list:
 
 ```bash
 plink --chr-set 26 no-xy no-mt --allow-no-sex \
-  --bfile SMARTER-OA-OAR3-top-0.4.4 \
+  --bfile SMARTER-OA-OAR3-top-0.4.10 \
   --keep selected_sheeps.txt \
-  --out selected_sheeps-OAR3-top-0.4.4 \
+  --out selected_sheeps-OAR3-top-0.4.10 \
   --make-bed
 ```

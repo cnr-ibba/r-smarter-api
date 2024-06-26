@@ -1,5 +1,5 @@
 
-#' Get SMARTER genotypes
+#' Get SMARTER Genotypes
 #'
 #' Retrieve genotypes data from SMARTER database. Only information about the
 #' supported assemblies are returned (see \code{\link{get_smarter_info}} for

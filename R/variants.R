@@ -1,4 +1,4 @@
-#' Get SMARTER variants
+#' Get SMARTER Variants
 #'
 #' Retrieve information on SMARTER SNPs. Only information about the supported
 #' assemblies are returned (see \code{\link{get_smarter_info}} for more

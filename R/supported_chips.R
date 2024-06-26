@@ -1,5 +1,5 @@
 
-#' Get SMARTER supported chips
+#' Get SMARTER Supported Chips
 #'
 #' Collect information on chip data currently managed in SMARTER database.
 #'
