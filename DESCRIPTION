@@ -42,7 +42,8 @@ Config/renv/profiles/dev/dependencies:
     roxygen2,
     styler,
     testthat,
-    usethis
+    usethis,
+    devtools
 Imports:
     jsonlite,
     httr,
