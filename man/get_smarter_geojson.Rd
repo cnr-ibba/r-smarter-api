@@ -4,12 +4,14 @@
 \alias{get_smarter_geojson}
 \title{Get SMARTER GeoJSON Samples}
 \usage{
-get_smarter_geojson(species, query = list())
+get_smarter_geojson(species, query = list(), polygons = NULL)
 }
 \arguments{
 \item{species}{a smarter species ("Goat", "Sheep")}
 
 \item{query}{a \code{list} of query arguments}
+
+\item{polygons}{a sf object with polygons to filter the samples}
 }
 \value{
 a sf data object
