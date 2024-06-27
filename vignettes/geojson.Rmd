@@ -18,12 +18,13 @@ This vignette explain some tips in order to work and visualize SMARTER data
 using the [GeoJSON endpoints](https://webserver.ibba.cnr.it/smarter-api/docs/#/GeoJSON):
 These endpoints in particular retrieve all the samples with GPS coordinates
 (like using the `locations__exists=TRUE` parameter with the `get_smarter_samples()`
-method) and then return results as a *Simple feature*. This could help you doing
+method) and then return results as a [Simple Feature](https://r-spatial.github.io/sf/index.html). 
+This could help you doing
 spatial queries such as collect samples within a certain area or calculate variables
 from a raster object. Moreover, is it possible to display data using maps or plots.
 Here are some libraries used in this vignette you may find useful:
 
-```{r setup}
+```{r message=FALSE, setup}
 library(sf)
 library(leaflet)
 library(ggplot2)
@@ -37,10 +38,18 @@ library(progress)
 library(smarterapi)
 ```
 
+```{r echo=FALSE, message=FALSE}
+# required by this vignette
+library(pander)
+```
+
 ## Get data using parameters
 
 You can collect GeoJSON data using parameters, like using the `get_smarter_samples()`
-function. For example, try to collect data for the *Sheep hapmap background* dataset:
+function. This function will parse the GeoJSON data to return a 
+[Simple Feature](https://r-spatial.github.io/sf/index.html) object, which is a
+tibble object with a geometry column.
+For example, try to collect data for the *Sheep hapmap background* dataset:
 
 ```{r}
 hapmap_dataset <- get_smarter_datasets(query = list(
@@ -55,9 +64,20 @@ hapmap_data <- get_smarter_geojson(species = "Sheep", query = list(
 ))
 ```
 
+Here is a preview of the first rows of the `hapmap_data` object:
+
+```{r echo=FALSE}
+pander::pander(
+  subset(
+    head(hapmap_data),
+    select = -c(dataset)
+  )
+)
+```
+
 ## Filter data using spatial queries
 
-An alternative approach in selecting samples expoits *spatial queries*. In this
+An alternative approach in selecting samples exploits *spatial queries*. In this
 example, we imported the goat dataset as [geojson](https://en.wikipedia.org/wiki/GeoJSON)
 file into [qgis](https://www.qgis.org/en/site/). Then we created two *polygons*
 features in correspondance of the samples we want to collect using GPS coordinates
@@ -78,9 +98,33 @@ sel_logical <- lengths(sel_sgbp) > 0
 selected_goats <- goat_data[sel_logical, ]
 ```
 
+The same query could be done using the `get_smarter_geojson()` function and 
+providing the polygons as an argument:
+
+```{r eval=FALSE}
+selected_goats <- get_smarter_geojson(
+  "Goat", 
+  query = list(type = "background"),
+  polygons = polygons
+)
+```
+
+This means that you can also provide any `sf` object as a polygon argument.
+Here we select by country, but using spatial queries:
+
+```{r eval=FALSE}
+italy <- rnaturalearth::ne_countries(scale = "medium", returnclass = "sf") %>%
+  dplyr::filter(name == "Italy")
+italy_goats <- get_smarter_geojson(
+  "Goat", 
+  query = list(type = "background"), 
+  polygons = italy
+)
+```
+
 ## Convert from MULTIPOINTS to POINT
 
-The `get_smarter_geojson()` methods returns a `sf()` *MULTIPOINTS* objects since
+The `get_smarter_geojson()` methods returns a `sf` *MULTIPOINTS* objects since
 multiple locations could be collected for each animal, for example for
 *transhumant* samples. However, for simplicity, we can focus our analyses using
 only one GPS coordinate, transforming this *MULTIPOINTS* object into a *POINT*
@@ -103,9 +147,13 @@ derive the countries from the `rnaturalearth` package, then we will zoom
 the plot to the selected points of the previous example:
 
 ```{r}
+# determine a bounding box around our samples
 bbox <- sf::st_bbox(hapmap_data)
+
+# collect the world countries as sf
 world <- rnaturalearth::ne_countries(scale = "medium", returnclass = "sf")
 
+# plot the data: use the bounding box to zoom the plot on our samples
 ggplot2::ggplot() +
   ggplot2::geom_sf(data = world, fill = "antiquewhite") +
   ggplot2::geom_sf(data = hapmap_data, color = "blue", size = 5) +
@@ -128,10 +176,10 @@ introduction to `sf` and `ggplot2`.
 
 Data could be visualized in an interactive way using *R* `leaflet` library:
 
-```{r eval=FALSE}
+```{r}
 leaflet::leaflet(
   data = hapmap_data,
-  options = leaflet::leafletOptions(minZoom = 5, maxZoom = 8)) %>%
+  options = leaflet::leafletOptions(minZoom = 5, maxZoom = 10)) %>%
   leaflet::addTiles() %>%
   leaflet::addMarkers(
     clusterOptions = leaflet::markerClusterOptions(), label = ~smarter_id
