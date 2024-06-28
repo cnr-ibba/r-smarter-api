@@ -103,7 +103,7 @@ providing the polygons as an argument:
 
 ```{r eval=FALSE}
 selected_goats <- get_smarter_geojson(
-  "Goat", 
+  "Goat",
   query = list(type = "background"),
   polygons = polygons
 )
@@ -116,8 +116,8 @@ Here we select by country, but using spatial queries:
 italy <- rnaturalearth::ne_countries(scale = "medium", returnclass = "sf") %>%
   dplyr::filter(name == "Italy")
 italy_goats <- get_smarter_geojson(
-  "Goat", 
-  query = list(type = "background"), 
+  "Goat",
+  query = list(type = "background"),
   polygons = italy
 )
 ```
@@ -158,11 +158,17 @@ ggplot2::ggplot() +
   ggplot2::geom_sf(data = world, fill = "antiquewhite") +
   ggplot2::geom_sf(data = hapmap_data, color = "blue", size = 5) +
   ggspatial::annotation_scale(location = "bl", width_hint = 0.5) +
-  ggspatial::annotation_north_arrow(location = "bl", which_north = "true",
-    pad_x = ggplot2::unit(0.75, "in"), pad_y = ggplot2::unit(0.5, "in"),
-    style = ggspatial::north_arrow_fancy_orienteering) +
+  ggspatial::annotation_north_arrow(
+    location = "bl",
+    which_north = "true",
+    pad_x = ggplot2::unit(0.75, "in"),
+    pad_y = ggplot2::unit(0.5, "in"),
+    style = ggspatial::north_arrow_fancy_orienteering
+  ) +
   ggspatial::coord_sf(
-    xlim = c(bbox$xmin, bbox$xmax), ylim = c(bbox$ymin, bbox$ymax)) +
+    xlim = c(bbox$xmin, bbox$xmax),
+    ylim = c(bbox$ymin, bbox$ymax)
+  ) +
   ggplot2::theme_bw() +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) +
   ggplot2::xlab("longitude") + ggplot2::ylab("latitude") +
@@ -179,7 +185,8 @@ Data could be visualized in an interactive way using *R* `leaflet` library:
 ```{r}
 leaflet::leaflet(
   data = hapmap_data,
-  options = leaflet::leafletOptions(minZoom = 5, maxZoom = 10)) %>%
+  options = leaflet::leafletOptions(minZoom = 5, maxZoom = 10)
+) %>%
   leaflet::addTiles() %>%
   leaflet::addMarkers(
     clusterOptions = leaflet::markerClusterOptions(), label = ~smarter_id
@@ -228,13 +235,15 @@ into terra *SpatialVectors*:
 worldclim_bio <- geodata::worldclim_global(
   var = "bio",
   res = 10,
-  path = tempdir())
+  path = tempdir()
+)
 bio_data <- terra::extract(worldclim_bio, terra::vect(hapmap_data))
 
 worldclim_elev <- geodata::worldclim_global(
   var = "elev",
   res = 10,
-  path = tempdir())
+  path = tempdir()
+)
 elev_data <- terra::extract(worldclim_elev, terra::vect(hapmap_data))
 
 hapmap_data_worldclim <- cbind(hapmap_data, merge(elev_data, bio_data))

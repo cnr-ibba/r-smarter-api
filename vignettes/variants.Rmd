@@ -101,7 +101,8 @@ snp <- get_smarter_variants(
 
 ```{r echo=FALSE}
 pander::pander(
-  subset(snp, select = -c(`_id.$oid`, `sequence.IlluminaOvineHDSNP`)))
+  subset(snp, select = -c(`_id.$oid`, `sequence.IlluminaOvineHDSNP`))
+)
 ```
 
 Is `T/C` on the *forward* strand of *OAR3*: this means that the reversed probe is
@@ -126,7 +127,9 @@ variants <- get_smarter_variants(
 ```
 
 ```{r echo=FALSE}
-variants$chip_name <- sapply(variants$chip_name, function(x) paste(x, collapse = ","))
+variants$chip_name <- sapply(
+  variants$chip_name, function(x) paste(x, collapse = ",")
+)
 
 pander::pander(
   subset(

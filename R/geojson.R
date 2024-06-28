@@ -93,7 +93,7 @@ get_within_polygon <- function(url, polygons, query = list()) {
   data <- list()
 
   for (i in seq_along(feature_list)) {
-    resp = httr::POST(
+    resp <- httr::POST(
       url = url,
       query = query,
       body = jsonlite::toJSON(

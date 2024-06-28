@@ -111,7 +111,8 @@ each one will be passed through the API endpoint
 ```{r}
 # select all genotypes datasets made before SMARTER project
 background_genotypes <- get_smarter_datasets(
-  query = list(type = "background", type = "genotypes"))
+  query = list(type = "background", type = "genotypes")
+)
 
 # same as before, but limiting to goat species
 background_goat_genotypes <- get_smarter_datasets(
@@ -141,7 +142,8 @@ So collect the *adaptmap* samples, we can provide the proper `dataset_id` to the
 # select the adaptmap id, which is in the first row of the dataframe
 adatpmap_id <- background_goat_genotypes["_id.$oid"][1, 1]
 adaptmap_goats <- get_smarter_samples(
-  species = "Goat", query = list(dataset = adatpmap_id, country = "Italy"))
+  species = "Goat", query = list(dataset = adatpmap_id, country = "Italy")
+)
 ```
 
 The previous case is quite easy, we want only one dataset in
@@ -152,7 +154,8 @@ we can transform the proper column in a list and then renaming it:
 ```{r eval=FALSE}
 # get more datasets
 foreground_goat_genotypes <- get_smarter_datasets(
-  query = list(type = "genotypes", type = "foreground", species = "Goat"))
+  query = list(type = "genotypes", type = "foreground", species = "Goat")
+)
 
 # construct the query arguments
 datasets <- as.list(foreground_goat_genotypes$"_id.$oid")
@@ -217,8 +220,12 @@ search parameter with the `get_smarter_breeds()` which model the
 endpoint:
 
 ```{r}
-breeds <- get_smarter_breeds(query = list(
-  species = "Sheep", search = "de france"))
+breeds <- get_smarter_breeds(
+  query = list(
+    species = "Sheep",
+    search = "de france"
+  )
+)
 ```
 
 ```{r echo=FALSE}
@@ -228,8 +235,12 @@ pander::pander(subset(breeds, select = c("name", "code")))
 Search for breeds can return multiple values, for example:
 
 ```{r}
-breeds <- get_smarter_breeds(query = list(
-  species = "Sheep", search = "merino"))
+breeds <- get_smarter_breeds(
+  query = list(
+    species = "Sheep",
+    search = "merino"
+  )
+)
 ```
 
 ```{r echo=FALSE}
@@ -333,7 +344,7 @@ the samples to the publication they come from. Here is an example of how to do:
 # collect all the genotypes datasets
 datasets <- get_smarter_datasets(
   query = list(
-    species = "Sheep", 
+    species = "Sheep",
     type = "genotypes"
   )
 )
@@ -345,21 +356,16 @@ samples <- get_smarter_samples(
 
 # merge datasets and samples using dplyr
 samples_with_doi <- dplyr::inner_join(
-    datasets, 
-    samples, 
-    by = dplyr::join_by(`_id.$oid` == `dataset_id.$oid`)
-  ) %>% dplyr::select(
-    smarter_id, 
-    breed_code, 
-    breed.y, 
-    doi
-  ) %>% dplyr::filter(
-    !is.na(doi)
-  )
+  datasets,
+  samples,
+  by = dplyr::join_by(`_id.$oid` == `dataset_id.$oid`)
+) %>%
+  dplyr::select(smarter_id, breed_code, breed.y, doi) %>%
+  dplyr::filter(!is.na(doi))
 
 # count how many samples come from each publication
-samples_with_doi %>% 
-  group_by(doi) %>% 
+samples_with_doi %>%
+  group_by(doi) %>%
   summarise(counts = n())
 ```
 
@@ -378,7 +384,7 @@ return the destination path of the downloaded archive:
 
 ```{r eval=FALSE}
 downloaded_archive <- get_smarter_genotypes(
-  "Sheep", 
+  "Sheep",
   "OAR3"
 )
 ```
@@ -397,8 +403,10 @@ file with *breed_code* and *smarter_id* as columns. For example, using the sampl
 selected above and *dplyr*:
 
 ```{r eval=FALSE}
-selected_sheeps_ids <- italian_background_sheeps %>% dplyr::select(
-  "breed_code", "smarter_id")
+selected_sheeps_ids <- italian_background_sheeps %>%
+  dplyr::select(
+    "breed_code", "smarter_id"
+  )
 
 write.table(
   selected_sheeps_ids,
@@ -406,7 +414,8 @@ write.table(
   quote = FALSE,
   sep = "\t",
   row.names = FALSE,
-  col.names = FALSE)
+  col.names = FALSE
+)
 ```
 
 Next, you need to collect the proper *plink options* in order to not loose
