@@ -1,6 +1,6 @@
 Package: smarterapi
 Title: Fetch SMARTER Data Through REST API
-Version: 0.2.0.9000
+Version: 0.2.0
 Authors@R:
     person(
         "Paolo", "Cozzi",
