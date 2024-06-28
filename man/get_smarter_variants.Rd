@@ -2,9 +2,9 @@
 % Please edit documentation in R/variants.R
 \name{get_smarter_variants}
 \alias{get_smarter_variants}
-\title{Get SMARTER variants}
+\title{Get SMARTER Variants}
 \usage{
-get_smarter_variants(species, assembly, query = list(), token = NULL)
+get_smarter_variants(species, assembly, query = list())
 }
 \arguments{
 \item{species}{a smarter species ("Goat", "Sheep")}
@@ -12,18 +12,14 @@ get_smarter_variants(species, assembly, query = list(), token = NULL)
 \item{assembly}{the smarter working assembly for such species}
 
 \item{query}{a \code{list} of query arguments}
-
-\item{token}{a string with a valid token}
 }
 \value{
 Returns a dataframe with selected variants
 }
 \description{
-Retrieve information on SMARTER SNPs. Only informations about the supported
+Retrieve information on SMARTER SNPs. Only information about the supported
 assemblies are returned (see \code{\link{get_smarter_info}} for more
 information).
-Cached token is used or a new token is generated if not provided when calling
-this function (see \code{\link{get_smarter_token}} for more information)
 }
 \section{About SMARTER supported assemblies}{
 

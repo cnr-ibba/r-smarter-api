@@ -5,23 +5,12 @@ version <- utils::packageVersion("smarterapi")
 smarterapi_globals <- new.env()
 smarterapi_globals$base_url <- "https://webserver.ibba.cnr.it"
 smarterapi_globals$base_endpoint <- "/smarter-api"
-smarterapi_globals$token <- NULL
-smarterapi_globals$expires <- NULL
 smarterapi_globals$size <- 25
+smarterapi_globals$ftp_url <- "ftp://webserver.ibba.cnr.it"
+smarterapi_globals$ftp_path <- "/smarter"
 smarterapi_globals$user_agent <- httr::user_agent(
   paste0("r-smarterapi v", version)
 )
-
-
-# returns true if token doesn't exist or is expired (or expires within 1 day)
-is_token_expired <- function() {
-  if (is.null(smarterapi_globals$token) | is.null(smarterapi_globals$token)) {
-    return(TRUE)
-  }
-
-  # consider a token expired if it least less than one day
-  return(smarterapi_globals$expires < as.Date(lubridate::now() + 1))
-}
 
 
 check_smarter_errors <- function(resp, parsed) {
@@ -39,14 +28,13 @@ check_smarter_errors <- function(resp, parsed) {
 }
 
 
-read_url <- function(url, token, query = list()) {
+read_url <- function(url, query = list()) {
   logger::log_debug(sprintf("Get data from %s", url))
 
   # in this request, we add the token to the request header section
   resp <- httr::GET(
     url,
     query = query,
-    httr::add_headers(Authorization = paste("Bearer", token)),
     smarterapi_globals$user_agent
   )
 
@@ -68,15 +56,15 @@ read_url <- function(url, token, query = list()) {
 }
 
 
-get_smarter_data <- function(url, token, query = list()) {
+get_smarter_data <- function(url, query = list()) {
   # test for page size. Add a default size if necessary
-  if (!"size" %in% names(query) | is.null(query[["size"]])) {
+  if (!"size" %in% names(query) || is.null(query[["size"]])) {
     # add global result size to query
     query$size <- smarterapi_globals$size
   }
 
   # do the request and parse data with our function
-  parsed <- read_url(url, token, query)
+  parsed <- read_url(url, query)
 
   # track results in df
   results <- parsed$"items"
@@ -89,7 +77,7 @@ get_smarter_data <- function(url, token, query = list()) {
     logger::log_debug(sprintf("Next page %s", query$page))
 
     # get next page
-    parsed <- read_url(url, token, query)
+    parsed <- read_url(url, query)
 
     # append new results to df. Deal with different columns
     results <- dplyr::bind_rows(results, parsed$"items")

@@ -4,14 +4,14 @@
 \alias{get_smarter_geojson}
 \title{Get SMARTER GeoJSON Samples}
 \usage{
-get_smarter_geojson(species, query = list(), token = NULL)
+get_smarter_geojson(species, query = list(), polygons = NULL)
 }
 \arguments{
 \item{species}{a smarter species ("Goat", "Sheep")}
 
 \item{query}{a \code{list} of query arguments}
 
-\item{token}{a string with a valid token}
+\item{polygons}{a sf object with polygons to filter the samples}
 }
 \value{
 a sf data object
@@ -19,8 +19,6 @@ a sf data object
 \description{
 Fetch SMARTER REST API samples with GPS coordinates and return them into as
 simple features.
-Cached token is used or a new token is generated if not provided when calling
-this function (see \code{\link{get_smarter_token}} for more information)
 }
 \examples{
 \dontrun{

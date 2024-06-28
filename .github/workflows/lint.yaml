@@ -2,7 +2,7 @@
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: [master, devel]
+    branches: [master]
   pull_request:
     branches: [master, devel]
 
@@ -16,7 +16,7 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Install dependencies on Linux
         run: sudo apt-get update -y && sudo apt-get install -y libcurl4-openssl-dev
@@ -28,7 +28,8 @@ jobs:
 
       - uses: r-lib/actions/setup-renv@v2
         with:
-          cache-version: 2
+          cache-version: 1
+          profile: '"dev"'
 
       - name: Lint
         run: lintr::lint_package()

@@ -16,48 +16,41 @@ knitr::opts_chunk$set(
 # smarterapi
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/cnr-ibba/r-smarter-api/workflows/R-CMD-check/badge.svg)](https://github.com/cnr-ibba/r-smarter-api/actions)
+[![R-CMD-check](https://github.com/cnr-ibba/r-smarter-api/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cnr-ibba/r-smarter-api/actions/workflows/R-CMD-check.yaml)
+[![lint](https://github.com/cnr-ibba/r-smarter-api/actions/workflows/lint.yaml/badge.svg)](https://github.com/cnr-ibba/r-smarter-api/actions/workflows/lint.yaml)
+[![pkgdown](https://github.com/cnr-ibba/r-smarter-api/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/cnr-ibba/r-smarter-api/actions/workflows/pkgdown.yaml)
 <!-- badges: end -->
 
-The goal of `smarterapi` is to collect data from *SMARTER REST API*
+The goal of `smarterapi` is to collect data from 
+[SMARTER REST API](https://webserver.ibba.cnr.it/smarter-api/docs/) and provide them to 
+the user as a dataframe. Get more information with the 
+[online vignette](https://cnr-ibba.github.io/r-smarter-api/articles/smarterapi.html).
 
 ## Installation
 
-You can install the development version of smarterapi from [GitHub](https://github.com/) with:
+The `smarterapi` package is only available from [GitHub](https://github.com/) 
+and can be installed as a *source package* or in alternative using
+[devtools](https://CRAN.R-project.org/package=devtools)
+package, for example:
 
 ```r
+# install devtools if needed
 # install.packages("devtools")
 devtools::install_github("cnr-ibba/r-smarter-api")
 ```
 
+After the installation, you can load the package in your R session:
+
+```{r eval = FALSE, import}
+# import this library to deal with the SMARTER API
+library(smarterapi)
+```
+
 ## SMARTER credentials
 
-The *SMARTER REST API* is not yet public and can be accessed providing a valid
-*token* in every *HTTP* request. `smarterapi` can deal with token generation and
-management and implement functions in order to automatically manage tokens in 
-every user requests. The function `get_smarter_token` can be used to manage tokens
-and cache them inside `smarterapi` package. You could provide manually your 
-SMARTER credentials by calling `get_smarter_token` with the proper parameters
-in order to generate a token, however the recommended way is to store your
-credentials using environment variables, and let `smarterapi` deal with 
-your token management. Please remember that SMARTER credentials **MUST NOT be
-tracked** in your code nor provided to un-authorized people. To manage your
-environment properly, you should define such environment variables in your `$HOME`
-directory, outside any other *R projects*. If you use *rstudio*, you can call
-an utility function which open such environment file:
-
-```r
-usethis::edit_r_environ()
-```
-
-Variables in environment file should be defined with `key=value` syntax. In order
-to configure properly `smarterapi`, you have to define `SMARTER_API_USERNAME` and 
-`SMARTER_API_PASSWORD` with your SMARTER credentials, like this:
-
-```text
-SMARTER_API_USERNAME=<smarter username>
-SMARTER_API_PASSWORD=<smarter password>
-```
+After the public release of SMARTER data, there's no need to provide credentials
+to access the data. If you used to have credentials to access the data, you need 
+to install the latest version of `smarterapi` package.
 
 ## Querying the SMARTER backend
 
@@ -68,10 +61,8 @@ lets to query the [Datasets endpoint](https://webserver.ibba.cnr.it/smarter-api/
 while `get_smarter_samples` is able to query and parse the 
 [Sample endpoints](https://webserver.ibba.cnr.it/smarter-api/docs/#/Samples)
 response. Each `smarterapi` function is documented in `R` and you can get help on
-each function like any other R functions. If you manage tokens using `smarterapi`
-and environment variables, you don't need to provide a token as a parameter while
-fetching data, those function will handle the token generation and authentication 
-for you. There are two types of parameters that are required to fetch data through
+each function like any other R functions. 
+There are two types of parameters that are required to fetch data through
 the *SMARTER-backend*: the `species` parameter, which can be `Goat` or `Sheep` respectively
 for goat and sheep [Samples](https://webserver.ibba.cnr.it/smarter-api/docs/#/Samples)
 or [Variants](https://webserver.ibba.cnr.it/smarter-api/docs/#/Variants) endpoints,
@@ -82,14 +73,16 @@ as a `list()` object in order to limit your query to some data in particular.
 For example, if you need all the foreground genotypes datasets, you can collect
 data like this:
 
-```r
-datasets <- get_smarter_datasets(query = list(type="genotypes", type="foreground"))
+```{r eval = FALSE, dataset}
+datasets <- get_smarter_datasets(
+  query = list(type = "genotypes", type = "foreground"))
 ```
 
 while if you require only background goat samples, you can do like this:
 
-```r
-goat_samples <- get_smarter_samples(species = "Goat", query=list(type="background"))
+```{r eval = FALSE, samples}
+goat_samples <- get_smarter_samples(
+  species = "Goat", query = list(type = "background"))
 ```
 
 The full option list available to each endpoint is available on the SMARTER-backend
@@ -106,7 +99,7 @@ described as *array of objects* can be specified multiple times:
 2       Landrace  LNR
 3         Landin  LND
 4 Icelandic goat  ICL
->
+
 > goat_samples <- get_smarter_samples(
     species = "Goat", 
     query = list(
@@ -118,16 +111,39 @@ described as *array of objects* can be specified multiple times:
   )
 ```
 
-## Example
+## Examples
 
 This is a basic example which shows you how to collect data from SMARTER REST API
 for the *Italian* goats belonging to the *Adaptmap* dataset:
 
-```{r example}
-library(smarterapi)
+```{r eval = FALSE, adaptmap}
+# collect the dataset by providing part of the name with the search option:
+# since we are forcing to collect only background genotypes, only one dataset
+# will be returned
 datasets <- get_smarter_datasets(
-  query = list(species = "Goat", search = "adaptmap", type = "genotypes", type="background"))
+  query = list(
+    species = "Goat", 
+    search = "adaptmap", 
+    type = "genotypes", 
+    type = "background"
+    )
+)
+
+# get the dataset id
 adatpmap_id <- datasets["_id.$oid"][1]
+
+# collect all the italian goats from the adaptmap dataset. Using the dataset id
+# to filter out all the samples belonging to this dataset and the country option
+# to filter out only the italian samples for this dataset
 adaptmap_goats <- get_smarter_samples(
-  species = "Goat", query = list(dataset=adatpmap_id, country="Italy"))
+  species = "Goat", 
+  query = list(
+    dataset = adatpmap_id, 
+    country = "Italy"
+  )
+)
 ```
+
+We have other examples in the [vignettes](https://cnr-ibba.github.io/r-smarter-api/articles/), 
+for example how to collect data from the [Variants](https://cnr-ibba.github.io/r-smarter-api/articles/variants.html)
+endpoints or how to work with [geographic coordinates](https://cnr-ibba.github.io/r-smarter-api/articles/geojson.html).

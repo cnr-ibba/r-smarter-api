@@ -4,20 +4,16 @@
 \alias{get_smarter_breeds}
 \title{Get SMARTER Breeds}
 \usage{
-get_smarter_breeds(query = list(), token = NULL)
+get_smarter_breeds(query = list())
 }
 \arguments{
 \item{query}{a \code{list} of query arguments}
-
-\item{token}{a string with a valid token}
 }
 \value{
 Returns a dataframe with selected breeds
 }
 \description{
 Fetch SMARTER REST API breeds endpoint and returns results in a dataframe.
-Cached token is used or a new token is generated if not provided when calling
-this function (see \code{\link{get_smarter_token}} for more information)
 }
 \section{Passing additional parameters}{
 
@@ -36,9 +32,7 @@ selected_breed <- get_smarter_breeds(query = list(code = "TEX"))
 
 selected_breeds <- get_smarter_breeds(query = list(search = "mer"))
 \dontrun{
-
 all_breeds <- get_smarter_breeds()
-
 sheep_breeds <- get_smarter_breeds(query = list(species = "Sheep"))
 }
 }

@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette describe how to use the 
+This vignette describe how to use the
 [variant endpoints](https://webserver.ibba.cnr.it/smarter-api/docs/#/Variants)
 which store information about SNPs used in the *smarter genotype datasets*.
 
@@ -29,14 +29,14 @@ library(pander)
 
 ## Assembly versions
 
-One of the aim of this project is to manage genotypes in different assembly 
+One of the aim of this project is to manage genotypes in different assembly
 version. This means collect data from different assemblies (due to when data is
-generated), from different sources (*Affymetrix*, *Illumina*, *WGS*) and different 
+generated), from different sources (*Affymetrix*, *Illumina*, *WGS*) and different
 file formats. Genotypes are normalized in order to be consistent accross data
 sources and stored in one genotype file for each specie.
 
-Currently four assembly versions are managed, two for the sheep dataset and two for 
-the goat dataset. Information about assemblies data sources can be retrieved from 
+Currently four assembly versions are managed, two for the sheep dataset and two for
+the goat dataset. Information about assemblies data sources can be retrieved from
 the backend [info endpoint](https://webserver.ibba.cnr.it/smarter-api/docs/#/Info)
 through the `get_smarter_info()` function:
 
@@ -53,14 +53,14 @@ pander::pander(assemblies)
 ## Collect data from an assembly
 
 `get_smarter_variants()` have two mandatory parameters, `species` and `assembly`,
-then it could accept additional parameters  (see one of the 
+then it could accept additional parameters  (see one of the
 [variant endpoints](https://webserver.ibba.cnr.it/smarter-api/docs/#/Variants)
 to have more information). For example you can search variants for *snp name* or
 *rs id* (if the latter exists):
 
 ```{r message=FALSE}
 snp <- get_smarter_variants(
-  species = "Goat", 
+  species = "Goat",
   assembly = "ARS1",
   query = list(
     name = "snp12965-scaffold1499-3295573"
@@ -68,20 +68,30 @@ snp <- get_smarter_variants(
 )
 ```
 
-```{r echo=FALSE}
-pander::pander(subset(snp, select = -c(`_id.$oid`, `sequence.IlluminaGoatSNP50`)))
+```{r echo=FALSE, warning=FALSE}
+pander::pander(
+  subset(
+    snp,
+    select = -c(
+      `_id.$oid`,
+      `sequence.IlluminaGoatSNP50`,
+      `sequence.AffymetrixAxiomGoatv2`,
+      `chip_name`
+    )
+  )
+)
 ```
 
 Please, refer to the `get_smarter_info()` `working_assemblies` to have an idea
-of the assemblies supported by the 
+of the assemblies supported by the
 [SMARTER-database](https://github.com/cnr-ibba/SMARTER-database).
 Data which come from [SNPchiMp v.3](https://webserver.ibba.cnr.it/SNPchimp/)
-like the *Sheep* `OAR3` assembly, support the *illumina forward* attribute. 
+like the *Sheep* `OAR3` assembly, support the *illumina forward* attribute.
 For example the following SNP:
 
 ```{r message=FALSE}
 snp <- get_smarter_variants(
-  species = "Sheep", 
+  species = "Sheep",
   assembly = "OAR3",
   query = list(
     rs_id = "rs10721092"
@@ -90,13 +100,15 @@ snp <- get_smarter_variants(
 ```
 
 ```{r echo=FALSE}
-pander::pander(subset(snp, select = -c(`_id.$oid`, `sequence.IlluminaOvineHDSNP`)))
+pander::pander(
+  subset(snp, select = -c(`_id.$oid`, `sequence.IlluminaOvineHDSNP`))
+)
 ```
 
-Is `T/C` on the *forward* strand of *OAR3*: this means that the reversed probe is 
+Is `T/C` on the *forward* strand of *OAR3*: this means that the reversed probe is
 aligned to the genome (as you could infer from the `bottom` *illumina strand* attribute
-of this SNP.). Variants in the SMARTER-database are converted using the **illumina top**
-coding convenction, so you will find this SNP as `A/G` in the SMARTER-database while
+of this SNP). Genotypes in the SMARTER-database are converted using the **illumina top**
+coding convention, so you will find this SNP as `A/G` in the SMARTER-database while
 on the reference sequence it's `T/C`.
 
 ## Fetch Variants by region
@@ -108,17 +120,33 @@ format, for example:
 variants <- get_smarter_variants(
   species = "Goat",
   assembly = "ARS1",
-  query = list(region = "1:1-100000")
+  query = list(
+    region = "1:1-100000"
+  )
 )
 ```
 
 ```{r echo=FALSE}
-pander::pander(subset(variants, select = -c(`_id.$oid`, `sequence.IlluminaGoatSNP50`)))
+variants$chip_name <- sapply(
+  variants$chip_name, function(x) paste(x, collapse = ",")
+)
+
+pander::pander(
+  subset(
+    variants,
+    select = -c(
+      `_id.$oid`,
+      `sequence.AffymetrixAxiomGoatv2`,
+      `sequence.IlluminaGoatSNP50`,
+      `probesets`
+    )
+  )
+)
 ```
 
 ## Fetch Variants by chip name
 
-You can download *all variants* for a certain chip: please consider that it will 
+You can download *all variants* for a certain chip: please consider that it will
 require a lot of time and memory, since we store more than 600K SNPs in the smarter
 database. First, collect the available chips from the SMARTER-database, for example
 for the Sheep species:

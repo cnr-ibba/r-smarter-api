@@ -1,10 +1,8 @@
-#' Get SMARTER variants
+#' Get SMARTER Variants
 #'
-#' Retrieve information on SMARTER SNPs. Only informations about the supported
+#' Retrieve information on SMARTER SNPs. Only information about the supported
 #' assemblies are returned (see \code{\link{get_smarter_info}} for more
 #' information).
-#' Cached token is used or a new token is generated if not provided when calling
-#' this function (see \code{\link{get_smarter_token}} for more information)
 #'
 #' @inheritParams get_smarter_samples
 #' @param assembly the smarter working assembly for such species
@@ -36,12 +34,8 @@
 #' )
 #' }
 # nolint start
-get_smarter_variants <- function(species, assembly, query = list(), token = NULL) {
+get_smarter_variants <- function(species, assembly, query = list()) {
   # nolint end
-  if (is.null(token)) {
-    token <- smarterapi::get_smarter_token()
-  }
-
   logger::log_info("Get data from variants endpoint")
 
   # mind that species is lowercase in endpoint url
@@ -58,7 +52,7 @@ get_smarter_variants <- function(species, assembly, query = list(), token = NULL
     )
   )
 
-  data <- get_smarter_data(url, token, query)
+  data <- get_smarter_data(url, query)
 
   logger::log_info("Done!")
 

@@ -2,8 +2,6 @@
 #' Get SMARTER Datasets
 #'
 #' Fetch SMARTER REST API datasets endpoint and returns results in a dataframe.
-#' Cached token is used or a new token is generated if not provided when calling
-#' this function (see \code{\link{get_smarter_token}} for more information)
 #'
 #' @inheritParams get_smarter_breeds
 #'
@@ -32,11 +30,7 @@
 #'
 #' all_datasets <- get_smarter_datasets()
 #' }
-get_smarter_datasets <- function(query = list(), token = NULL) {
-  if (is.null(token)) {
-    token <- smarterapi::get_smarter_token()
-  }
-
+get_smarter_datasets <- function(query = list()) {
   logger::log_info("Get data from datasets endpoint")
 
   url <- httr::modify_url(
@@ -44,7 +38,7 @@ get_smarter_datasets <- function(query = list(), token = NULL) {
     path = sprintf("%s/datasets", smarterapi_globals$base_endpoint)
   )
 
-  data <- get_smarter_data(url, token, query)
+  data <- get_smarter_data(url, query)
 
   logger::log_info("Done!")
 

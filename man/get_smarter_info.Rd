@@ -4,18 +4,13 @@
 \alias{get_smarter_info}
 \title{Get SMARTER Info}
 \usage{
-get_smarter_info(token = NULL)
-}
-\arguments{
-\item{token}{a string with a valid token}
+get_smarter_info()
 }
 \value{
 a list object with SMARTER database information
 }
 \description{
 Collect information about smarter database status and returns values in a list
-Cached token is used or a new token is generated if not provided when calling
-this function (see \code{\link{get_smarter_token}} for more information)
 }
 \section{About SMARTER database info endpoint}{
 
@@ -28,7 +23,7 @@ The info endpoint contains information about the status of the database\tabular{
 }
 
 
-Those informations are required to understand if your genotypes are updated
+Those information are required to understand if your genotypes are updated
 or not. For example, if the SMARTER database current \emph{version} and
 \emph{last_updated} are more recent than your genotype file, you could retrive
 information on samples not included in the genotype file. In such case, you
