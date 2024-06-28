@@ -34,6 +34,9 @@
     <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_datasets.html</loc>
   </url>
   <url>
+    <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_genotypes.html</loc>
+  </url>
+  <url>
     <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_geojson.html</loc>
   </url>
   <url>
@@ -44,9 +47,6 @@
   </url>
   <url>
     <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_supportedchips.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_token.html</loc>
   </url>
   <url>
     <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_variants.html</loc>
