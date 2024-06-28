@@ -2,11 +2,8 @@
 #' Get SMARTER Breeds
 #'
 #' Fetch SMARTER REST API breeds endpoint and returns results in a dataframe.
-#' Cached token is used or a new token is generated if not provided when calling
-#' this function (see \code{\link{get_smarter_token}} for more information)
 #'
 #' @param query a \code{list} of query arguments
-#' @param token a string with a valid token
 #'
 #' @return Returns a dataframe with selected breeds
 #' @export
@@ -26,16 +23,10 @@
 #'
 #' selected_breeds <- get_smarter_breeds(query = list(search = "mer"))
 #' \dontrun{
-#'
 #' all_breeds <- get_smarter_breeds()
-#'
 #' sheep_breeds <- get_smarter_breeds(query = list(species = "Sheep"))
 #' }
-get_smarter_breeds <- function(query = list(), token = NULL) {
-  if (is.null(token)) {
-    token <- smarterapi::get_smarter_token()
-  }
-
+get_smarter_breeds <- function(query = list()) {
   logger::log_info("Get data from breeds endpoint")
 
   # setting the URL endpoint
@@ -45,7 +36,7 @@ get_smarter_breeds <- function(query = list(), token = NULL) {
   )
 
   # reading our data
-  data <- get_smarter_data(url, token, query)
+  data <- get_smarter_data(url, query)
 
   logger::log_info("Done!")
 

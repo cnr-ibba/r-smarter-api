@@ -4,20 +4,16 @@
 \alias{get_smarter_countries}
 \title{Get SMARTER Countries}
 \usage{
-get_smarter_countries(query = list(), token = NULL)
+get_smarter_countries(query = list())
 }
 \arguments{
 \item{query}{a \code{list} of query arguments}
-
-\item{token}{a string with a valid token}
 }
 \value{
 Returns a dataframe with selected countries
 }
 \description{
 Fetch SMARTER REST API countries endpoint and returns results in a dataframe.
-Cached token is used or a new token is generated if not provided when calling
-this function (see \code{\link{get_smarter_token}} for more information)
 }
 \section{Passing additional parameters}{
 

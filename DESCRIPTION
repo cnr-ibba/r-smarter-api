@@ -1,24 +1,26 @@
 Package: smarterapi
 Title: Fetch SMARTER Data Through REST API
 Version: 0.2.0.9000
-Authors@R: 
-    person("Paolo", "Cozzi", , "paolo.cozzi@ibba.cnr.it", 
-           role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0003-0388-6874"))
-Description: smarterapi is an interface which interacts with SMARTER REST API
-    by querying data using token authentication and providing results into 
-    dataframes.
+Authors@R:
+    person(
+        "Paolo", "Cozzi",
+        email = "paolo.cozzi@ibba.cnr.it",
+        role = c("aut", "cre"),
+        comment = c(ORCID = "0000-0003-0388-6874")
+    )
+Description:
+    Provides functions to fetch data from the SMARTER API, a RESTful
+    web service that provides access to data from the SMARTER database.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
-Suggests: 
+Suggests:
     lintr,
     styler,
     testthat (>= 3.0.0),
     rcmdcheck,
     roxygen2,
-    utils,
     usethis,
     leaflet,
     knitr,
@@ -34,22 +36,26 @@ Suggests:
     rnaturalearth,
     rnaturalearthdata
 Config/testthat/edition: 3
-Config/renv/profiles/dev/dependencies: 
+Config/renv/profiles/dev/dependencies:
     lintr,
     rcmdcheck,
     roxygen2,
     styler,
     testthat,
-    usethis
-Imports: 
+    usethis,
+    devtools
+Imports:
     jsonlite,
     httr,
     urltools,
-    lubridate,
+    RCurl,
+    fs,
+    utils,
     logger,
     dplyr,
     tidyr,
-    sf
+    sf,
+    geojsonsf
 URL: https://cnr-ibba.github.io/r-smarter-api/
 BugReports: https://github.com/cnr-ibba/r-smarter-api/issues
 VignetteBuilder: knitr

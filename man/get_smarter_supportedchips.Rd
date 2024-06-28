@@ -2,22 +2,18 @@
 % Please edit documentation in R/supported_chips.R
 \name{get_smarter_supportedchips}
 \alias{get_smarter_supportedchips}
-\title{Get SMARTER supported chips}
+\title{Get SMARTER Supported Chips}
 \usage{
-get_smarter_supportedchips(query = list(), token = NULL)
+get_smarter_supportedchips(query = list())
 }
 \arguments{
 \item{query}{a \code{list} of query arguments}
-
-\item{token}{a string with a valid token}
 }
 \value{
 Returns a dataframe with selected chips
 }
 \description{
 Collect information on chip data currently managed in SMARTER database.
-Cached token is used or a new token is generated if not provided when calling
-this function (see \code{\link{get_smarter_token}} for more information)
 }
 \examples{
 chips <- get_smarter_supportedchips()

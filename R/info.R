@@ -3,10 +3,6 @@
 #' Get SMARTER Info
 #'
 #' Collect information about smarter database status and returns values in a list
-#' Cached token is used or a new token is generated if not provided when calling
-#' this function (see \code{\link{get_smarter_token}} for more information)
-#'
-#' @param token a string with a valid token
 #'
 #' @return a list object with SMARTER database information
 #' @export
@@ -21,7 +17,7 @@
 #' | plink_specie | track the specie specific parameters to generate genotypes using plink |
 #' | working_assemblies | the source of variant positions and genotypes |
 #'
-#' Those informations are required to understand if your genotypes are updated
+#' Those information are required to understand if your genotypes are updated
 #' or not. For example, if the SMARTER database current *version* and
 #' *last_updated* are more recent than your genotype file, you could retrive
 #' information on samples not included in the genotype file. In such case, you
@@ -35,11 +31,7 @@
 #' smarter_status <- get_smarter_info()
 #' smarter_version <- smarter_status$version
 # nolint end
-get_smarter_info <- function(token = NULL) {
-  if (is.null(token)) {
-    token <- smarterapi::get_smarter_token()
-  }
-
+get_smarter_info <- function() {
   logger::log_info("Get data from info endpoint")
 
   url <- httr::modify_url(
@@ -47,7 +39,7 @@ get_smarter_info <- function(token = NULL) {
     path = sprintf("%s/info", smarterapi_globals$base_endpoint)
   )
 
-  data <- get_smarter_data(url, token)
+  data <- get_smarter_data(url)
 
   logger::log_info("Done!")
 
