@@ -42,6 +42,10 @@ jobs:
         with:
           cache-version: 1
 
+      - name: Install development dependencies
+        run: renv::install(dev = TRUE)
+        shell: Rscript {0}
+
       - uses: r-lib/actions/check-r-package@v2
         with:
           error-on: '"error"'
