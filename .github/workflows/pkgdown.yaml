@@ -16,8 +16,6 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
-      SMARTER_API_USERNAME: ${{ secrets.SMARTER_API_USERNAME }}
-      SMARTER_API_PASSWORD: ${{ secrets.SMARTER_API_PASSWORD }}
 
     steps:
       - uses: actions/checkout@v4
