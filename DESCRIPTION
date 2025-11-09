@@ -22,6 +22,7 @@ Suggests:
     rcmdcheck,
     roxygen2,
     usethis,
+    devtools,
     leaflet,
     knitr,
     rmarkdown,
@@ -35,16 +36,9 @@ Suggests:
     terra,
     rnaturalearth,
     rnaturalearthdata,
-    mockery
+    mockery,
+    pkgdown
 Config/testthat/edition: 3
-Config/renv/profiles/dev/dependencies:
-    lintr,
-    rcmdcheck,
-    roxygen2,
-    styler,
-    testthat,
-    usethis,
-    devtools
 Imports:
     jsonlite,
     httr,
