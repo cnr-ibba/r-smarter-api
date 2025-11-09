@@ -594,14 +594,13 @@
     },
     "evaluate": {
       "Package": "evaluate",
-      "Version": "0.24.0",
+      "Version": "1.0.5",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
-        "R",
-        "methods"
+        "R"
       ],
-      "Hash": "a1066cbc05caee9a4bf6d90f194ff4da"
+      "Hash": "94cf2c54237f6841cee68e3ba4ab5a14"
     },
     "fansi": {
       "Package": "fansi",
@@ -643,14 +642,14 @@
     },
     "fs": {
       "Package": "fs",
-      "Version": "1.6.4",
+      "Version": "1.6.6",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "methods"
       ],
-      "Hash": "15aeb8c27f5ea5161f9f6a641fafd93a"
+      "Hash": "7eb1e342eee7e0a7449c49cdaa526d39"
     },
     "furrr": {
       "Package": "furrr",
@@ -1236,6 +1235,17 @@
       ],
       "Hash": "fec5f52652d60615fdb3957b3d74324a"
     },
+    "mockery": {
+      "Package": "mockery",
+      "Version": "0.4.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "testthat"
+      ],
+      "Hash": "444deb51983b81e5e61d4cdb46ec5f49"
+    },
     "munsell": {
       "Package": "munsell",
       "Version": "0.5.1",
@@ -1592,16 +1602,6 @@
         "xopen"
       ],
       "Hash": "8f25ebe2ec38b1f2aef3b0d2ef76f6c4"
-    },
-    "rematch2": {
-      "Package": "rematch2",
-      "Version": "2.1.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "tibble"
-      ],
-      "Hash": "76c9e04c712a05848ae7a23d2f170a40"
     },
     "remotes": {
       "Package": "remotes",
@@ -2017,7 +2017,7 @@
     },
     "testthat": {
       "Package": "testthat",
-      "Version": "3.2.1.1",
+      "Version": "3.2.3",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2042,7 +2042,7 @@
         "waldo",
         "withr"
       ],
-      "Hash": "3f6e7e5e2220856ff865e4834766bf2b"
+      "Hash": "42f889439ccb14c55fc3d75c9c755056"
     },
     "textshaping": {
       "Package": "textshaping",
@@ -2240,21 +2240,18 @@
     },
     "waldo": {
       "Package": "waldo",
-      "Version": "0.5.2",
+      "Version": "0.6.2",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "cli",
         "diffobj",
-        "fansi",
         "glue",
         "methods",
-        "rematch2",
-        "rlang",
-        "tibble"
+        "rlang"
       ],
-      "Hash": "c7d3fd6d29ab077cbac8f0e2751449e6"
+      "Hash": "b7b91294ee9418a54527a9a9d8677597"
     },
     "whisker": {
       "Package": "whisker",
@@ -2265,7 +2262,7 @@
     },
     "withr": {
       "Package": "withr",
-      "Version": "3.0.0",
+      "Version": "3.0.2",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2273,7 +2270,7 @@
         "grDevices",
         "graphics"
       ],
-      "Hash": "d31b6c62c10dcf11ec530ca6b0dd5d35"
+      "Hash": "cc2d62c76458d425210d1eb1478b30b4"
     },
     "wk": {
       "Package": "wk",
