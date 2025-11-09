@@ -1,4 +1,10 @@
 
+#' @importFrom utils packageVersion
+#' @importFrom httr user_agent http_error http_type status_code GET content
+#' @importFrom jsonlite fromJSON
+#' @importFrom logger log_debug
+#' @importFrom urltools param_get
+#' @importFrom dplyr bind_rows
 version <- utils::packageVersion("smarterapi")
 
 # define a global environment for the package

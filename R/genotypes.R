@@ -32,7 +32,12 @@ get_smarter_genotypes <- function(species, assembly, dest_path = NULL) {
     path = sprintf("%s/%s/%s/", smarterapi_globals$ftp_path, species, assembly)
   )
 
+  logger::log_debug("Got url ", url)
+
   tmp <- RCurl::getURL(url, ftp.use.epsv = FALSE, dirlistonly = TRUE)
+
+  # deal with different endlines
+  tmp <- gsub("\r\n|\r", "\n", tmp)
   file_list <- strsplit(tmp, "\n")[[1]]
 
   info <- get_smarter_info()
@@ -60,6 +65,8 @@ get_smarter_genotypes <- function(species, assembly, dest_path = NULL) {
     )
   )
 
+  logger::log_info("Collecting ", url)
+
   if (is.null(dest_path)) {
     dest_file <- fs::path(getwd(), matching_file)
   } else {
@@ -68,14 +75,14 @@ get_smarter_genotypes <- function(species, assembly, dest_path = NULL) {
 
   # Use tryCatch to handle potential errors
   tryCatch({
-    utils::download.file(url, destfile = dest_file, mode = "wb")
+    curl::curl_download(url, destfile = dest_file, quiet = FALSE)
     if (file.exists(dest_file)) {
-      print(sprintf("File downloaded successfully in %s.", dest_file))
+      logger::log_info(sprintf("File downloaded successfully in '%s'", dest_file))
     } else {
-      print("File download failed.")
+      logger::log_error("File download failed!")
     }
   }, error = function(e) {
-    print(paste("An error occurred:", e$message))
+    logger::log_error(paste("An error occurred:", e$message))
   })
 
   return(dest_file)
