@@ -34,7 +34,8 @@ Suggests:
     geodata,
     terra,
     rnaturalearth,
-    rnaturalearthdata
+    rnaturalearthdata,
+    mockery
 Config/testthat/edition: 3
 Config/renv/profiles/dev/dependencies:
     lintr,
@@ -55,7 +56,8 @@ Imports:
     dplyr,
     tidyr,
     sf,
-    geojsonsf
+    geojsonsf,
+    curl
 URL: https://cnr-ibba.github.io/r-smarter-api/
 BugReports: https://github.com/cnr-ibba/r-smarter-api/issues
 VignetteBuilder: knitr
