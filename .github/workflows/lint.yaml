@@ -30,6 +30,10 @@ jobs:
         with:
           cache-version: 1
 
+      - name: Install development dependencies
+        run: renv::install(dev = TRUE)
+        shell: Rscript {0}
+
       - name: Lint
         run: lintr::lint_package()
         shell: Rscript {0}
