@@ -18,7 +18,7 @@ This vignette describe how to use the
 [variant endpoints](https://webserver.ibba.cnr.it/smarter-api/docs/#/Variants)
 which store information about SNPs used in the *smarter genotype datasets*.
 
-```{r setup}
+```{r setup, message=FALSE}
 library(smarterapi)
 ```
 
