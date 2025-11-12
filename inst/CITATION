@@ -1,0 +1,52 @@
+c(
+  bibentry(
+    bibtype = "Manual",
+    title = "smarterapi: Fetch SMARTER Data Through REST API",
+    author = person("Paolo", "Cozzi", email = "paolo.cozzi@ibba.cnr.it", role = c("aut", "cre"), comment = c(ORCID = "0000-0003-0388-6874")),
+    year = format(Sys.Date(), "%Y"),
+    note = sprintf("R package version %s", meta$Version),
+    url = "https://cnr-ibba.github.io/r-smarter-api/",
+    header = "To cite the smarterapi R package in publications use:"
+  ),
+
+  bibentry(
+    bibtype = "Article",
+    title = "SMARTER-database: a tool to integrate SNP array datasets for sheep and goat breeds",
+    author = c(
+      person("Paolo", "Cozzi"),
+      person("Arianna", "Manunza"),
+      person("Johanna", "Ramirez-Diaz"),
+      person("Valentina", "Tsartsianidou"),
+      person("Konstantinos", "Gkagkavouzis"),
+      person("Pablo", "Peraza"),
+      person("Anna Maria", "Johansson"),
+      person("Juan José", "Arranz"),
+      person("Fernando", "Freire"),
+      person("Szilvia", "Kusza"),
+      person("Filippo", "Biscarini"),
+      person("Lucy", "Peters"),
+      person("Gwenola", "Tosser-Klopp"),
+      person("Gabriel", "Ciappesoni"),
+      person("Alexandros", "Triantafyllidis"),
+      person("Rachel", "Rupp"),
+      person("Bertrand", "Servin"),
+      person("Alessandra", "Stella")
+    ),
+    journal = "GigaByte",
+    year = "2024",
+    url = "https://github.com/cnr-ibba/SMARTER-database",
+    doi = "10.46471/gigabyte.139",
+    header = "To cite SMARTER-database in publications use:",
+    textVersion = paste(
+      "Paolo Cozzi, Arianna Manunza, Johanna Ramirez-Diaz, ",
+      "Valentina Tsartsianidou, Konstantinos Gkagkavouzis, ",
+      "Pablo Peraza, Anna Maria Johansson, Juan José Arranz, ",
+      "Fernando Freire, Szilvia Kusza, Filippo Biscarini, ",
+      "Lucy Peters, Gwenola Tosser-Klopp, Gabriel Ciappesoni, ",
+      "Alexandros Triantafyllidis, Rachel Rupp, Bertrand Servin, ",
+      "Alessandra Stella, SMARTER-database: a tool to integrate ",
+      "SNP array datasets for sheep and goat breeds, ",
+      "Gigabyte, 2024  https://doi.org/10.46471/gigabyte.139"
+    )
+  )
+)
