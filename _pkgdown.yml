@@ -1,7 +1,7 @@
 url: https://cnr-ibba.github.io/r-smarter-api/
 template:
+  light-switch: true
   bootstrap: 5
-  bootswatch: pulse
   bslib:
+    bootswatch: flatly
     pkgdown-nav-height: 100px
-
