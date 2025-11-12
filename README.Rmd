@@ -21,14 +21,14 @@ knitr::opts_chunk$set(
 [![pkgdown](https://github.com/cnr-ibba/r-smarter-api/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/cnr-ibba/r-smarter-api/actions/workflows/pkgdown.yaml)
 <!-- badges: end -->
 
-The goal of `smarterapi` is to collect data from 
-[SMARTER REST API](https://webserver.ibba.cnr.it/smarter-api/docs/) and provide them to 
-the user as a dataframe. Get more information with the 
+The goal of `smarterapi` is to collect SMARTER data from
+[SMARTER REST API](https://webserver.ibba.cnr.it/smarter-api/docs/) and provide them to
+the user as a dataframe. Get more information with the
 [online vignette](https://cnr-ibba.github.io/r-smarter-api/articles/smarterapi.html).
 
 ## Installation
 
-The `smarterapi` package is only available from [GitHub](https://github.com/) 
+The `smarterapi` package is only available from [GitHub](https://github.com/)
 and can be installed as a *source package* or in alternative using
 [devtools](https://CRAN.R-project.org/package=devtools)
 package, for example:
@@ -49,19 +49,19 @@ library(smarterapi)
 ## SMARTER credentials
 
 After the public release of SMARTER data, there's no need to provide credentials
-to access the data. If you used to have credentials to access the data, you need 
-to install the latest version of `smarterapi` package.
+to access the data. If you used to have credentials to access the data, you need
+to upgrade your installation of `smarterapi` package.
 
 ## Querying the SMARTER backend
 
 `smarterapi` provides a set of functions used to fetch data from *SMARTER-backend*
 endpoints described in [api documentation](https://webserver.ibba.cnr.it/smarter-api/docs/)
-and returning them into a `data.frame` object. For example, the `get_smarter_datasets` 
+and returning them into a `data.frame` object. For example, the `get_smarter_datasets`
 lets to query the [Datasets endpoint](https://webserver.ibba.cnr.it/smarter-api/docs/#/Datasets/get_datasets),
-while `get_smarter_samples` is able to query and parse the 
+while `get_smarter_samples` is able to query and parse the
 [Sample endpoints](https://webserver.ibba.cnr.it/smarter-api/docs/#/Samples)
 response. Each `smarterapi` function is documented in `R` and you can get help on
-each function like any other R functions. 
+each function like any other R functions.
 There are two types of parameters that are required to fetch data through
 the *SMARTER-backend*: the `species` parameter, which can be `Goat` or `Sheep` respectively
 for goat and sheep [Samples](https://webserver.ibba.cnr.it/smarter-api/docs/#/Samples)
@@ -69,7 +69,7 @@ or [Variants](https://webserver.ibba.cnr.it/smarter-api/docs/#/Variants) endpoin
 and the `query` parameter which can be provided to any *get_smarter_* function.
 The `species` parameter is *mandatory* in order to query an endpoint specific for
 *Goat* or *Sheep*, while the `query` parameter is optional and need to be specified
-as a `list()` object in order to limit your query to some data in particular. 
+as a `list()` object in order to limit your query to some data in particular.
 For example, if you need all the foreground genotypes datasets, you can collect
 data like this:
 
@@ -101,11 +101,11 @@ described as *array of objects* can be specified multiple times:
 4 Icelandic goat  ICL
 
 > goat_samples <- get_smarter_samples(
-    species = "Goat", 
+    species = "Goat",
     query = list(
-      breed_code="RAN", 
-      breed_code="LNR", 
-      breed_code="LND", 
+      breed_code="RAN",
+      breed_code="LNR",
+      breed_code="LND",
       breed_code="ICL"
     )
   )
@@ -122,9 +122,9 @@ for the *Italian* goats belonging to the *Adaptmap* dataset:
 # will be returned
 datasets <- get_smarter_datasets(
   query = list(
-    species = "Goat", 
-    search = "adaptmap", 
-    type = "genotypes", 
+    species = "Goat",
+    search = "adaptmap",
+    type = "genotypes",
     type = "background"
     )
 )
@@ -136,14 +136,30 @@ adatpmap_id <- datasets["_id.$oid"][1]
 # to filter out all the samples belonging to this dataset and the country option
 # to filter out only the italian samples for this dataset
 adaptmap_goats <- get_smarter_samples(
-  species = "Goat", 
+  species = "Goat",
   query = list(
-    dataset = adatpmap_id, 
+    dataset = adatpmap_id,
     country = "Italy"
   )
 )
 ```
 
-We have other examples in the [vignettes](https://cnr-ibba.github.io/r-smarter-api/articles/), 
+We have other examples in the [vignettes](https://cnr-ibba.github.io/r-smarter-api/articles/),
 for example how to collect data from the [Variants](https://cnr-ibba.github.io/r-smarter-api/articles/variants.html)
 endpoints or how to work with [geographic coordinates](https://cnr-ibba.github.io/r-smarter-api/articles/geojson.html).
+
+# Citation
+
+To cite SMARTER data in publications, please use:
+
+```{r echo=FALSE, results='asis'}
+citations <- format(citation("smarterapi"), style = "text")
+cat(paste0("> ", gsub("\n", "\n> ", citations)), sep = "\n\n")
+```
+
+Or simply copy `citation("smarterapi")` output from your R console.
+
+## License
+
+This package is licensed under GPL-3.0 License. See the
+[LICENSE](LICENSE.md) file for details.
