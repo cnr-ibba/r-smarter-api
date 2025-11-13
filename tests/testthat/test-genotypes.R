@@ -8,9 +8,9 @@ test_that("get_smarter_genotypes downloads file correctly", {
   mock_download <- mock(NULL)
 
   # Stub functions with mocks
-  stub(get_smarter_genotypes, 'RCurl::getURL', mock_geturl)
-  stub(get_smarter_genotypes, 'get_smarter_info', mock_info)
-  stub(get_smarter_genotypes, 'curl::curl_download', mock_download)
+  stub(get_smarter_genotypes, "RCurl::getURL", mock_geturl)
+  stub(get_smarter_genotypes, "get_smarter_info", mock_info)
+  stub(get_smarter_genotypes, "curl::curl_download", mock_download)
 
   # Create a temporary directory for the test
   temp_dir <- tempdir()
@@ -46,9 +46,9 @@ test_that("get_smarter_genotypes builds correct FTP URL", {
   mock_info <- mock(list(version = "0.16.0"))
   mock_download <- mock(NULL)
 
-  stub(get_smarter_genotypes, 'RCurl::getURL', mock_geturl)
-  stub(get_smarter_genotypes, 'get_smarter_info', mock_info)
-  stub(get_smarter_genotypes, 'curl::curl_download', mock_download)
+  stub(get_smarter_genotypes, "RCurl::getURL", mock_geturl)
+  stub(get_smarter_genotypes, "get_smarter_info", mock_info)
+  stub(get_smarter_genotypes, "curl::curl_download", mock_download)
 
   get_smarter_genotypes(
     species = "Goat",
@@ -72,9 +72,9 @@ test_that("get_smarter_genotypes handles species case-insensitively", {
   mock_info <- mock(list(version = "0.16.0"))
   mock_download <- mock(NULL)
 
-  stub(get_smarter_genotypes, 'RCurl::getURL', mock_geturl)
-  stub(get_smarter_genotypes, 'get_smarter_info', mock_info)
-  stub(get_smarter_genotypes, 'curl::curl_download', mock_download)
+  stub(get_smarter_genotypes, "RCurl::getURL", mock_geturl)
+  stub(get_smarter_genotypes, "get_smarter_info", mock_info)
+  stub(get_smarter_genotypes, "curl::curl_download", mock_download)
 
   # Test with lowercase input
   get_smarter_genotypes(species = "sheep", assembly = "oar4")
@@ -89,9 +89,9 @@ test_that("get_smarter_genotypes uses working directory when dest_path is NULL",
   mock_info <- mock(list(version = "0.16.0"))
   mock_download <- mock(NULL)
 
-  stub(get_smarter_genotypes, 'RCurl::getURL', mock_geturl)
-  stub(get_smarter_genotypes, 'get_smarter_info', mock_info)
-  stub(get_smarter_genotypes, 'curl::curl_download', mock_download)
+  stub(get_smarter_genotypes, "RCurl::getURL", mock_geturl)
+  stub(get_smarter_genotypes, "get_smarter_info", mock_info)
+  stub(get_smarter_genotypes, "curl::curl_download", mock_download)
 
   result <- get_smarter_genotypes(
     species = "Sheep",
@@ -108,8 +108,8 @@ test_that("get_smarter_genotypes raises error when no file matches", {
   mock_geturl <- mock("other-file.txt\nsome-archive.zip")
   mock_info <- mock(list(version = "0.16.0"))
 
-  stub(get_smarter_genotypes, 'RCurl::getURL', mock_geturl)
-  stub(get_smarter_genotypes, 'get_smarter_info', mock_info)
+  stub(get_smarter_genotypes, "RCurl::getURL", mock_geturl)
+  stub(get_smarter_genotypes, "get_smarter_info", mock_info)
 
   expect_error(
     get_smarter_genotypes(species = "Sheep", assembly = "OAR3"),
@@ -124,8 +124,8 @@ test_that("get_smarter_genotypes raises error when too many files match", {
   )
   mock_info <- mock(list(version = "0.16.0"))
 
-  stub(get_smarter_genotypes, 'RCurl::getURL', mock_geturl)
-  stub(get_smarter_genotypes, 'get_smarter_info', mock_info)
+  stub(get_smarter_genotypes, "RCurl::getURL", mock_geturl)
+  stub(get_smarter_genotypes, "get_smarter_info", mock_info)
 
   expect_error(
     get_smarter_genotypes(species = "Sheep", assembly = "OAR3"),
@@ -139,9 +139,9 @@ test_that("get_smarter_genotypes handles different line endings", {
   mock_info <- mock(list(version = "0.16.0"))
   mock_download <- mock(NULL)
 
-  stub(get_smarter_genotypes, 'RCurl::getURL', mock_geturl)
-  stub(get_smarter_genotypes, 'get_smarter_info', mock_info)
-  stub(get_smarter_genotypes, 'curl::curl_download', mock_download)
+  stub(get_smarter_genotypes, "RCurl::getURL", mock_geturl)
+  stub(get_smarter_genotypes, "get_smarter_info", mock_info)
+  stub(get_smarter_genotypes, "curl::curl_download", mock_download)
 
   result <- get_smarter_genotypes(
     species = "Sheep",

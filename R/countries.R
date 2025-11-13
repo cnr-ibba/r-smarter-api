@@ -1,4 +1,3 @@
-
 #' Get SMARTER Countries
 #'
 #' Fetch SMARTER REST API countries endpoint and returns results in a dataframe.

@@ -1,4 +1,3 @@
-
 #' Get SMARTER Breeds
 #'
 #' Fetch SMARTER REST API breeds endpoint and returns results in a dataframe.

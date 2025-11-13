@@ -1,4 +1,3 @@
-
 #' @importFrom utils packageVersion
 #' @importFrom httr user_agent http_error http_type status_code GET content
 #' @importFrom jsonlite fromJSON

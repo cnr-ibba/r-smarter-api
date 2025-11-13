@@ -1,4 +1,3 @@
-
 #' Get SMARTER Genotypes
 #'
 #' Retrieve genotypes data from SMARTER database. Only information about the
@@ -74,16 +73,19 @@ get_smarter_genotypes <- function(species, assembly, dest_path = NULL) {
   }
 
   # Use tryCatch to handle potential errors
-  tryCatch({
-    curl::curl_download(url, destfile = dest_file, quiet = FALSE)
-    if (file.exists(dest_file)) {
-      logger::log_info(sprintf("File downloaded successfully in '%s'", dest_file))
-    } else {
-      logger::log_error("File download failed!")
+  tryCatch(
+    {
+      curl::curl_download(url, destfile = dest_file, quiet = FALSE)
+      if (file.exists(dest_file)) {
+        logger::log_info(sprintf("File downloaded successfully in '%s'", dest_file))
+      } else {
+        logger::log_error("File download failed!")
+      }
+    },
+    error = function(e) {
+      logger::log_error(paste("An error occurred:", e$message))
     }
-  }, error = function(e) {
-    logger::log_error(paste("An error occurred:", e$message))
-  })
+  )
 
   return(dest_file)
 }
