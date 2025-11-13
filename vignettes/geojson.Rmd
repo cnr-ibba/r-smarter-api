@@ -8,10 +8,15 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+library(pander)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
 )
+logger::log_threshold(logger::ERROR)
 ```
 
 This vignette explain some tips in order to work and visualize SMARTER data
@@ -36,11 +41,6 @@ library(geodata)
 library(terra)
 library(progress)
 library(smarterapi)
-```
-
-```{r echo=FALSE, message=FALSE}
-# required by this vignette
-library(pander)
 ```
 
 ## Get data using parameters
