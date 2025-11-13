@@ -8,10 +8,15 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+library(pander)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
 )
+logger::log_threshold(logger::ERROR)
 ```
 
 This vignette explains how to properly cite SMARTER data when used in your
@@ -29,6 +34,7 @@ When loading the `smarterapi` package, a message is shown to remind users
 to cite SMARTER data if used in publications:
 
 ```{r setup}
+library(dplyr)
 library(smarterapi)
 ```
 
@@ -40,3 +46,102 @@ citation("smarterapi")
 
 This will provide you with the reference to the SMARTER-database publication to
 be used when citing SMARTER data, in particular for *foreground* datasets.
+
+## Retrieving citation information for samples
+
+For *background* datasets, the original publication is tracked in the `doi` field.
+You can retrieve citation information for the samples you are using by merging
+sample data with dataset data. For example, let's retrieve Italian sheep samples
+and then merge them with dataset information using the `dataset_id` field:
+
+```{r samples-merge}
+italian_sheeps <- get_smarter_samples(
+  species = "Sheep",
+  query = list(country = "Italy")
+)
+
+datasets <- get_smarter_datasets(
+  query = list(species = "Sheep")
+)
+
+italian_sheeps_with_datasets <- dplyr::inner_join(
+  datasets,
+  italian_sheeps,
+  by = dplyr::join_by(`_id.$oid` == `dataset_id.$oid`)
+)
+```
+
+Select some columns for simplicity: let's keep the *breed* with the `doi`, to know
+which publication to cite for each breed used. The same breed could be present
+in multiple datasets, or the same dataset could include multiple breeds. Let's
+keep only distinct rows for simplicity. Note that since both the *dataset* and
+*sample* tables have a `breed` column, the resulting data frame will have `breed.x`
+and `breed.y` columns, respectively for the left and right side of the join.
+We are interested in the `breed.y` column, which we rename to `breed_name` for
+clarity:
+
+```{r select-columns}
+italian_breeds_doi <- italian_sheeps_with_datasets %>%
+  dplyr::select(breed.y, doi) %>%
+  dplyr::rename(breed_name = breed.y) %>%
+  dplyr::distinct()
+
+italian_breeds_doi %>% head()
+```
+
+The `smarterapi` package includes utility functions to help users retrieve
+citation information. These functions use memoization to speed up repeated queries.
+For example, you can use the `get_full_citation()` function to retrieve the full
+citation information for a given DOI, and `get_short_citation()` to retrieve a
+short citation. Let's apply these functions to our dataframe:
+
+```{r get-citations, warning=FALSE}
+italian_breeds_citations <- italian_breeds_doi %>%
+  dplyr::mutate(full_citation = sapply(doi, get_full_citation),
+                short_citation = sapply(doi, get_short_citation))
+
+italian_breeds_citations %>%
+  dplyr::select(breed_name, short_citation) %>%
+  head()
+```
+
+In the example above we retrieved both full and short citations for each breed
+using the `doi` field. We displayed only the breed name and short citation for
+simplicity. You can use the full citation when preparing your bibliography, while
+the short citation can be used in the main text of your publication. Let's see
+how to display the full citations for all the Italian sheep breeds we collected:
+
+```r
+italian_breeds_citations %>%
+  dplyr::select(short_citation, full_citation) %>%
+  dplyr::distinct()
+```
+
+```{r echo=FALSE}
+pander::pander(
+  italian_breeds_citations %>%
+    dplyr::select(short_citation, full_citation) %>%
+    dplyr::distinct()
+)
+```
+
+## Collect citations in BibTeX format
+
+You can also retrieve citation information in BibTeX format, which is useful when
+preparing your bibliography with BibTeX. The `get_bibtex_citation()` function
+retrieves citation information in BibTeX format for a given DOI:
+
+```r
+# retrieve bibtex citations
+bibtex_entries <- italian_breeds_doi %>%
+  dplyr::mutate(bibtex_citation = sapply(doi, get_bibtex_citation)) %>%
+  dplyr::select(bibtex_citation) %>%
+  dplyr::distinct() %>%
+  dplyr::pull(bibtex_citation)
+
+# collect all entries into a single string
+bibtex_content <- paste(bibtex_entries, collapse = "\n\n")
+
+# Save to a .bib file
+writeLines(bibtex_content, "italian_breeds.bib")
+```
