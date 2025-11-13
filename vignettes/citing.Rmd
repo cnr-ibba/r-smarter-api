@@ -97,8 +97,10 @@ short citation. Let's apply these functions to our dataframe:
 
 ```{r get-citations, warning=FALSE}
 italian_breeds_citations <- italian_breeds_doi %>%
-  dplyr::mutate(full_citation = sapply(doi, get_full_citation),
-                short_citation = sapply(doi, get_short_citation))
+  dplyr::mutate(
+    full_citation = sapply(doi, get_full_citation),
+    short_citation = sapply(doi, get_short_citation)
+  )
 
 italian_breeds_citations %>%
   dplyr::select(breed_name, short_citation) %>%

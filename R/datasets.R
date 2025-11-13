@@ -1,4 +1,3 @@
-
 #' Get SMARTER Datasets
 #'
 #' Fetch SMARTER REST API datasets endpoint and returns results in a dataframe.

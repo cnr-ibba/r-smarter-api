@@ -68,14 +68,16 @@ datasets, you can collect data like this:
 
 ``` r
 datasets <- get_smarter_datasets(
-  query = list(type = "genotypes", type = "foreground"))
+  query = list(type = "genotypes", type = "foreground")
+)
 ```
 
 If you require only background goat samples, you can do this:
 
 ``` r
 goat_samples <- get_smarter_samples(
-  species = "Goat", query = list(type = "background"))
+  species = "Goat", query = list(type = "background")
+)
 ```
 
 The full list of available options for each endpoint is documented in
@@ -121,7 +123,7 @@ datasets <- get_smarter_datasets(
     search = "adaptmap",
     type = "genotypes",
     type = "background"
-    )
+  )
 )
 
 # Get the dataset ID

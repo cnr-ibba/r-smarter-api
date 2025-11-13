@@ -1,4 +1,3 @@
-
 # Function to strip the URL prefix if it exists
 strip_doi_url <- function(doi) {
   # Use sub() to remove the https://doi.org/ part if it exists
@@ -14,7 +13,7 @@ get_first_non_na_author <- function(authors) {
 
     # Check if family name exists and is not NA
     if (!is.null(author[["family"]]) && !is.na(author[["family"]])) {
-      return(author[["family"]])  # Return the first valid family name
+      return(author[["family"]]) # Return the first valid family name
     }
   }
 
@@ -42,33 +41,36 @@ get_short_citation_internal <- function(doi) {
   }
 
   # If not cached, retrieve metadata and cache the result
-  tryCatch({
-    # Retrieve metadata from CrossRef
-    metadata <- rcrossref::cr_cn(doi, format = "citeproc-json")
+  tryCatch(
+    {
+      # Retrieve metadata from CrossRef
+      metadata <- rcrossref::cr_cn(doi, format = "citeproc-json")
 
-    # Check if author information exists and use the helper function to get the first valid author
-    if (!is.null(metadata$author) && length(metadata$author) > 0) {
-      first_author <- get_first_non_na_author(metadata$author)
-    } else {
-      first_author <- "Unknown Author"
+      # Check if author information exists and use the helper function to get the first valid author
+      if (!is.null(metadata$author) && length(metadata$author) > 0) {
+        first_author <- get_first_non_na_author(metadata$author)
+      } else {
+        first_author <- "Unknown Author"
+      }
+
+      # Extract the year
+      if (!is.null(metadata$issued$`date-parts`[[1]][1])) {
+        year <- metadata$issued$`date-parts`[[1]][1]
+      } else {
+        year <- "Unknown Year"
+      }
+
+      # Create citation in "Author et al. Year" format
+      citation <- paste(first_author, "et al.", year)
+
+      # Return the citation
+      return(citation)
+    },
+    error = function(e) {
+      # Handle errors (e.g., invalid DOI)
+      return(NA)
     }
-
-    # Extract the year
-    if (!is.null(metadata$issued$`date-parts`[[1]][1])) {
-      year <- metadata$issued$`date-parts`[[1]][1]
-    } else {
-      year <- "Unknown Year"
-    }
-
-    # Create citation in "Author et al. Year" format
-    citation <- paste(first_author, "et al.", year)
-
-    # Return the citation
-    return(citation)
-  }, error = function(e) {
-    # Handle errors (e.g., invalid DOI)
-    return(NA)
-  })
+  )
 }
 
 #' Get Short Citation from DOI with Caching
@@ -101,14 +103,17 @@ get_short_citation <- memoise::memoise(get_short_citation_internal)
 #' @importFrom rcrossref cr_cn
 #' @keywords internal
 get_full_citation_internal <- function(doi, style = "apa") {
-  tryCatch({
-    # Fetch the full citation in provided style using rcrossref
-    full_citation <- rcrossref::cr_cn(doi, format = "text", style = style)
-    return(full_citation)
-  }, error = function(e) {
-    # If there's an error (e.g., invalid DOI), return NA
-    return(NA)
-  })
+  tryCatch(
+    {
+      # Fetch the full citation in provided style using rcrossref
+      full_citation <- rcrossref::cr_cn(doi, format = "text", style = style)
+      return(full_citation)
+    },
+    error = function(e) {
+      # If there's an error (e.g., invalid DOI), return NA
+      return(NA)
+    }
+  )
 }
 
 #' Get Full Citation from DOI with Caching
@@ -147,14 +152,17 @@ get_full_citation <- memoise::memoise(get_full_citation_internal)
 #' @importFrom rcrossref cr_cn
 #' @keywords internal
 get_bibtex_internal <- function(doi) {
-  tryCatch({
-    # Fetch BibTeX format from CrossRef API
-    bibtex_entry <- rcrossref::cr_cn(doi, format = "bibtex")
-    return(bibtex_entry)
-  }, error = function(e) {
-    # Handle cases where the DOI might be invalid or unreachable
-    return(NA)
-  })
+  tryCatch(
+    {
+      # Fetch BibTeX format from CrossRef API
+      bibtex_entry <- rcrossref::cr_cn(doi, format = "bibtex")
+      return(bibtex_entry)
+    },
+    error = function(e) {
+      # Handle cases where the DOI might be invalid or unreachable
+      return(NA)
+    }
+  )
 }
 
 #' Get BibTeX Citation from DOI with Caching

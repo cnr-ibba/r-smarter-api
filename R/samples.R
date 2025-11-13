@@ -1,4 +1,3 @@
-
 #' Get SMARTER Samples
 #'
 #' Fetch SMARTER REST API samples endpoint and returns results in a dataframe.

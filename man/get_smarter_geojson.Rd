@@ -38,7 +38,7 @@ goat_data <- get_smarter_geojson(
 # leaflet doesn't handle MULTIPOINT data (https://github.com/rstudio/leaflet/issues/352)
 # Cast them into point considering only the first objects
 # (https://r-spatial.github.io/sf/reference/st_cast.html)
-goat_data <- goat_data \%>\% sf::st_cast("POINT", do_split=FALSE)
+goat_data <- goat_data \%>\% sf::st_cast("POINT", do_split = FALSE)
 
 # draw samples in a leaflet map using markerCluser
 leaflet(data = goat_data) \%>\%

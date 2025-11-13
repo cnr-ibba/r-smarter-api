@@ -187,7 +187,8 @@ isheep_ids <- isheep_datasets$"_id.$oid"
 
 # collect all foreground samples
 foreground_samples <- get_smarter_samples(
-  "Sheep", query = list(type = "foreground")
+  "Sheep",
+  query = list(type = "foreground")
 )
 
 # get rid of isheep_samples

@@ -174,7 +174,8 @@ ggplot2::ggplot() +
   ) +
   ggplot2::theme_bw() +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) +
-  ggplot2::xlab("longitude") + ggplot2::ylab("latitude") +
+  ggplot2::xlab("longitude") +
+  ggplot2::ylab("latitude") +
   ggplot2::ggtitle("Selected samples")
 ```
 
