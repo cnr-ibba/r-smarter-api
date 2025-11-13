@@ -1,6 +1,4 @@
 
-
-
 # Function to strip the URL prefix if it exists
 strip_doi_url <- function(doi) {
   # Use sub() to remove the https://doi.org/ part if it exists
