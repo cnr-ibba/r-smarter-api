@@ -12,6 +12,5 @@
 }
 
 utils::globalVariables(c(
-  "smarterapi_globals",
-  "get_smarter_data"
+  "smarterapi_globals"
 ))
