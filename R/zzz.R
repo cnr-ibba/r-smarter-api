@@ -10,3 +10,8 @@
     "https://cnr-ibba.github.io/r-smarter-api/articles/citing.html\n"
   )
 }
+
+utils::globalVariables(c(
+  "smarterapi_globals",
+  "get_smarter_data"
+))
