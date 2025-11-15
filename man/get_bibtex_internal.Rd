@@ -2,12 +2,12 @@
 % Please edit documentation in R/citations.R
 \name{get_bibtex_internal}
 \alias{get_bibtex_internal}
-\title{Get Citation in bibtext format from DOI}
+\title{Get Citation in BibTeX format from DOI}
 \usage{
 get_bibtex_internal(doi)
 }
 \description{
-This function retrieves the bibtex citation for a given DOI using
+This function retrieves the BibTeX citation for a given DOI using
 the rcrossref package.
 }
 \keyword{internal}

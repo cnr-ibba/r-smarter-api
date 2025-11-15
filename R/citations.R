@@ -144,9 +144,9 @@ get_full_citation_internal <- function(doi, style = "apa") {
 get_full_citation <- memoise::memoise(get_full_citation_internal)
 
 
-#' Get Citation in bibtext format from DOI
+#' Get Citation in BibTeX format from DOI
 #'
-#' This function retrieves the bibtex citation for a given DOI using
+#' This function retrieves the BibTeX citation for a given DOI using
 #' the rcrossref package.
 #'
 #' @importFrom rcrossref cr_cn
