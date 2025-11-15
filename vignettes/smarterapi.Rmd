@@ -370,6 +370,8 @@ samples_with_doi %>%
   summarise(counts = n())
 ```
 
+For a comprehensive guide on how to cite SMARTER samples, including additional
+examples, see the dedicated `vignette("citing")`
 
 ## Collect genotypes
 
