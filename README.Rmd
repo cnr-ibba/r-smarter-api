@@ -52,7 +52,7 @@ library(smarterapi)
 
 > NOTE: The `smarterapi` package is managed using [renv](https://rstudio.github.io/renv/):
 > you don't need to clone the entire repository to install the package. Managing
-> the package installation with `devtools` let you to install the minimal set of
+> the package installation with `devtools` lets you install the minimal set of
 > dependencies needed to use the package. Cloning the repository is only needed
 > if you want to contribute to the package development: in this case, please
 > follow the instructions in the [CONTRIBUTING.md](./.github/CONTRIBUTING.md) guide to set
