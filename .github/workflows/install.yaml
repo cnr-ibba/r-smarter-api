@@ -2,9 +2,11 @@
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: [master]
+    branches:
+      - master
   pull_request:
-    branches: [master, devel]
+    branches:
+      - master
 
 name: install
 
@@ -49,10 +51,10 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - name: Install devtools dependency
-        run: install.packages("devtools")
+      - name: Install remotes dependency
+        run: install.packages("remotes")
         shell: Rscript {0}
 
-      - name: Install package with devtools
-        run: devtools::install_github("cnr-ibba/r-smarter-api")
+      - name: Install package with remotes (PR branch)
+        run: remotes::install_github(sprintf("cnr-ibba/r-smarter-api@%s", Sys.getenv("GITHUB_HEAD_REF", unset = "master")))
         shell: Rscript {0}
