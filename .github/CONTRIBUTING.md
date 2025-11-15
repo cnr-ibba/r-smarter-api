@@ -73,7 +73,8 @@ renv::snapshot()
 
 -   Document all exported functions with roxygen2 comments.
 -   Update vignettes if your changes affect user workflows.
--   Regenerate documentation with `devtools::document()` and `pkgdown::build_site()`.
+-   Regenerate documentation with `devtools::document()` and
+    `pkgdown::build_site()` to update the website.
 -   Preview changes with `pkgdown::preview_site()`.
 
 ### README

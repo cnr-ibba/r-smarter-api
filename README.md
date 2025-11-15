@@ -27,6 +27,10 @@ example:
 # install devtools if needed
 # install.packages("devtools")
 devtools::install_github("cnr-ibba/r-smarter-api")
+
+# Alternatively, you can use remotes (lighter dependency):
+# install.packages("remotes")
+remotes::install_github("cnr-ibba/r-smarter-api")
 ```
 
 After the installation, you can load the package in your R session:
@@ -35,6 +39,17 @@ After the installation, you can load the package in your R session:
 # import this library to deal with the SMARTER API
 library(smarterapi)
 ```
+
+> NOTE: The `smarterapi` package is managed using
+> [renv](https://rstudio.github.io/renv/): you don’t need to clone the
+> entire repository to install the package. Managing the package
+> installation with `devtools` let you to install the minimal set of
+> dependencies needed to use the package. Cloning the repository is only
+> needed if you want to contribute to the package development: in this
+> case, please follow the instructions in the
+> [CONTRIBUTING.md](./.github/CONTRIBUTING.md) guide to set up your
+> development environment with all the required dependencies to build
+> and test the package with vignettes.
 
 ## SMARTER credentials
 
