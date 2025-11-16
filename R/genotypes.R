@@ -24,11 +24,11 @@
 get_smarter_genotypes <- function(species, assembly, dest_path = NULL) {
   # test species and assembly are valid
   check_species_and_assemblies(species, assembly)
-  assembly <- toupper(assembly)
   logger::log_info("Get genotypes from SMARTER FTP server")
 
   # mind that species is lowercase in API endpoint urls, but uppercase for FTP
   species <- toupper(species)
+  assembly <- toupper(assembly)
 
   url <- httr::modify_url(
     smarterapi_globals$ftp_url,
