@@ -55,8 +55,8 @@ check_species_and_assemblies <- function(species, assembly) {
     stop(
       sprintf(
         "Assembly '%s' is not supported for species '%s'",
-        assembly,
-        species_clean
+        toupper(assembly),
+        species
       )
     )
   }
