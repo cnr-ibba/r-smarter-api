@@ -5,65 +5,58 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="smarterapi">
 <title>Using smarterapi • smarterapi</title>
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Using smarterapi">
-<meta property="og:description" content="smarterapi">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Using smarterapi">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary" data-bs-theme="dark"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">smarterapi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="active nav-item">
-  <a class="nav-link" href="../articles/smarterapi.html">Get started</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
+<li class="active nav-item"><a class="nav-link" href="../articles/smarterapi.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/geojson.html">Working with GeoJSON data</a>
-    <a class="dropdown-item" href="../articles/variants.html">Working with SNPs</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/citing.html">Citing SMARTER data</a></li>
+    <li><a class="dropdown-item" href="../articles/geojson.html">Working with GeoJSON data</a></li>
+    <li><a class="dropdown-item" href="../articles/variants.html">Working with SNPs</a></li>
+  </ul>
 </li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/cnr-ibba/r-smarter-api/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/cnr-ibba/r-smarter-api/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
+<li><button class="dropdown-item" data-bs-theme-value="light"><span class="fa fa-sun"></span> Light</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="dark"><span class="fa fa-moon"></span> Dark</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
+  </ul>
 </li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
@@ -72,10 +65,11 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>Using smarterapi</h1>
+
+      <h1>Using smarterapi</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/cnr-ibba/r-smarter-api/blob/HEAD/vignettes/smarterapi.Rmd" class="external-link"><code>vignettes/smarterapi.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/cnr-ibba/r-smarter-api/blob/master/vignettes/smarterapi.Rmd" class="external-link"><code>vignettes/smarterapi.Rmd</code></a></small>
       <div class="d-none name"><code>smarterapi.Rmd</code></div>
     </div>
 
@@ -107,18 +101,17 @@ version. You can check database version using the
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">info</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_info.html">get_smarter_info</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">info</span><span class="op">$</span><span class="va">version</span></span>
-<span><span class="co">#&gt; [1] "0.4.10"</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">info</span><span class="op">$</span><span class="va">last_updated</span></span>
-<span><span class="co">#&gt; [1] "2024-05-29 02:41:35 UTC"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "0.4.10"</span></span>
+<span><span class="va">info</span><span class="op">$</span><span class="va">last_updated</span></span>
+<span><span class="co">#&gt; [1] "2024-10-08 11:55:59 UTC"</span></span></code></pre></div>
 <p>The same version system is specified in the genotype file dataset you
 can download from the smarter FTP site:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">$</span> tree <span class="at">-L</span> 2 SHEEP/</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="ex">SHEEP/</span></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="ex">└──</span> OAR3</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    <span class="ex">├──</span> archive</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    <span class="ex">├──</span> SMARTER-OA-OAR3-top-0.4.10.md5</span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>    <span class="ex">└──</span> SMARTER-OA-OAR3-top-0.4.10.zip</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">$</span> tree <span class="at">-L</span> 2 SHEEP/</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ex">SHEEP/</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="ex">└──</span> OAR3</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>    <span class="ex">├──</span> archive</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    <span class="ex">├──</span> SMARTER-OA-OAR3-top-0.4.10.md5</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>    <span class="ex">└──</span> SMARTER-OA-OAR3-top-0.4.10.zip</span></code></pre></div>
 <p>You have to ensure that you are working with the same version, for
 both metadata and genotypes: if not, you may not find samples in the
 genotype files or you are referring to an out-dated assembly version. To
@@ -172,7 +165,7 @@ proper <code>type</code> to the <code>query</code> argument. Since the
 at once. For parameters which supports arrays, you could supply the same
 parameter name multiple times: each one will be passed through the API
 endpoint</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># select all genotypes datasets made before SMARTER project</span></span>
 <span><span class="va">background_genotypes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_datasets.html">get_smarter_datasets</a></span><span class="op">(</span></span>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"background"</span>, type <span class="op">=</span> <span class="st">"genotypes"</span><span class="op">)</span></span>
@@ -225,7 +218,7 @@ table looks like:</p>
 <p>So collect the <em>adaptmap</em> samples, we can provide the proper
 <code>dataset_id</code> to the <code><a href="../reference/get_smarter_samples.html">get_smarter_samples()</a></code>
 method. We can add additional parameters, like country:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># select the adaptmap id, which is in the first row of the dataframe</span></span>
 <span><span class="va">adatpmap_id</span> <span class="op">&lt;-</span> <span class="va">background_goat_genotypes</span><span class="op">[</span><span class="st">"_id.$oid"</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">]</span></span>
 <span><span class="va">adaptmap_goats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_samples.html">get_smarter_samples</a></span><span class="op">(</span></span>
@@ -236,7 +229,7 @@ method. We can add additional parameters, like country:</p>
 this value in the <code>get_smarter_samples</code> query. But how we can
 handle multiple datasets? we can transform the proper column in a list
 and then renaming it:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get more datasets</span></span>
 <span><span class="va">foreground_goat_genotypes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_datasets.html">get_smarter_datasets</a></span><span class="op">(</span></span>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"genotypes"</span>, type <span class="op">=</span> <span class="st">"foreground"</span>, species <span class="op">=</span> <span class="st">"Goat"</span><span class="op">)</span></span>
@@ -254,7 +247,7 @@ and then renaming it:</p>
 do a reverse selection of our samples, for example to get all the
 samples which are not in one or more datasets: suppose, for example, to
 collect all samples which are not in the <em>isheep</em> datasets:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># collect all foreground datasets having "isheep" in their name</span></span>
 <span><span class="va">isheep_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_datasets.html">get_smarter_datasets</a></span><span class="op">(</span></span>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -269,7 +262,8 @@ collect all samples which are not in the <em>isheep</em> datasets:</p>
 <span></span>
 <span><span class="co"># collect all foreground samples</span></span>
 <span><span class="va">foreground_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_samples.html">get_smarter_samples</a></span><span class="op">(</span></span>
-<span>  <span class="st">"Sheep"</span>, query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"foreground"</span><span class="op">)</span></span>
+<span>  <span class="st">"Sheep"</span>,</span>
+<span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"foreground"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># get rid of isheep_samples</span></span>
@@ -278,7 +272,7 @@ collect all samples which are not in the <em>isheep</em> datasets:</p>
 <p>The last selection example relies on dataset file contents: if you
 remember the name of the file submitted in the dataset, you can search
 by datasets <em>content</em>:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_datasets.html">get_smarter_datasets</a></span><span class="op">(</span>query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">"adaptmap"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
@@ -318,7 +312,7 @@ in order to retrieve <em>Île de France</em> or <em>Fjällnäs</em> breed
 samples, you have to specify the full breed name or use the search
 parameter with the <code><a href="../reference/get_smarter_breeds.html">get_smarter_breeds()</a></code> which model the <a href="https://webserver.ibba.cnr.it/smarter-api/docs/#/Breeds/get_breeds" class="external-link">/breeds</a>
 endpoint:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">breeds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_breeds.html">get_smarter_breeds</a></span><span class="op">(</span></span>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    species <span class="op">=</span> <span class="st">"Sheep"</span>,</span>
@@ -340,7 +334,7 @@ endpoint:</p>
 </tr></tbody>
 </table>
 <p>Search for breeds can return multiple values, for example:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">breeds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_breeds.html">get_smarter_breeds</a></span><span class="op">(</span></span>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    species <span class="op">=</span> <span class="st">"Sheep"</span>,</span>
@@ -401,12 +395,12 @@ endpoint:</p>
 </table>
 <p>Name and codes can be used as they are to select samples by passing
 multiple arguments to the query:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">selected_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_samples.html">get_smarter_samples</a></span><span class="op">(</span>species <span class="op">=</span> <span class="st">"Sheep"</span>, query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  breed_code <span class="op">=</span> <span class="st">"MER"</span>, breed_code <span class="op">=</span> <span class="st">"AME"</span></span>
 <span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>or to get all the samples with <em>merino</em> in breed name:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># construct the query arguments</span></span>
 <span><span class="va">query</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/as.list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">breeds</span><span class="op">$</span><span class="va">code</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">query</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"breed_code"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">query</span><span class="op">)</span><span class="op">)</span></span>
@@ -420,7 +414,7 @@ multiple arguments to the query:</p>
 <p>You can retrive samples by countries. First get a list of the
 available countries relying on country name, then extract samples using
 the correct country name:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">italy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_countries.html">get_smarter_countries</a></span><span class="op">(</span>query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">"italy"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">italian_background_sheeps</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_samples.html">get_smarter_samples</a></span><span class="op">(</span></span>
@@ -437,7 +431,7 @@ the correct country name:</p>
 search for multiple chip types, you will collect all samples which
 belongs to any of the specified chip. First, collect a list of the
 available chips for a certain species:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sheep_chips</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_supportedchips.html">get_smarter_supportedchips</a></span><span class="op">(</span>query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>species <span class="op">=</span> <span class="st">"Sheep"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table style="width:88%;" class="table">
 <colgroup>
@@ -492,7 +486,7 @@ available chips for a certain species:</p>
 </tbody>
 </table>
 <p>Then collect samples relying on chip name, for example:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">selected_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_samples.html">get_smarter_samples</a></span><span class="op">(</span></span>
 <span>  species <span class="op">=</span> <span class="st">"Sheep"</span>,</span>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -509,7 +503,7 @@ difficult to define a single query you can apply to each samples. For
 the moment, the only queries you can apply on metadata are restricted to
 their presence or absence. For example, we can collect all samples which
 have GPS coordinates and phenotypes (any):</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">smarter_goats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_samples.html">get_smarter_samples</a></span><span class="op">(</span></span>
 <span>  species <span class="op">=</span> <span class="st">"Goat"</span>,</span>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -531,7 +525,7 @@ information to collect publication information, but you need to merge
 <em>samples</em> and <em>datasets</em> dataframes in order to refer
 properly the samples to the publication they come from. Here is an
 example of how to do:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># collect all the genotypes datasets</span></span>
 <span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_datasets.html">get_smarter_datasets</a></span><span class="op">(</span></span>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -558,6 +552,9 @@ example of how to do:</p>
 <span><span class="va">samples_with_doi</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">doi</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>counts <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>For a comprehensive guide on how to cite SMARTER samples, including
+additional examples, see the dedicated
+<code><a href="../articles/citing.html">vignette("citing")</a></code></p>
 </div>
 <div class="section level2">
 <h2 id="collect-genotypes">Collect genotypes<a class="anchor" aria-label="anchor" href="#collect-genotypes"></a>
@@ -571,7 +568,7 @@ alternative, is it possible to download the genotypes using the
 will download the genotypes from the FTP for the current releases of the
 selected <em>species</em> and <em>assembly</em> and will return the
 destination path of the downloaded archive:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">downloaded_archive</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_genotypes.html">get_smarter_genotypes</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Sheep"</span>,</span>
 <span>  <span class="st">"OAR3"</span></span>
@@ -589,7 +586,7 @@ extract their genotypes from the proper file using <a href="https://www.cog-geno
 write a <em>TSV</em> file with <em>breed_code</em> and
 <em>smarter_id</em> as columns. For example, using the samples selected
 above and <em>dplyr</em>:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">selected_sheeps_ids</span> <span class="op">&lt;-</span> <span class="va">italian_background_sheeps</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span></span>
 <span>    <span class="st">"breed_code"</span>, <span class="st">"smarter_id"</span></span>
@@ -607,19 +604,19 @@ above and <em>dplyr</em>:</p>
 to not loose information from the plink file. The parameters used to
 generate the genotype files are tracked in the info endpoint. In this
 example, get parameters from <em>Sheep</em> genotypes:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">info</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_smarter_info.html">get_smarter_info</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">plink_opts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">info</span><span class="op">$</span><span class="va">plink_specie_opt</span><span class="op">$</span><span class="va">Sheep</span>, collapse <span class="op">=</span> <span class="st">" "</span><span class="op">)</span></span>
 <span><span class="va">plink_opts</span></span>
 <span><span class="co">#&gt; [1] "--chr-set 26 no-xy no-mt --allow-no-sex"</span></span></code></pre></div>
 <p>And finally you can call plink and providing your sample list:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--chr-set</span> 26 no-xy no-mt <span class="at">--allow-no-sex</span> <span class="dt">\</span></span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>  <span class="at">--bfile</span> SMARTER-OA-OAR3-top-0.4.10 <span class="dt">\</span></span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>  <span class="at">--keep</span> selected_sheeps.txt <span class="dt">\</span></span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>  <span class="at">--out</span> selected_sheeps-OAR3-top-0.4.10 <span class="dt">\</span></span>
-<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>  <span class="at">--make-bed</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--chr-set</span> 26 no-xy no-mt <span class="at">--allow-no-sex</span> <span class="dt">\</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>  <span class="at">--bfile</span> SMARTER-OA-OAR3-top-0.4.10 <span class="dt">\</span></span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>  <span class="at">--keep</span> selected_sheeps.txt <span class="dt">\</span></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>  <span class="at">--out</span> selected_sheeps-OAR3-top-0.4.10 <span class="dt">\</span></span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>  <span class="at">--make-bed</span></span></code></pre></div>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
@@ -630,15 +627,15 @@ example, get parameters from <em>Sheep</em> genotypes:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>

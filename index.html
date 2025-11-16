@@ -5,65 +5,60 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Provides functions to fetch data from the SMARTER API, a RESTful web service that provides access to data from the SMARTER database.">
 <title>Fetch SMARTER Data Through REST API • smarterapi</title>
-<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="lightswitch.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Fetch SMARTER Data Through REST API">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Fetch SMARTER Data Through REST API">
+<meta name="description" content="Provides functions to fetch data from the SMARTER API, a RESTful web service that provides access to data from the SMARTER database.">
 <meta property="og:description" content="Provides functions to fetch data from the SMARTER API, a RESTful web service that provides access to data from the SMARTER database.">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary" data-bs-theme="dark"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="index.html">smarterapi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="articles/smarterapi.html">Get started</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="articles/smarterapi.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="articles/geojson.html">Working with GeoJSON data</a>
-    <a class="dropdown-item" href="articles/variants.html">Working with SNPs</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="articles/citing.html">Citing SMARTER data</a></li>
+    <li><a class="dropdown-item" href="articles/geojson.html">Working with GeoJSON data</a></li>
+    <li><a class="dropdown-item" href="articles/variants.html">Working with SNPs</a></li>
+  </ul>
 </li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/cnr-ibba/r-smarter-api/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/cnr-ibba/r-smarter-api/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
+<li><button class="dropdown-item" data-bs-theme-value="light"><span class="fa fa-sun"></span> Light</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="dark"><span class="fa fa-moon"></span> Dark</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
+  </ul>
 </li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-home">
 <div class="row">
@@ -72,37 +67,46 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of <code>smarterapi</code> is to collect data from <a href="https://webserver.ibba.cnr.it/smarter-api/docs/" class="external-link">SMARTER REST API</a> and provide them to the user as a dataframe. Get more information with the <a href="https://cnr-ibba.github.io/r-smarter-api/articles/smarterapi.html">online vignette</a>.</p>
+<p>The goal of <code>smarterapi</code> is to collect SMARTER data from <a href="https://webserver.ibba.cnr.it/smarter-api/docs/" class="external-link">SMARTER REST API</a> and provide them to the user as a dataframe. Get more information with the <a href="https://cnr-ibba.github.io/r-smarter-api/articles/smarterapi.html">online vignette</a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>The <code>smarterapi</code> package is only available from <a href="https://github.com/" class="external-link">GitHub</a> and can be installed as a <em>source package</em> or in alternative using <a href="https://CRAN.R-project.org/package=devtools" class="external-link">devtools</a> package, for example:</p>
+<p>The <code>smarterapi</code> package is only available from <a href="https://github.com/" class="external-link">GitHub</a> and can be installed as a <em>source package</em> or alternatively using the <a href="https://CRAN.R-project.org/package=devtools" class="external-link">devtools</a> package, for example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install devtools if needed</span></span>
 <span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"cnr-ibba/r-smarter-api"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"cnr-ibba/r-smarter-api"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Alternatively, you can use remotes (lighter dependency):</span></span>
+<span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"cnr-ibba/r-smarter-api"</span><span class="op">)</span></span></code></pre></div>
 <p>After the installation, you can load the package in your R session:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># import this library to deal with the SMARTER API</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cnr-ibba.github.io/r-smarter-api/">smarterapi</a></span><span class="op">)</span></span></code></pre></div>
+<blockquote>
+<p>NOTE: The <code>smarterapi</code> package is managed using <a href="https://rstudio.github.io/renv/" class="external-link">renv</a>: you don’t need to clone the entire repository to install the package. Managing the package installation with <code>devtools</code> lets you install the minimal set of dependencies needed to use the package. Cloning the repository is only needed if you want to contribute to the package development: in this case, please follow the instructions in the <a href="./CONTRIBUTING.html">CONTRIBUTING.md</a> guide to set up your development environment with all the required dependencies to build and test the package with vignettes.</p>
+</blockquote>
 </div>
 <div class="section level2">
 <h2 id="smarter-credentials">SMARTER credentials<a class="anchor" aria-label="anchor" href="#smarter-credentials"></a>
 </h2>
-<p>After the public release of SMARTER data, there’s no need to provide credentials to access the data. If you used to have credentials to access the data, you need to install the latest version of <code>smarterapi</code> package.</p>
+<p>After the public release of SMARTER data, there is no need to provide credentials to access the data. If you previously had credentials to access the data, you need to upgrade your installation of the <code>smarterapi</code> package.</p>
 </div>
 <div class="section level2">
 <h2 id="querying-the-smarter-backend">Querying the SMARTER backend<a class="anchor" aria-label="anchor" href="#querying-the-smarter-backend"></a>
 </h2>
-<p><code>smarterapi</code> provides a set of functions used to fetch data from <em>SMARTER-backend</em> endpoints described in <a href="https://webserver.ibba.cnr.it/smarter-api/docs/" class="external-link">api documentation</a> and returning them into a <code>data.frame</code> object. For example, the <code>get_smarter_datasets</code> lets to query the <a href="https://webserver.ibba.cnr.it/smarter-api/docs/#/Datasets/get_datasets" class="external-link">Datasets endpoint</a>, while <code>get_smarter_samples</code> is able to query and parse the <a href="https://webserver.ibba.cnr.it/smarter-api/docs/#/Samples" class="external-link">Sample endpoints</a> response. Each <code>smarterapi</code> function is documented in <code>R</code> and you can get help on each function like any other R functions. There are two types of parameters that are required to fetch data through the <em>SMARTER-backend</em>: the <code>species</code> parameter, which can be <code>Goat</code> or <code>Sheep</code> respectively for goat and sheep <a href="https://webserver.ibba.cnr.it/smarter-api/docs/#/Samples" class="external-link">Samples</a> or <a href="https://webserver.ibba.cnr.it/smarter-api/docs/#/Variants" class="external-link">Variants</a> endpoints, and the <code>query</code> parameter which can be provided to any <em>get_smarter_</em> function. The <code>species</code> parameter is <em>mandatory</em> in order to query an endpoint specific for <em>Goat</em> or <em>Sheep</em>, while the <code>query</code> parameter is optional and need to be specified as a <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code> object in order to limit your query to some data in particular. For example, if you need all the foreground genotypes datasets, you can collect data like this:</p>
+<p><code>smarterapi</code> provides a set of functions to fetch data from <em>SMARTER-backend</em> endpoints described in the <a href="https://webserver.ibba.cnr.it/smarter-api/docs/" class="external-link">API documentation</a> and return them as <code>data.frame</code> objects. For example, <code><a href="reference/get_smarter_datasets.html">get_smarter_datasets()</a></code> queries the <a href="https://webserver.ibba.cnr.it/smarter-api/docs/#/Datasets/get_datasets" class="external-link">Datasets endpoint</a>, while <code><a href="reference/get_smarter_samples.html">get_smarter_samples()</a></code> queries and parses the <a href="https://webserver.ibba.cnr.it/smarter-api/docs/#/Samples" class="external-link">Samples endpoint</a> response. Each <code>smarterapi</code> function is documented in R and you can get help on each function like any other R function. There are two types of parameters that can be used to fetch data from the <em>SMARTER-backend</em>: the <code>species</code> parameter, which can be <code>Goat</code> or <code>Sheep</code> for the <a href="https://webserver.ibba.cnr.it/smarter-api/docs/#/Samples" class="external-link">Samples</a> or <a href="https://webserver.ibba.cnr.it/smarter-api/docs/#/Variants" class="external-link">Variants</a> endpoints, and the <code>query</code> parameter which can be provided to any <code>get_smarter_*()</code> function. The <code>species</code> parameter is <em>mandatory</em> to query species-specific endpoints, while the <code>query</code> parameter is optional and needs to be specified as a <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code> object to filter your query to specific data. For example, if you need all foreground genotype datasets, you can collect data like this:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_smarter_datasets.html">get_smarter_datasets</a></span><span class="op">(</span></span>
-<span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"genotypes"</span>, type <span class="op">=</span> <span class="st">"foreground"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>while if you require only background goat samples, you can do like this:</p>
+<span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"genotypes"</span>, type <span class="op">=</span> <span class="st">"foreground"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>If you require only background goat samples, you can do this:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">goat_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_smarter_samples.html">get_smarter_samples</a></span><span class="op">(</span></span>
-<span>  species <span class="op">=</span> <span class="st">"Goat"</span>, query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"background"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>The full option list available to each endpoint is available on the SMARTER-backend <a href="https://webserver.ibba.cnr.it/smarter-api/docs/" class="external-link">swagger documentation</a>: the option name to use is the same name described in <em>parameters</em>, and description and parameter types can give you hints on how to exploit endpoint properly. For instance, parameters described as <em>array of objects</em> can be specified multiple times:</p>
+<span>  species <span class="op">=</span> <span class="st">"Goat"</span>, query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"background"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>The full list of available options for each endpoint is documented in the SMARTER-backend <a href="https://webserver.ibba.cnr.it/smarter-api/docs/" class="external-link">Swagger documentation</a>. The option names to use are the same as those described in the <em>parameters</em> section, and the descriptions and parameter types can give you hints on how to use the endpoints properly. For instance, parameters described as <em>array of objects</em> can be specified multiple times:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="sc">&gt;</span> goat_breeds <span class="ot">&lt;-</span> <span class="fu">get_smarter_breeds</span>(<span class="at">query =</span> <span class="fu">list</span>(<span class="at">species=</span><span class="st">"Goat"</span>, <span class="at">search=</span><span class="st">"land"</span>))</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="sc">&gt;</span> goat_breeds[<span class="fu">c</span>(<span class="st">"name"</span>,<span class="st">"code"</span>)]</span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>            name code</span>
@@ -112,11 +116,11 @@
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="dv">4</span> Icelandic goat  ICL</span>
 <span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a></span>
 <span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="sc">&gt;</span> goat_samples <span class="ot">&lt;-</span> <span class="fu">get_smarter_samples</span>(</span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    <span class="at">species =</span> <span class="st">"Goat"</span>, </span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    <span class="at">species =</span> <span class="st">"Goat"</span>,</span>
 <span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    <span class="at">query =</span> <span class="fu">list</span>(</span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>      <span class="at">breed_code=</span><span class="st">"RAN"</span>, </span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>      <span class="at">breed_code=</span><span class="st">"LNR"</span>, </span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>      <span class="at">breed_code=</span><span class="st">"LND"</span>, </span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>      <span class="at">breed_code=</span><span class="st">"RAN"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>      <span class="at">breed_code=</span><span class="st">"LNR"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>      <span class="at">breed_code=</span><span class="st">"LND"</span>,</span>
 <span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>      <span class="at">breed_code=</span><span class="st">"ICL"</span></span>
 <span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>    )</span>
 <span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>  )</span></code></pre></div>
@@ -124,34 +128,52 @@
 <div class="section level2">
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
-<p>This is a basic example which shows you how to collect data from SMARTER REST API for the <em>Italian</em> goats belonging to the <em>Adaptmap</em> dataset:</p>
+<p>This is a basic example showing how to collect data from the SMARTER REST API for <em>Italian</em> goats belonging to the <em>Adaptmap</em> dataset:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># collect the dataset by providing part of the name with the search option:</span></span>
-<span><span class="co"># since we are forcing to collect only background genotypes, only one dataset</span></span>
+<code class="sourceCode R"><span><span class="co"># Collect the dataset by providing part of the name with the search option.</span></span>
+<span><span class="co"># Since we are filtering for background genotypes only, only one dataset</span></span>
 <span><span class="co"># will be returned</span></span>
 <span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_smarter_datasets.html">get_smarter_datasets</a></span><span class="op">(</span></span>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    species <span class="op">=</span> <span class="st">"Goat"</span>, </span>
-<span>    search <span class="op">=</span> <span class="st">"adaptmap"</span>, </span>
-<span>    type <span class="op">=</span> <span class="st">"genotypes"</span>, </span>
+<span>    species <span class="op">=</span> <span class="st">"Goat"</span>,</span>
+<span>    search <span class="op">=</span> <span class="st">"adaptmap"</span>,</span>
+<span>    type <span class="op">=</span> <span class="st">"genotypes"</span>,</span>
 <span>    type <span class="op">=</span> <span class="st">"background"</span></span>
-<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># get the dataset id</span></span>
-<span><span class="va">adatpmap_id</span> <span class="op">&lt;-</span> <span class="va">datasets</span><span class="op">[</span><span class="st">"_id.$oid"</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="co"># Get the dataset ID</span></span>
+<span><span class="va">adaptmap_id</span> <span class="op">&lt;-</span> <span class="va">datasets</span><span class="op">[</span><span class="st">"_id.$oid"</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span></span>
-<span><span class="co"># collect all the italian goats from the adaptmap dataset. Using the dataset id</span></span>
-<span><span class="co"># to filter out all the samples belonging to this dataset and the country option</span></span>
-<span><span class="co"># to filter out only the italian samples for this dataset</span></span>
+<span><span class="co"># Collect all Italian goats from the Adaptmap dataset. Use the dataset ID</span></span>
+<span><span class="co"># to filter samples belonging to this dataset and the country option</span></span>
+<span><span class="co"># to filter for Italian samples only</span></span>
 <span><span class="va">adaptmap_goats</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_smarter_samples.html">get_smarter_samples</a></span><span class="op">(</span></span>
-<span>  species <span class="op">=</span> <span class="st">"Goat"</span>, </span>
+<span>  species <span class="op">=</span> <span class="st">"Goat"</span>,</span>
 <span>  query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    dataset <span class="op">=</span> <span class="va">adatpmap_id</span>, </span>
+<span>    dataset <span class="op">=</span> <span class="va">adaptmap_id</span>,</span>
 <span>    country <span class="op">=</span> <span class="st">"Italy"</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>We have other examples in the <a href="https://cnr-ibba.github.io/r-smarter-api/articles/">vignettes</a>, for example how to collect data from the <a href="https://cnr-ibba.github.io/r-smarter-api/articles/variants.html">Variants</a> endpoints or how to work with <a href="https://cnr-ibba.github.io/r-smarter-api/articles/geojson.html">geographic coordinates</a>.</p>
+<p>While this information can be retrieved through the <a href="https://webserver.ibba.cnr.it/smarter-api/docs/" class="external-link">SMARTER-backend</a>, genotype data are available from the <a href="ftp://webserver.ibba.cnr.it/smarter/">FTP site</a>. The <code>smarterapi</code> package provides functions to easily download and manage these data:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/get_smarter_genotypes.html">get_smarter_genotypes</a></span><span class="op">(</span>species <span class="op">=</span> <span class="st">"Goat"</span>, assembly <span class="op">=</span> <span class="st">"ARS1"</span><span class="op">)</span></span></code></pre></div>
+<p>See the <a href="https://cnr-ibba.github.io/r-smarter-api/articles/smarterapi.html#collect-genotypes">Collect genotypes</a> vignette for more details and examples on how to extract genotype data from the samples of interest.</p>
+<p>More examples are available in the <a href="https://cnr-ibba.github.io/r-smarter-api/articles/">vignettes</a>, such as <a href="https://cnr-ibba.github.io/r-smarter-api/articles/smarterapi.html">get started</a> with <code>smarterapi</code>, how to collect data from the <a href="https://cnr-ibba.github.io/r-smarter-api/articles/variants.html">Variants</a> endpoint or how to work with <a href="https://cnr-ibba.github.io/r-smarter-api/articles/geojson.html">geographic coordinates</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
+<p>To cite SMARTER data in publications, please use:</p>
+<blockquote>
+<p>Cozzi P, Manunza A, Ramirez-Diaz J, Tsartsianidou V, Gkagkavouzis K, Peraza P, Johansson A, Arranz J, Freire F, Kusza S, Biscarini F, Peters L, Tosser-Klopp G, Ciappesoni G, Triantafyllidis A, Rupp R, Servin B, Stella A (2024). “SMARTER-database: a tool to integrate SNP array datasets for sheep and goat breeds.” <em>GigaByte</em>. <a href="doi:10.46471/gigabyte.139" class="uri">doi:10.46471/gigabyte.139</a> <a href="https://doi.org/10.46471/gigabyte.139" class="external-link uri">https://doi.org/10.46471/gigabyte.139</a>, <a href="https://github.com/cnr-ibba/SMARTER-database" class="external-link uri">https://github.com/cnr-ibba/SMARTER-database</a>.</p>
+</blockquote>
+<p>Or simply copy <code>citation("smarterapi")</code> output from your R console.</p>
+</div>
+<div class="section level2">
+<h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
+</h2>
+<p>This package is licensed under GPL-3.0 License. See the <a href="LICENSE.html">LICENSE</a> file for details.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -170,6 +192,13 @@
 </ul>
 </div>
 
+<div class="community">
+<h2 data-toc-skip>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+</ul>
+</div>
 
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
@@ -181,7 +210,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Paolo Cozzi <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-0388-6874" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Paolo Cozzi <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-0388-6874" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 
@@ -203,15 +232,15 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>

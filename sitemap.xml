@@ -1,57 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/404.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/articles/geojson.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/articles/smarterapi.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/articles/variants.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/index.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_breeds.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_countries.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_datasets.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_genotypes.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_geojson.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_info.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_samples.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_supportedchips.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_variants.html</loc>
-  </url>
-  <url>
-    <loc>https://cnr-ibba.github.io/r-smarter-api/reference/index.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/404.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/CONTRIBUTING.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/ISSUE_TEMPLATE.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/LICENSE.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/PULL_REQUEST_TEMPLATE.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/articles/citing.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/articles/geojson.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/articles/index.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/articles/smarterapi.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/articles/variants.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/authors.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/index.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_bibtex_citation.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_bibtex_internal.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_full_citation.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_full_citation_internal.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_short_citation.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_short_citation_internal.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_breeds.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_countries.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_datasets.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_genotypes.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_geojson.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_info.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_samples.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_supportedchips.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/reference/get_smarter_variants.html</loc></url>
+<url><loc>https://cnr-ibba.github.io/r-smarter-api/reference/index.html</loc></url>
 </urlset>
+
