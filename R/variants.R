@@ -36,6 +36,9 @@
 # nolint start
 get_smarter_variants <- function(species, assembly, query = list()) {
   # nolint end
+  # test species and assembly are valid
+  check_species_and_assemblies(species, assembly)
+
   logger::log_info("Get data from variants endpoint")
 
   # mind that species is lowercase in endpoint url

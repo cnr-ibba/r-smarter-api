@@ -4,6 +4,7 @@
 #' @importFrom logger log_debug
 #' @importFrom urltools param_get
 #' @importFrom dplyr bind_rows
+#' @importFrom stringr str_to_title
 version <- utils::packageVersion("smarterapi")
 
 # define a global environment for the package
@@ -32,6 +33,35 @@ is_valid_assembly <- function(species, assembly) {
   is_valid_species(species) && assembly %in% smarterapi_species_assemblies[[species]]
 }
 
+check_species <- function(species) {
+  # check species
+  species_clean <- stringr::str_to_title(tolower(species))
+
+  if (!is_valid_species(species_clean)) {
+    stop(sprintf("Species '%s' is not supported", species))
+  }
+}
+
+check_species_and_assemblies <- function(species, assembly) {
+  # check species and assembly
+  species_clean <- stringr::str_to_title(tolower(species))
+  assembly <- toupper(assembly)
+
+  if (!is_valid_species(species_clean)) {
+    stop(sprintf("Species '%s' is not supported", species))
+  }
+
+  if (!is_valid_assembly(species_clean, assembly)) {
+    stop(
+      sprintf(
+        "Assembly '%s' is not supported for species '%s'",
+        assembly,
+        species_clean
+      )
+    )
+  }
+}
+
 check_smarter_errors <- function(resp, parsed) {
   # deal with API errors: not "200 Ok" status
   if (httr::http_error(resp)) {
@@ -45,7 +75,6 @@ check_smarter_errors <- function(resp, parsed) {
     )
   }
 }
-
 
 read_url <- function(url, query = list()) {
   logger::log_debug(sprintf("Get data from %s", url))
@@ -73,7 +102,6 @@ read_url <- function(url, query = list()) {
 
   return(parsed)
 }
-
 
 get_smarter_data <- function(url, query = list()) {
   # test for page size. Add a default size if necessary
