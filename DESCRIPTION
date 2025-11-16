@@ -53,7 +53,8 @@ Imports:
     geojsonsf,
     curl,
     memoise,
-    rcrossref
+    rcrossref,
+    stringr
 URL: https://cnr-ibba.github.io/r-smarter-api/
 BugReports: https://github.com/cnr-ibba/r-smarter-api/issues
 VignetteBuilder: knitr

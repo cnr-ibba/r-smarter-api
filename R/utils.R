@@ -17,6 +17,20 @@ smarterapi_globals$user_agent <- httr::user_agent(
   paste0("r-smarterapi v", version)
 )
 
+# define supported species and assemblies
+smarterapi_species_assemblies <- list(
+  Sheep = c("OAR3", "OAR4"),
+  Goat  = c("ARS1", "CHI1")
+)
+
+# some helpers functions to deal with species and assemblies
+is_valid_species <- function(species) {
+  species %in% names(smarterapi_species_assemblies)
+}
+
+is_valid_assembly <- function(species, assembly) {
+  is_valid_species(species) && assembly %in% smarterapi_species_assemblies[[species]]
+}
 
 check_smarter_errors <- function(resp, parsed) {
   # deal with API errors: not "200 Ok" status

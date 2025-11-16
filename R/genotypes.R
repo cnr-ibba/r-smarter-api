@@ -10,6 +10,7 @@
 #'
 #' @return a character string with the path to the downloaded file is returned
 #' @export
+#' @importFrom stringr str_to_title
 #'
 #' @section About SMARTER supported assemblies:
 #' Currently SMARTER supports *OAR3* and *OAR4* assemblies for Sheep and *CHI1*
@@ -22,9 +23,26 @@
 #' get_smarter_genotypes(species = "Sheep", assembly = "OAR3")
 #' }
 get_smarter_genotypes <- function(species, assembly, dest_path = NULL) {
-  # mind that species is lowercase in endpoint url
-  species <- toupper(species)
+  # check species and assembly
+  species_clean <- stringr::str_to_title(tolower(species))
   assembly <- toupper(assembly)
+
+  if (!is_valid_species(species_clean)) {
+    stop(sprintf("Species '%s' is not supported", species))
+  }
+
+  if (!is_valid_assembly(species_clean, assembly)) {
+    stop(
+      sprintf(
+        "Assembly '%s' is not supported for species '%s'",
+        assembly,
+        species_clean
+      )
+    )
+  }
+
+  # mind that species is lowercase in endpoint url: for ftp is uppercase
+  species <- toupper(species)
 
   url <- httr::modify_url(
     smarterapi_globals$ftp_url,
