@@ -8,17 +8,22 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+library(pander)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
 )
+logger::log_threshold(logger::ERROR)
 ```
 
 This vignette explain some tips in order to work and visualize SMARTER data
 using the [GeoJSON endpoints](https://webserver.ibba.cnr.it/smarter-api/docs/#/GeoJSON):
 These endpoints in particular retrieve all the samples with GPS coordinates
 (like using the `locations__exists=TRUE` parameter with the `get_smarter_samples()`
-method) and then return results as a [Simple Feature](https://r-spatial.github.io/sf/index.html). 
+method) and then return results as a [Simple Feature](https://r-spatial.github.io/sf/index.html).
 This could help you doing
 spatial queries such as collect samples within a certain area or calculate variables
 from a raster object. Moreover, is it possible to display data using maps or plots.
@@ -38,15 +43,10 @@ library(progress)
 library(smarterapi)
 ```
 
-```{r echo=FALSE, message=FALSE}
-# required by this vignette
-library(pander)
-```
-
 ## Get data using parameters
 
 You can collect GeoJSON data using parameters, like using the `get_smarter_samples()`
-function. This function will parse the GeoJSON data to return a 
+function. This function will parse the GeoJSON data to return a
 [Simple Feature](https://r-spatial.github.io/sf/index.html) object, which is a
 tibble object with a geometry column.
 For example, try to collect data for the *Sheep hapmap background* dataset:
@@ -98,7 +98,7 @@ sel_logical <- lengths(sel_sgbp) > 0
 selected_goats <- goat_data[sel_logical, ]
 ```
 
-The same query could be done using the `get_smarter_geojson()` function and 
+The same query could be done using the `get_smarter_geojson()` function and
 providing the polygons as an argument:
 
 ```{r eval=FALSE}
@@ -147,6 +147,9 @@ derive the countries from the `rnaturalearth` package, then we will zoom
 the plot to the selected points of the previous example:
 
 ```{r}
+#| fig.alt: >
+#|    Map showing sheep samples from the Hapmap dataset in Italy
+#|    plotted over a world map using ggplot2
 # determine a bounding box around our samples
 bbox <- sf::st_bbox(hapmap_data)
 
@@ -171,7 +174,8 @@ ggplot2::ggplot() +
   ) +
   ggplot2::theme_bw() +
   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) +
-  ggplot2::xlab("longitude") + ggplot2::ylab("latitude") +
+  ggplot2::xlab("longitude") +
+  ggplot2::ylab("latitude") +
   ggplot2::ggtitle("Selected samples")
 ```
 
@@ -183,6 +187,9 @@ introduction to `sf` and `ggplot2`.
 Data could be visualized in an interactive way using *R* `leaflet` library:
 
 ```{r}
+#| fig.alt: >
+#|    Interactive map showing clustered markers of sheep samples from the
+#|    Hapmap dataset in Italy"
 leaflet::leaflet(
   data = hapmap_data,
   options = leaflet::leafletOptions(minZoom = 5, maxZoom = 10)

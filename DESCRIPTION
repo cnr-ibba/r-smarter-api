@@ -1,6 +1,6 @@
 Package: smarterapi
 Title: Fetch SMARTER Data Through REST API
-Version: 0.2.0
+Version: 0.2.1
 Authors@R:
     person(
         "Paolo", "Cozzi",
@@ -14,7 +14,7 @@ Description:
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.3
 Suggests:
     lintr,
     styler,
@@ -22,6 +22,7 @@ Suggests:
     rcmdcheck,
     roxygen2,
     usethis,
+    devtools,
     leaflet,
     knitr,
     rmarkdown,
@@ -34,16 +35,10 @@ Suggests:
     geodata,
     terra,
     rnaturalearth,
-    rnaturalearthdata
+    rnaturalearthdata,
+    mockery,
+    pkgdown
 Config/testthat/edition: 3
-Config/renv/profiles/dev/dependencies:
-    lintr,
-    rcmdcheck,
-    roxygen2,
-    styler,
-    testthat,
-    usethis,
-    devtools
 Imports:
     jsonlite,
     httr,
@@ -55,7 +50,11 @@ Imports:
     dplyr,
     tidyr,
     sf,
-    geojsonsf
+    geojsonsf,
+    curl,
+    memoise,
+    rcrossref,
+    stringr
 URL: https://cnr-ibba.github.io/r-smarter-api/
 BugReports: https://github.com/cnr-ibba/r-smarter-api/issues
 VignetteBuilder: knitr

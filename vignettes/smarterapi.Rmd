@@ -8,10 +8,15 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+library(pander)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
 )
+logger::log_threshold(logger::ERROR)
 ```
 
 **smarterapi** is an R package which enable to browse the
@@ -26,11 +31,6 @@ Simply import `smarterapi` like any other R package:
 ```{r setup, message=FALSE}
 library(dplyr)
 library(smarterapi)
-```
-
-```{r echo=FALSE}
-# required by this vignette
-library(pander)
 ```
 
 ## Collect info about versions
@@ -105,7 +105,7 @@ endpoint. For example, to extract
 only *background* genotypes datasets (data generated before SMARTER project) you
 have to pass the proper `type` to the `query` argument. Since the `query` argument
 is a list, you can pass multiple parameters at once. For parameters which supports
-arrays, you could supply the same parameter name multiple times: 
+arrays, you could supply the same parameter name multiple times:
 each one will be passed through the API endpoint
 
 ```{r}
@@ -187,7 +187,8 @@ isheep_ids <- isheep_datasets$"_id.$oid"
 
 # collect all foreground samples
 foreground_samples <- get_smarter_samples(
-  "Sheep", query = list(type = "foreground")
+  "Sheep",
+  query = list(type = "foreground")
 )
 
 # get rid of isheep_samples
@@ -369,6 +370,8 @@ samples_with_doi %>%
   summarise(counts = n())
 ```
 
+For a comprehensive guide on how to cite SMARTER samples, including additional
+examples, see the dedicated `vignette("citing")`
 
 ## Collect genotypes
 
@@ -378,7 +381,7 @@ to download the files using an FTP client like [FileZilla](https://filezilla-pro
 or [lftp](https://lftp.yar.ru/) and then
 extract the genotypes using [plink](https://www.cog-genomics.org/plink/).
 In alternative, is it possible to download the genotypes using the `get_smarter_genotypes`
-method of this package. This method will download the genotypes from the FTP 
+method of this package. This method will download the genotypes from the FTP
 for the current releases of the selected *species* and *assembly* and will
 return the destination path of the downloaded archive:
 
@@ -389,7 +392,7 @@ downloaded_archive <- get_smarter_genotypes(
 )
 ```
 
-This method will download the genotypes in the current working directory, or 
+This method will download the genotypes in the current working directory, or
 in the directory specified in the `dest_path` argument. The genotypes will be stored
 in a compressed `.zip` file, which need to be de-compressed in order to be
 used with [plink](https://www.cog-genomics.org/plink/).

@@ -1,4 +1,3 @@
-
 #' Get SMARTER Samples
 #'
 #' Fetch SMARTER REST API samples endpoint and returns results in a dataframe.
@@ -41,6 +40,8 @@
 #' all_sheep_samples <- get_smarter_samples("Sheep")
 #' }
 get_smarter_samples <- function(species, query = list()) {
+  # test species is valid
+  check_species(species)
   logger::log_info("Get data from samples endpoint")
 
   # mind that species is lowercase in endpoint url

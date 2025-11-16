@@ -29,7 +29,10 @@ jobs:
       - uses: r-lib/actions/setup-renv@v2
         with:
           cache-version: 1
-          profile: '"dev"'
+
+      - name: Install development dependencies
+        run: renv::install(dev = TRUE)
+        shell: Rscript {0}
 
       - name: Lint
         run: lintr::lint_package()

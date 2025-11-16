@@ -1,4 +1,3 @@
-
 #' Get SMARTER Genotypes
 #'
 #' Retrieve genotypes data from SMARTER database. Only information about the
@@ -23,7 +22,11 @@
 #' get_smarter_genotypes(species = "Sheep", assembly = "OAR3")
 #' }
 get_smarter_genotypes <- function(species, assembly, dest_path = NULL) {
-  # mind that species is lowercase in endpoint url
+  # test species and assembly are valid
+  check_species_and_assemblies(species, assembly)
+  logger::log_info("Get genotypes from SMARTER FTP server")
+
+  # mind that species is lowercase in API endpoint urls, but uppercase for FTP
   species <- toupper(species)
   assembly <- toupper(assembly)
 
@@ -32,7 +35,12 @@ get_smarter_genotypes <- function(species, assembly, dest_path = NULL) {
     path = sprintf("%s/%s/%s/", smarterapi_globals$ftp_path, species, assembly)
   )
 
+  logger::log_debug("Got url ", url)
+
   tmp <- RCurl::getURL(url, ftp.use.epsv = FALSE, dirlistonly = TRUE)
+
+  # deal with different endlines
+  tmp <- gsub("\r\n|\r", "\n", tmp)
   file_list <- strsplit(tmp, "\n")[[1]]
 
   info <- get_smarter_info()
@@ -60,6 +68,8 @@ get_smarter_genotypes <- function(species, assembly, dest_path = NULL) {
     )
   )
 
+  logger::log_info("Collecting ", url)
+
   if (is.null(dest_path)) {
     dest_file <- fs::path(getwd(), matching_file)
   } else {
@@ -67,16 +77,19 @@ get_smarter_genotypes <- function(species, assembly, dest_path = NULL) {
   }
 
   # Use tryCatch to handle potential errors
-  tryCatch({
-    utils::download.file(url, destfile = dest_file, mode = "wb")
-    if (file.exists(dest_file)) {
-      print(sprintf("File downloaded successfully in %s.", dest_file))
-    } else {
-      print("File download failed.")
+  tryCatch(
+    {
+      curl::curl_download(url, destfile = dest_file, quiet = FALSE)
+      if (file.exists(dest_file)) {
+        logger::log_info(sprintf("File downloaded successfully in '%s'", dest_file))
+      } else {
+        logger::log_error("File download failed!")
+      }
+    },
+    error = function(e) {
+      logger::log_error(paste("An error occurred:", e$message))
     }
-  }, error = function(e) {
-    print(paste("An error occurred:", e$message))
-  })
+  )
 
   return(dest_file)
 }

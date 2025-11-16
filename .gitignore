@@ -7,3 +7,5 @@ docs
 inst/doc
 vignettes/*.txt
 *.zip
+*.curltmp
+/.quarto/

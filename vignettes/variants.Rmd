@@ -8,23 +8,23 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+library(pander)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
 )
+logger::log_threshold(logger::ERROR)
 ```
 
 This vignette describe how to use the
 [variant endpoints](https://webserver.ibba.cnr.it/smarter-api/docs/#/Variants)
 which store information about SNPs used in the *smarter genotype datasets*.
 
-```{r setup}
+```{r setup, message=FALSE}
 library(smarterapi)
-```
-
-```{r echo=FALSE}
-# required by this vignette
-library(pander)
 ```
 
 ## Assembly versions
