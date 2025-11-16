@@ -36,11 +36,11 @@ for more information about the breeds endpoint
 
 ``` r
 italy <- get_smarter_countries(query = list(name = "Italy"))
-#> INFO [2025-11-16 16:05:45] Get data from countries endpoint
-#> INFO [2025-11-16 16:05:45] Done!
+#> INFO [2025-11-16 16:16:33] Get data from countries endpoint
+#> INFO [2025-11-16 16:16:33] Done!
 france <- get_smarter_countries(query = list(alpha_2 = "FR"))
-#> INFO [2025-11-16 16:05:45] Get data from countries endpoint
-#> INFO [2025-11-16 16:05:46] Done!
+#> INFO [2025-11-16 16:16:33] Get data from countries endpoint
+#> INFO [2025-11-16 16:16:33] Done!
 
 if (FALSE) { # \dontrun{
 # get countries where there are sheeps

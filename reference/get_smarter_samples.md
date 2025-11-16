@@ -41,19 +41,19 @@ italian_sheeps <- get_smarter_samples(
   "Sheep",
   query = list(country = "Italy")
 )
-#> INFO [2025-11-16 16:05:48] Get data from samples endpoint
-#> INFO [2025-11-16 16:05:52] Done!
+#> INFO [2025-11-16 16:16:35] Get data from samples endpoint
+#> INFO [2025-11-16 16:16:38] Done!
 
 merino_sheeps <- get_smarter_samples("Sheep", query = list(breed = "Merino"))
-#> INFO [2025-11-16 16:05:52] Get data from samples endpoint
-#> INFO [2025-11-16 16:05:54] Done!
+#> INFO [2025-11-16 16:16:38] Get data from samples endpoint
+#> INFO [2025-11-16 16:16:39] Done!
 
 selected_goats <- get_smarter_samples(
   "Goat",
   query = list(country = "Italy", breed_code = "ORO", breed_code = "GAR")
 )
-#> INFO [2025-11-16 16:05:54] Get data from samples endpoint
-#> INFO [2025-11-16 16:05:54] Done!
+#> INFO [2025-11-16 16:16:39] Get data from samples endpoint
+#> INFO [2025-11-16 16:16:39] Done!
 if (FALSE) { # \dontrun{
 
 foreground_goats <- get_smarter_samples(

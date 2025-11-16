@@ -34,12 +34,12 @@ more information about the breeds endpoint
 
 ``` r
 selected_breed <- get_smarter_breeds(query = list(code = "TEX"))
-#> INFO [2025-11-16 16:05:44] Get data from breeds endpoint
-#> INFO [2025-11-16 16:05:45] Done!
+#> INFO [2025-11-16 16:16:32] Get data from breeds endpoint
+#> INFO [2025-11-16 16:16:32] Done!
 
 selected_breeds <- get_smarter_breeds(query = list(search = "mer"))
-#> INFO [2025-11-16 16:05:45] Get data from breeds endpoint
-#> INFO [2025-11-16 16:05:45] Done!
+#> INFO [2025-11-16 16:16:32] Get data from breeds endpoint
+#> INFO [2025-11-16 16:16:32] Done!
 if (FALSE) { # \dontrun{
 all_breeds <- get_smarter_breeds()
 sheep_breeds <- get_smarter_breeds(query = list(species = "Sheep"))
