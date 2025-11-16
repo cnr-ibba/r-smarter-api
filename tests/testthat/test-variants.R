@@ -1,7 +1,7 @@
 library(testthat)
 library(mockery)
 
-test_that("get_smarter_variants deal with invalid species", {
+test_that("get_smarter_variants deals with invalid species", {
   mock_geturl <- mock(NULL)
 
   # Stub functions with mocks
@@ -19,7 +19,7 @@ test_that("get_smarter_variants deal with invalid species", {
   expect_called(mock_geturl, 0)
 })
 
-test_that("get_smarter_variants deal with invalid assembly", {
+test_that("get_smarter_variants deals with invalid assembly", {
   mock_geturl <- mock(NULL)
 
   # Stub functions with mocks

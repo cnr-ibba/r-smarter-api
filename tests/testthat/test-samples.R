@@ -1,7 +1,7 @@
 library(testthat)
 library(mockery)
 
-test_that("get_smarter_samples deal with invalid species", {
+test_that("get_smarter_samples deals with invalid species", {
   mock_geturl <- mock(NULL)
 
   # Stub functions with mocks

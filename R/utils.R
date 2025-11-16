@@ -45,18 +45,18 @@ check_species <- function(species) {
 check_species_and_assemblies <- function(species, assembly) {
   # check species and assembly
   species_clean <- stringr::str_to_title(tolower(species))
-  assembly <- toupper(assembly)
+  assembly_clean <- toupper(assembly)
 
   if (!is_valid_species(species_clean)) {
     stop(sprintf("Species '%s' is not supported", species))
   }
 
-  if (!is_valid_assembly(species_clean, assembly)) {
+  if (!is_valid_assembly(species_clean, assembly_clean)) {
     stop(
       sprintf(
         "Assembly '%s' is not supported for species '%s'",
         assembly,
-        species_clean
+        species
       )
     )
   }
