@@ -37,14 +37,14 @@ more information about the datasets endpoint
 genotypes_foreground <- get_smarter_datasets(
   query = list(type = "foreground", type = "genotypes")
 )
-#> INFO [2025-11-16 16:16:33] Get data from datasets endpoint
-#> INFO [2025-11-16 16:16:33] Done!
+#> INFO [2025-11-16 16:25:08] Get data from datasets endpoint
+#> INFO [2025-11-16 16:25:08] Done!
 
 adaptmap_genotypes <- get_smarter_datasets(
   query = list(species = "Goat", search = "adaptmap", type = "genotypes")
 )
-#> INFO [2025-11-16 16:16:33] Get data from datasets endpoint
-#> INFO [2025-11-16 16:16:33] Done!
+#> INFO [2025-11-16 16:25:08] Get data from datasets endpoint
+#> INFO [2025-11-16 16:25:08] Done!
 if (FALSE) { # \dontrun{
 
 all_datasets <- get_smarter_datasets()

@@ -22,8 +22,8 @@ Returns a dataframe with selected chips
 
 ``` r
 chips <- get_smarter_supportedchips()
-#> INFO [2025-11-16 16:16:40] Get data from supported chip endpoint
-#> INFO [2025-11-16 16:16:40] Done!
+#> INFO [2025-11-16 16:25:17] Get data from supported chip endpoint
+#> INFO [2025-11-16 16:25:17] Done!
 if (FALSE) { # \dontrun{
 # collect data on chips
 get_smarter_supportedchips()

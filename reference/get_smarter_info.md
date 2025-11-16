@@ -39,7 +39,7 @@ you may want to use the same specie options
 
 ``` r
 smarter_status <- get_smarter_info()
-#> INFO [2025-11-16 16:16:35] Get data from info endpoint
-#> INFO [2025-11-16 16:16:35] Done!
+#> INFO [2025-11-16 16:25:10] Get data from info endpoint
+#> INFO [2025-11-16 16:25:10] Done!
 smarter_version <- smarter_status$version
 ```

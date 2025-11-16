@@ -8,7 +8,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/cnr-ibba/r-smarter-api/blob/master/inst/CITATION)
+[`inst/CITATION`](https://github.com/cnr-ibba/r-smarter-api/blob/v0.2.1/inst/CITATION)
 
 Paolo Cozzi, Arianna Manunza, Johanna Ramirez-Diaz, Valentina
 Tsartsianidou, Konstantinos Gkagkavouzis, Pablo Peraza, Anna Maria

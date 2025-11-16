@@ -46,8 +46,8 @@ variants <- get_smarter_variants(
   assembly = "ARS1",
   query = list(region = "1:1-100000")
 )
-#> INFO [2025-11-16 16:16:40] Get data from variants endpoint
-#> INFO [2025-11-16 16:16:40] Done!
+#> INFO [2025-11-16 16:25:17] Get data from variants endpoint
+#> INFO [2025-11-16 16:25:17] Done!
 if (FALSE) { # \dontrun{
 # get available assemblies from info endpoint
 names(get_smarter_info()$working_assemblies)
