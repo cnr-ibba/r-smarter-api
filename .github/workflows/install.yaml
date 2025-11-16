@@ -56,5 +56,5 @@ jobs:
         shell: Rscript {0}
 
       - name: Install package with remotes (PR branch)
-        run: remotes::install_github(sprintf("cnr-ibba/r-smarter-api@%s", Sys.getenv("GITHUB_HEAD_REF", unset = "master")))
+        run: remotes::install_github(sprintf("cnr-ibba/r-smarter-api@%s", Sys.getenv("GITHUB_REF_NAME", unset = "master")))
         shell: Rscript {0}

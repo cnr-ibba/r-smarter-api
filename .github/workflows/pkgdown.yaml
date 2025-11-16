@@ -44,7 +44,7 @@ jobs:
 
       - name: Deploy to GitHub pages 🚀
         if: (github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'release'
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           clean: false
           branch: gh-pages
